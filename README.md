@@ -125,3 +125,7 @@ Not implemented yet. Each command already has a stable `id` and a parsed list of
 - Favorites and recently copied commands
 - A form to fill in placeholders before copying
 - Editing commands from the app
+
+## License
+
+[MIT](LICENSE)
