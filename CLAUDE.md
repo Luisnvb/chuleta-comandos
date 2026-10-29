@@ -9,10 +9,18 @@ npm install            # install dependencies
 npm run build-data     # data/*.yaml -> src/generated/commands.json (validates entries)
 npm run dev            # dev server (runs build-data first via predev)
 npm run build          # production build into dist/ (runs build-data first via prebuild)
-npm run preview        # serve dist/ — use this to test the service worker / offline / install
+npm run preview        # serve dist/ on http://localhost:4173 — service worker / offline / install
+npm run generate-icons # regenerate PNG icons after editing public/favicon.svg
 ```
 
 The service worker is only active in `build` + `preview`, not in `dev`.
+
+## PWA
+
+- vite-plugin-pwa (`generateSW`, `registerType: 'autoUpdate'`) precaches everything (JS with the bundled command data, CSS, HTML, icons): the app works with no server at all.
+- The installed app lives on `http://localhost:4173` (port pinned in `vite.config.js` — do not change it or the installed app stops receiving updates).
+- Updating the installed app after editing data or code: `npm run build && npm run preview`, open the app once (it updates on load), then stop the server.
+- Icons are generated from `public/favicon.svg` by `pwa-assets.config.js` (maskable/apple with the accent background). Generated PNGs are committed.
 
 ## Stack
 
@@ -28,7 +36,7 @@ data/              SOURCE OF TRUTH — one YAML file per tool (linux.yaml, git.y
 scripts/           Node scripts (build-data.js)
 src/generated/     Generated JSON — never edit by hand, gitignored
 src/               App code (see "Code conventions")
-public/            Static assets (icons)
+public/            favicon.svg (icon source) + generated PNG/ICO icons
 ```
 
 ## Data format (`data/<tool>.yaml`)
