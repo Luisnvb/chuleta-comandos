@@ -4,6 +4,10 @@ A personal, offline-first PWA to find and copy developer commands in a couple of
 
 The command descriptions are in Spanish; the UI and code are in English.
 
+| Light | Dark |
+|---|---|
+| ![Cheatsheet in light mode, searching "rama"](docs/screenshot-light.png) | ![Cheatsheet in dark mode, searching "rama"](docs/screenshot-dark.png) |
+
 ## Features
 
 - **Fuzzy search** over command, description, tags and category, with typo tolerance and accents ignored. Multi-word queries match every word in any order (`crear rama` = `rama crear`).
