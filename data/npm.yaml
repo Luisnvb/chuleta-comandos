@@ -1,0 +1,231 @@
+# npm (Node.js package manager). Not from a PDF: written for this project.
+
+# --- proyecto ---
+- tool: npm
+  category: proyecto
+  command: 'npm init -y'
+  description: Crea un package.json con valores por defecto.
+  tags: [crear, iniciar, package.json]
+- tool: npm
+  category: proyecto
+  command: 'npm create {plantilla}@latest {carpeta}'
+  description: Crea un proyecto desde una plantilla (create-*).
+  tags: [crear, scaffold, plantilla]
+  example: 'npm create vite@latest mi-app'
+- tool: npm
+  category: proyecto
+  command: 'npm pkg set {clave}="{valor}"'
+  description: Modifica un campo de package.json desde la terminal.
+  tags: [package.json, editar]
+  example: 'npm pkg set scripts.lint="eslint ."'
+- tool: npm
+  category: proyecto
+  command: 'npm version {tipo}'
+  description: Sube la versión (patch, minor, major) y crea un commit y una etiqueta de git.
+  tags: [versión, semver, release]
+  example: 'npm version patch'
+
+# --- dependencias ---
+- tool: npm
+  category: dependencias
+  command: 'npm install'
+  description: Instala todas las dependencias de package.json (alias npm i).
+  tags: [instalar, install]
+- tool: npm
+  category: dependencias
+  command: 'npm ci'
+  description: Instalación limpia y exacta desde package-lock.json (ideal para CI).
+  tags: [instalar, ci, lock]
+- tool: npm
+  category: dependencias
+  command: 'npm install {paquete}'
+  description: Instala un paquete como dependencia.
+  tags: [instalar, añadir, add]
+  example: 'npm install fuse.js'
+- tool: npm
+  category: dependencias
+  command: 'npm install -D {paquete}'
+  description: Instala un paquete como dependencia de desarrollo.
+  tags: [instalar, dev, devDependencies]
+  example: 'npm install -D vite'
+- tool: npm
+  category: dependencias
+  command: 'npm install {paquete}@{version}'
+  description: Instala una versión concreta de un paquete.
+  tags: [instalar, versión]
+  example: 'npm install react@18.3.1'
+- tool: npm
+  category: dependencias
+  command: 'npm install -g {paquete}'
+  description: Instala un paquete de forma global.
+  tags: [instalar, global]
+- tool: npm
+  category: dependencias
+  command: 'npm uninstall {paquete}'
+  description: Desinstala un paquete y lo quita de package.json.
+  tags: [desinstalar, quitar, remove]
+- tool: npm
+  category: dependencias
+  command: 'npm update'
+  description: Actualiza los paquetes dentro de los rangos de package.json.
+  tags: [actualizar, update]
+- tool: npm
+  category: dependencias
+  command: 'npm outdated'
+  description: Lista los paquetes con versiones más nuevas disponibles.
+  tags: [desactualizados, versiones]
+- tool: npm
+  category: dependencias
+  command: 'npm ls --depth=0'
+  description: Lista las dependencias directas instaladas.
+  tags: [listar, dependencias]
+- tool: npm
+  category: dependencias
+  command: 'npm ls -g --depth=0'
+  description: Lista los paquetes globales instalados.
+  tags: [listar, global]
+- tool: npm
+  category: dependencias
+  command: 'npm explain {paquete}'
+  description: Explica por qué está instalado un paquete (alias npm why).
+  tags: [dependencias, por qué, why]
+- tool: npm
+  category: dependencias
+  command: 'npm dedupe'
+  description: Reduce duplicados en el árbol de dependencias.
+  tags: [duplicados, optimizar]
+- tool: npm
+  category: dependencias
+  command: 'npm prune'
+  description: Elimina paquetes que no están en package.json.
+  tags: [limpiar, sobrantes]
+
+# --- scripts ---
+- tool: npm
+  category: scripts
+  command: 'npm run'
+  description: Lista los scripts disponibles en package.json.
+  tags: [scripts, listar]
+- tool: npm
+  category: scripts
+  command: 'npm run {script}'
+  description: Ejecuta un script de package.json.
+  tags: [scripts, ejecutar]
+  example: 'npm run build'
+- tool: npm
+  category: scripts
+  command: 'npm run {script} -- {argumentos}'
+  description: Ejecuta un script pasándole argumentos extra.
+  tags: [scripts, argumentos]
+  example: 'npm run dev -- --port 3000'
+- tool: npm
+  category: scripts
+  command: 'npm start'
+  description: Ejecuta el script start.
+  tags: [scripts, start, arrancar]
+- tool: npm
+  category: scripts
+  command: 'npm test'
+  description: Ejecuta el script test (alias npm t).
+  tags: [scripts, test]
+- tool: npm
+  category: scripts
+  command: 'npx {paquete}'
+  description: Ejecuta un binario de un paquete sin instalarlo globalmente.
+  tags: [npx, ejecutar, binario]
+  example: 'npx eslint .'
+
+# --- información ---
+- tool: npm
+  category: información
+  command: 'npm view {paquete} version'
+  description: Última versión publicada de un paquete.
+  tags: [versión, info]
+- tool: npm
+  category: información
+  command: 'npm view {paquete} versions'
+  description: Todas las versiones publicadas de un paquete.
+  tags: [versiones, info]
+- tool: npm
+  category: información
+  command: 'npm docs {paquete}'
+  description: Abre la documentación de un paquete en el navegador.
+  tags: [documentación, docs]
+- tool: npm
+  category: información
+  command: 'npm repo {paquete}'
+  description: Abre el repositorio de un paquete en el navegador.
+  tags: [repositorio, github]
+- tool: npm
+  category: información
+  command: 'npm -v'
+  description: Versión de npm instalada.
+  tags: [versión]
+
+# --- seguridad y mantenimiento ---
+- tool: npm
+  category: mantenimiento
+  command: 'npm audit'
+  description: Busca vulnerabilidades conocidas en las dependencias.
+  tags: [seguridad, vulnerabilidades, audit]
+- tool: npm
+  category: mantenimiento
+  command: 'npm audit fix'
+  description: Actualiza dependencias para corregir vulnerabilidades sin cambios incompatibles.
+  tags: [seguridad, corregir, audit]
+- tool: npm
+  category: mantenimiento
+  command: 'npm cache clean --force'
+  description: Vacía la caché de npm.
+  tags: [cache, limpiar]
+- tool: npm
+  category: mantenimiento
+  command: 'npm doctor'
+  description: Comprueba que el entorno de npm funciona correctamente.
+  tags: [diagnóstico]
+
+# --- configuración ---
+- tool: npm
+  category: configuración
+  command: 'npm config list'
+  description: Muestra la configuración activa de npm.
+  tags: [config, listar]
+- tool: npm
+  category: configuración
+  command: 'npm config get {clave}'
+  description: Muestra un valor de configuración.
+  tags: [config]
+  example: 'npm config get registry'
+- tool: npm
+  category: configuración
+  command: 'npm config set {clave} {valor}'
+  description: Cambia un valor de configuración.
+  tags: [config]
+  example: 'npm config set save-exact true'
+
+# --- publicación ---
+- tool: npm
+  category: publicación
+  command: 'npm login'
+  description: Inicia sesión en el registro de npm.
+  tags: [login, cuenta]
+- tool: npm
+  category: publicación
+  command: 'npm whoami'
+  description: Usuario con el que has iniciado sesión.
+  tags: [usuario, cuenta]
+- tool: npm
+  category: publicación
+  command: 'npm pack --dry-run'
+  description: Muestra qué archivos se incluirían al publicar, sin publicar.
+  tags: [publicar, empaquetar, dry-run]
+- tool: npm
+  category: publicación
+  command: 'npm publish'
+  description: Publica el paquete en el registro (--access public para paquetes con scope).
+  tags: [publicar, release]
+- tool: npm
+  category: publicación
+  command: 'npm link'
+  description: Enlaza el paquete local de forma global para probarlo en otro proyecto.
+  tags: [enlazar, local, desarrollo]

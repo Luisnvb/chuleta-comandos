@@ -1,0 +1,451 @@
+# Source: pdfs/comandos-linux.pdf
+
+# --- navegación y archivos ---
+- tool: linux
+  category: navegación y archivos
+  command: 'pwd'
+  description: Muestra el directorio actual.
+  tags: [directorio, ruta, where]
+- tool: linux
+  category: navegación y archivos
+  command: 'ls -lah'
+  description: Lista archivos con detalles, ocultos incluidos y tamaños legibles.
+  tags: [listar, list, dir]
+- tool: linux
+  category: navegación y archivos
+  command: 'cd {ruta}'
+  description: Cambia a un directorio.
+  tags: [directorio, change]
+  example: 'cd /var/www'
+- tool: linux
+  category: navegación y archivos
+  command: 'cd ..'
+  description: Sube al directorio padre.
+  tags: [directorio, padre]
+- tool: linux
+  category: navegación y archivos
+  command: 'cd ~'
+  description: Va al directorio home del usuario.
+  tags: [directorio, home]
+- tool: linux
+  category: navegación y archivos
+  command: 'cd -'
+  description: Vuelve al directorio anterior.
+  tags: [directorio, anterior]
+- tool: linux
+  category: navegación y archivos
+  command: 'mkdir -p {ruta}'
+  description: Crea directorios, incluidos los intermedios.
+  tags: [crear, carpeta, directorio]
+  example: 'mkdir -p dir/subdir'
+- tool: linux
+  category: navegación y archivos
+  command: 'touch {archivo}'
+  description: Crea un archivo vacío o actualiza su fecha.
+  tags: [crear, archivo]
+- tool: linux
+  category: navegación y archivos
+  command: 'cp -r {origen} {destino}'
+  description: Copia archivos o directorios (recursivo).
+  tags: [copiar, copy]
+- tool: linux
+  category: navegación y archivos
+  command: 'mv {origen} {destino}'
+  description: Mueve o renombra.
+  tags: [mover, renombrar, move, rename]
+- tool: linux
+  category: navegación y archivos
+  command: 'rm {archivo}'
+  description: Borra un archivo. Sin papelera.
+  tags: [borrar, eliminar, delete]
+- tool: linux
+  category: navegación y archivos
+  command: 'rm -r {directorio}'
+  description: Borra un directorio y su contenido. Sin papelera, cuidado con rm -rf.
+  tags: [borrar, eliminar, delete, carpeta]
+- tool: linux
+  category: navegación y archivos
+  command: 'ln -s {destino} {enlace}'
+  description: Crea un enlace simbólico.
+  tags: [symlink, enlace]
+- tool: linux
+  category: navegación y archivos
+  command: 'tree'
+  description: Muestra la estructura de directorios en árbol (puede requerir instalarlo).
+  tags: [árbol, estructura]
+
+# --- ver y editar contenido ---
+- tool: linux
+  category: ver y editar
+  command: 'cat {archivo}'
+  description: Imprime el contenido completo de un archivo.
+  tags: [leer, mostrar, print]
+- tool: linux
+  category: ver y editar
+  command: 'less {archivo}'
+  description: Abre un archivo paginado (q para salir, / para buscar).
+  tags: [leer, paginar, pager]
+- tool: linux
+  category: ver y editar
+  command: 'head -n 20 {archivo}'
+  description: Muestra las primeras líneas de un archivo.
+  tags: [primeras, inicio]
+- tool: linux
+  category: ver y editar
+  command: 'tail -n 20 {archivo}'
+  description: Muestra las últimas líneas de un archivo.
+  tags: [últimas, final]
+- tool: linux
+  category: ver y editar
+  command: 'tail -f {archivo}'
+  description: Sigue un archivo en tiempo real.
+  tags: [logs, seguir, follow]
+  example: 'tail -f registro.log'
+- tool: linux
+  category: ver y editar
+  command: 'nano {archivo}'
+  description: Editor de texto sencillo en terminal.
+  tags: [editor, editar]
+- tool: linux
+  category: ver y editar
+  command: 'vim {archivo}'
+  description: Editor de texto avanzado en terminal.
+  tags: [editor, editar, vi]
+- tool: linux
+  category: ver y editar
+  command: 'wc -l {archivo}'
+  description: Cuenta líneas (-w palabras, -c bytes).
+  tags: [contar, líneas, count]
+- tool: linux
+  category: ver y editar
+  command: 'diff {archivo_a} {archivo_b}'
+  description: Compara dos archivos línea a línea.
+  tags: [comparar, diferencias]
+
+# --- búsqueda y filtrado ---
+- tool: linux
+  category: búsqueda y filtrado
+  command: 'find . -name "{patron}"'
+  description: Busca archivos por nombre desde el directorio actual.
+  tags: [buscar, archivos, search]
+  example: 'find . -name "*.txt"'
+- tool: linux
+  category: búsqueda y filtrado
+  command: 'grep -rn "{texto}" .'
+  description: Busca texto dentro de archivos, con número de línea.
+  tags: [buscar, texto, search]
+- tool: linux
+  category: búsqueda y filtrado
+  command: 'grep -i "{texto}" {archivo}'
+  description: Busca texto ignorando mayúsculas y minúsculas.
+  tags: [buscar, case-insensitive]
+- tool: linux
+  category: búsqueda y filtrado
+  command: 'grep -v "{texto}" {archivo}'
+  description: Muestra las líneas que NO coinciden.
+  tags: [buscar, invertir, excluir]
+- tool: linux
+  category: búsqueda y filtrado
+  command: 'sort | uniq -c'
+  description: Ordena y cuenta líneas repetidas.
+  tags: [ordenar, contar, duplicados]
+- tool: linux
+  category: búsqueda y filtrado
+  command: "cut -d',' -f1"
+  description: Extrae columnas de texto delimitado.
+  tags: [columnas, csv]
+- tool: linux
+  category: búsqueda y filtrado
+  command: "awk '{print $1}'"
+  description: Procesa texto por columnas.
+  tags: [columnas, texto]
+- tool: linux
+  category: búsqueda y filtrado
+  command: "sed 's/{viejo}/{nuevo}/g' {archivo}"
+  description: Sustituye texto en un flujo o archivo (-i para editar en sitio).
+  tags: [reemplazar, replace, sustituir]
+- tool: linux
+  category: búsqueda y filtrado
+  command: 'which {comando}'
+  description: Indica la ruta del ejecutable de un comando.
+  tags: [ruta, ejecutable, where]
+
+# --- permisos y propietarios ---
+- tool: linux
+  category: permisos
+  command: 'chmod 755 {archivo}'
+  description: Cambia permisos (rwx = 4+2+1 para usuario, grupo, otros).
+  tags: [permisos, chmod]
+- tool: linux
+  category: permisos
+  command: 'chmod +x {archivo}'
+  description: Hace ejecutable un archivo.
+  tags: [permisos, ejecutable]
+  example: 'chmod +x script.sh'
+- tool: linux
+  category: permisos
+  command: 'chown {usuario}:{grupo} {archivo}'
+  description: Cambia el propietario de un archivo.
+  tags: [propietario, owner]
+- tool: linux
+  category: permisos
+  command: 'sudo {comando}'
+  description: Ejecuta un comando como administrador.
+  tags: [admin, root, superusuario]
+- tool: linux
+  category: permisos
+  command: 'whoami'
+  description: Muestra tu usuario actual.
+  tags: [usuario, user]
+- tool: linux
+  category: permisos
+  command: 'id'
+  description: Muestra tu usuario y tus grupos.
+  tags: [usuario, grupos]
+
+# --- procesos y sistema ---
+- tool: linux
+  category: procesos y sistema
+  command: 'ps aux'
+  description: Lista todos los procesos en ejecución.
+  tags: [procesos, process]
+- tool: linux
+  category: procesos y sistema
+  command: 'top'
+  description: Monitor interactivo de procesos y recursos.
+  tags: [procesos, monitor, cpu]
+- tool: linux
+  category: procesos y sistema
+  command: 'htop'
+  description: Monitor interactivo de procesos más visual (puede requerir instalarlo).
+  tags: [procesos, monitor, cpu]
+- tool: linux
+  category: procesos y sistema
+  command: 'kill {pid}'
+  description: Termina un proceso por su PID.
+  tags: [matar, terminar, proceso]
+- tool: linux
+  category: procesos y sistema
+  command: 'kill -9 {pid}'
+  description: Fuerza la terminación de un proceso.
+  tags: [matar, forzar, proceso]
+- tool: linux
+  category: procesos y sistema
+  command: 'pkill {nombre}'
+  description: Termina procesos por nombre.
+  tags: [matar, proceso]
+- tool: linux
+  category: procesos y sistema
+  command: '{comando} &'
+  description: Ejecuta un comando en segundo plano.
+  tags: [background, segundo plano]
+- tool: linux
+  category: procesos y sistema
+  command: 'jobs'
+  description: Lista las tareas en segundo plano de la shell.
+  tags: [background, tareas]
+- tool: linux
+  category: procesos y sistema
+  command: 'fg'
+  description: Trae al frente una tarea en segundo plano.
+  tags: [background, foreground]
+- tool: linux
+  category: procesos y sistema
+  command: 'df -h'
+  description: Espacio libre en los discos.
+  tags: [disco, espacio]
+- tool: linux
+  category: procesos y sistema
+  command: 'du -sh *'
+  description: Tamaño de cada elemento del directorio.
+  tags: [disco, tamaño, size]
+- tool: linux
+  category: procesos y sistema
+  command: 'free -h'
+  description: Uso de memoria RAM.
+  tags: [memoria, ram]
+- tool: linux
+  category: procesos y sistema
+  command: 'uname -a'
+  description: Información del kernel y del sistema.
+  tags: [sistema, kernel, versión]
+- tool: linux
+  category: procesos y sistema
+  command: 'uptime'
+  description: Tiempo encendido y carga media.
+  tags: [sistema, carga]
+- tool: linux
+  category: procesos y sistema
+  command: 'systemctl status {servicio}'
+  description: Estado de un servicio (también start, stop, restart, enable).
+  tags: [servicio, systemd, daemon]
+  example: 'systemctl status nginx'
+- tool: linux
+  category: procesos y sistema
+  command: 'journalctl -u {servicio} -f'
+  description: Registros de un servicio en tiempo real.
+  tags: [logs, servicio, systemd]
+
+# --- red ---
+- tool: linux
+  category: red
+  command: 'ip a'
+  description: Muestra interfaces y direcciones IP.
+  tags: [ip, interfaces, network]
+- tool: linux
+  category: red
+  command: 'ping -c 4 {host}'
+  description: Comprueba la conectividad con un host.
+  tags: [conectividad, network]
+- tool: linux
+  category: red
+  command: 'curl -I {url}'
+  description: Hace una petición HTTP mostrando solo las cabeceras.
+  tags: [http, cabeceras, headers]
+  example: 'curl -I https://example.com'
+- tool: linux
+  category: red
+  command: 'wget {url}'
+  description: Descarga un archivo.
+  tags: [descargar, download]
+- tool: linux
+  category: red
+  command: 'ssh {usuario}@{host}'
+  description: Conexión remota segura.
+  tags: [remoto, servidor]
+- tool: linux
+  category: red
+  command: 'scp {archivo} {usuario}@{host}:{ruta}'
+  description: Copia archivos por SSH.
+  tags: [copiar, remoto, ssh]
+- tool: linux
+  category: red
+  command: 'rsync -avz {origen} {destino}'
+  description: Sincroniza archivos de forma eficiente.
+  tags: [sincronizar, copiar, sync]
+- tool: linux
+  category: red
+  command: 'ss -tulpn'
+  description: Puertos abiertos y procesos que escuchan.
+  tags: [puertos, ports, netstat]
+
+# --- compresión ---
+- tool: linux
+  category: compresión
+  command: 'tar -czvf {archivo}.tar.gz {directorio}'
+  description: Crea un archivo comprimido .tar.gz.
+  tags: [comprimir, tar, gzip]
+  example: 'tar -czvf backup.tar.gz dir'
+- tool: linux
+  category: compresión
+  command: 'tar -xzvf {archivo}.tar.gz'
+  description: Extrae un .tar.gz.
+  tags: [descomprimir, extraer, tar]
+- tool: linux
+  category: compresión
+  command: 'zip -r {archivo}.zip {directorio}'
+  description: Comprime un directorio en formato zip.
+  tags: [comprimir, zip]
+- tool: linux
+  category: compresión
+  command: 'unzip {archivo}.zip'
+  description: Descomprime un archivo zip.
+  tags: [descomprimir, zip]
+
+# --- paquetes ---
+- tool: linux
+  category: paquetes
+  command: 'sudo apt update && sudo apt upgrade'
+  description: 'Debian/Ubuntu: actualiza índices y paquetes.'
+  tags: [apt, actualizar, debian, ubuntu]
+- tool: linux
+  category: paquetes
+  command: 'sudo apt install {paquete}'
+  description: 'Debian/Ubuntu: instala un paquete.'
+  tags: [apt, instalar, debian, ubuntu]
+- tool: linux
+  category: paquetes
+  command: 'sudo dnf install {paquete}'
+  description: 'Fedora/RHEL: instala un paquete.'
+  tags: [dnf, instalar, fedora]
+- tool: linux
+  category: paquetes
+  command: 'sudo pacman -S {paquete}'
+  description: 'Arch: instala un paquete.'
+  tags: [pacman, instalar, arch]
+
+# --- redirecciones y shell ---
+- tool: linux
+  category: redirecciones y shell
+  command: '{comando} > {archivo}'
+  description: Envía la salida a un archivo (sobrescribe).
+  tags: [redirigir, salida, output]
+- tool: linux
+  category: redirecciones y shell
+  command: '{comando} >> {archivo}'
+  description: Añade la salida al final de un archivo.
+  tags: [redirigir, añadir, append]
+- tool: linux
+  category: redirecciones y shell
+  command: '{comando} 2> {archivo}'
+  description: Redirige los errores a un archivo.
+  tags: [redirigir, errores, stderr]
+  example: 'npm run build 2> err.log'
+- tool: linux
+  category: redirecciones y shell
+  command: '{comando1} | {comando2}'
+  description: 'Tubería: la salida de uno es la entrada del otro.'
+  tags: [pipe, tubería]
+- tool: linux
+  category: redirecciones y shell
+  command: '{comando1} && {comando2}'
+  description: Ejecuta el segundo comando solo si el primero tuvo éxito.
+  tags: [encadenar, and]
+- tool: linux
+  category: redirecciones y shell
+  command: 'history'
+  description: Muestra el historial de comandos.
+  tags: [historial]
+- tool: linux
+  category: redirecciones y shell
+  command: '!!'
+  description: Repite el último comando (útil con sudo !!).
+  tags: [historial, repetir]
+- tool: linux
+  category: redirecciones y shell
+  command: "alias {nombre}='{comando}'"
+  description: Crea un atajo de comando (guárdalo en ~/.bashrc).
+  tags: [alias, atajo]
+  example: "alias ll='ls -lah'"
+- tool: linux
+  category: redirecciones y shell
+  command: 'man {comando}'
+  description: Abre el manual de un comando.
+  tags: [ayuda, help, manual]
+- tool: linux
+  category: redirecciones y shell
+  command: '{comando} --help'
+  description: Muestra la ayuda rápida de un comando.
+  tags: [ayuda, help]
+
+# --- atajos de teclado ---
+- tool: linux
+  category: atajos
+  command: 'Ctrl+C'
+  description: Interrumpe el proceso actual.
+  tags: [teclado, interrumpir, shortcut]
+- tool: linux
+  category: atajos
+  command: 'Ctrl+Z'
+  description: Suspende el proceso actual (reanúdalo con fg).
+  tags: [teclado, suspender, shortcut]
+- tool: linux
+  category: atajos
+  command: 'Ctrl+R'
+  description: Busca en el historial de comandos.
+  tags: [teclado, historial, shortcut]
+- tool: linux
+  category: atajos
+  command: 'Tab'
+  description: Autocompleta comandos y rutas.
+  tags: [teclado, autocompletar, shortcut]
