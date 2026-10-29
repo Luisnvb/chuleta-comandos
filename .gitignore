@@ -5,3 +5,6 @@ src/generated/
 
 # Original PDF cheatsheets: local reference only, not redistributed
 pdfs/
+
+.vercel
+.env*
