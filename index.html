@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Search and copy developer commands" />
+    <title>Cheatsheet</title>
+  </head>
+  <body>
+    <header class="top">
+      <div class="search-wrap">
+        <label class="visually-hidden" for="search">Search commands</label>
+        <input
+          id="search"
+          type="search"
+          placeholder="Search commands…"
+          autocomplete="off"
+          spellcheck="false"
+          autofocus
+          role="combobox"
+          aria-expanded="true"
+          aria-controls="results"
+          aria-autocomplete="list"
+        />
+      </div>
+      <nav id="filters" class="filters" aria-label="Filter by tool"></nav>
+      <p id="status" class="status"></p>
+    </header>
+
+    <main>
+      <ul id="results" class="results" role="listbox" aria-label="Commands"></ul>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
