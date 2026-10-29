@@ -31,7 +31,7 @@ The service worker is only active in `build` + `preview`, not in `dev`.
 ## Project layout
 
 ```
-pdfs/              Original PDF cheatsheets (reference only, not used at runtime)
+pdfs/              Original PDF cheatsheets — local only, gitignored (not redistributed)
 data/              SOURCE OF TRUTH — one YAML file per tool (linux.yaml, git.yaml, ...)
 scripts/           Node scripts (build-data.js)
 src/generated/     Generated JSON — never edit by hand, gitignored

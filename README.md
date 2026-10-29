@@ -100,7 +100,6 @@ See [`CLAUDE.md`](CLAUDE.md) for the full data conventions.
 
 ```
 data/              Command data, one YAML per tool (source of truth)
-pdfs/              Original PDF cheatsheets the data was extracted from
 scripts/           build-data.js
 src/
   main.js          Wiring: data, state, events
