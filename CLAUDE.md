@@ -79,7 +79,7 @@ The build step adds derived fields to each entry: a stable `id` (from tool + com
 
 ## Keyboard shortcuts (`src/keyboard.js`)
 
-Ctrl+K or `/` focus search · ↑/↓ move (PageUp/PageDown ±10) · Enter copy · Ctrl+D toggle favorite · Esc clears the query, then the filter · Alt+0…9 filter in `FILTERS` order (0 = all, 1–7 tools, 8 favorites, 9 recent) · typing anywhere goes into the search box.
+Ctrl+K or `/` focus search · ↑/↓ move (PageUp/PageDown ±10) · Enter copy (or open the fill-in form) · Shift+Enter copy template as is · Ctrl+D toggle favorite · Esc clears the query, then the filter · Alt+0…9 filter in `FILTERS` order (0 = all, 1–7 tools, 8 favorites, 9 recent) · typing anywhere goes into the search box.
 
 `FILTERS` (`src/tools.js`) = All + `TOOLS` + `COLLECTIONS`. With 7 tools the Alt digits are exactly used up: adding a tool pushes Favorites/Recent past Alt+9 — revisit the shortcut scheme then (and the hint in `index.html`).
 
@@ -91,6 +91,15 @@ Ctrl+K or `/` focus search · ↑/↓ move (PageUp/PageDown ±10) · Enter copy 
 - They are filters like the tools: search works inside them; with an empty query they are sorted newest first. Copying in the Recent view updates the count but doesn't reorder the visible list.
 - A `storage` event listener keeps several open windows (tab + installed app) in sync.
 
+## Placeholder fill-in form (`src/fill-form.js`, `src/placeholders.js`)
+
+- Enter / click on a command with `placeholders` opens a native `<dialog>`; commands without placeholders are copied directly. Shift+Enter (list or form) copies the template untouched.
+- In the form, Enter jumps to the next empty field and copies when none are left; an empty field shakes instead of copying. Esc and backdrop click cancel. Focus returns to the search box on close.
+- While a dialog is open, the global shortcuts in `keyboard.js` are disabled.
+- Values are remembered per placeholder **name** (`cheatsheet:placeholder-values`), shared across commands and pre-filled + selected next time. Consistent placeholder names in the YAML (`{rama}`, `{archivo}`, `{url}`…) make this useful — reuse existing names when adding commands.
+- The `PLACEHOLDER` regex lives in `placeholders.js` (same rule as `scripts/build-data.js`); values are inserted verbatim, no shell quoting.
+- All localStorage access goes through `src/storage.js` (try/catch, fallback values).
+
 ## Out of scope for now (keep the structure ready)
 
-Placeholder fill-in form before copying (will use the `placeholders` field) and editing commands in the app — do not implement until asked.
+Editing commands in the app — do not implement until asked.

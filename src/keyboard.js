@@ -1,7 +1,8 @@
 // Global keyboard shortcuts. Behaviour lives in main.js; this module only maps keys to actions.
 //   Ctrl+K or /     focus the search box
 //   ↑ ↓             move the selection (PageUp/PageDown jump 10)
-//   Enter           copy the selected command
+//   Enter           copy the selected command, or open the fill-in form if it has placeholders
+//   Shift+Enter     copy the selected command as is, placeholders included
 //   Ctrl+D          add/remove the selected command from favorites
 //   Esc             clear the query, then reset the filter
 //   Alt+0…9         select a filter (0 = all, then tools, favorites, recent)
@@ -9,8 +10,18 @@
 
 const PAGE = 10;
 
-export function initKeyboard({ input, moveSelection, copySelected, toggleFavorite, clear, selectFilter }) {
+export function initKeyboard({
+  input,
+  moveSelection,
+  activateSelected,
+  copySelectedTemplate,
+  toggleFavorite,
+  clear,
+  selectFilter,
+}) {
   document.addEventListener('keydown', (e) => {
+    // An open dialog (the fill-in form) handles its own keys.
+    if (document.querySelector('dialog[open]')) return;
     const target = e.target instanceof Element ? e.target : document.body;
     const inSearch = target === input;
     const inOtherField = !inSearch && target.closest('input, textarea, select, [contenteditable]');
@@ -59,7 +70,8 @@ export function initKeyboard({ input, moveSelection, copySelected, toggleFavorit
         // Let Enter activate focused buttons (tool filters).
         if (target.closest('button')) return;
         e.preventDefault();
-        copySelected();
+        if (e.shiftKey) copySelectedTemplate();
+        else activateSelected();
         return;
       case 'Escape':
         e.preventDefault();

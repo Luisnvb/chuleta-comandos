@@ -1,6 +1,6 @@
-// Favorites and recently copied commands, stored per device in localStorage as lists of
-// command ids, newest first. Storage may be unavailable (private mode, blocked site data):
-// the app then keeps the lists in memory for the session.
+// Favorites and recently copied commands, stored per device as lists of command ids,
+// newest first.
+import { readJSON, writeJSON } from './storage.js';
 
 const KEYS = {
   favorites: 'cheatsheet:favorites',
@@ -10,12 +10,8 @@ const KEYS = {
 export const MAX_RECENT = 20;
 
 function load(key) {
-  try {
-    const value = JSON.parse(localStorage.getItem(key));
-    return Array.isArray(value) ? value.filter((id) => typeof id === 'string') : [];
-  } catch {
-    return [];
-  }
+  const value = readJSON(key, []);
+  return Array.isArray(value) ? value.filter((id) => typeof id === 'string') : [];
 }
 
 // validIds: ids present in the current data; entries for removed commands are dropped.
@@ -27,11 +23,7 @@ export function loadCollections(validIds) {
 }
 
 export function saveCollection(name, ids) {
-  try {
-    localStorage.setItem(KEYS[name], JSON.stringify(ids));
-  } catch {
-    // Storage unavailable: the list lives in memory only.
-  }
+  writeJSON(KEYS[name], ids);
 }
 
 export function toggleFavorite(ids, id) {

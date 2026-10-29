@@ -8,7 +8,9 @@ import {
   saveCollection,
   toggleFavorite,
 } from './collections.js';
+import { createFillForm } from './fill-form.js';
 import { initKeyboard } from './keyboard.js';
+import { loadRememberedValues, rememberValues } from './placeholders.js';
 import {
   flashCopied,
   optionId,
@@ -36,6 +38,7 @@ const els = {
   status: document.getElementById('status'),
   list: document.getElementById('results'),
   toast: document.getElementById('toast'),
+  fill: document.getElementById('fill'),
 };
 
 // Matches for the current query across all tools; the active filter is applied on top.
@@ -114,23 +117,46 @@ function clear() {
   }
 }
 
-async function copyCommand(index) {
-  const command = state.results[index];
-  if (!command) return;
-  setState({ selected: index });
+// text: the command as copied (template or with placeholders filled in).
+async function copy(command, text) {
   try {
-    await copyText(command.command);
+    await copyText(text);
   } catch {
     showToast(els.toast, 'Could not copy to the clipboard', true);
     return;
   }
-  flashCopied(document.getElementById(optionId(command)));
-  showToast(els.toast, `Copied: ${command.command}`);
+  const el = document.getElementById(optionId(command));
+  if (el) flashCopied(el);
+  showToast(els.toast, `Copied: ${text}`);
 
   const recent = addRecent(state.recent, command.id);
   saveCollection('recent', recent);
   // Results are not recomputed, so the Recent list doesn't reorder under the cursor.
   setState({ recent });
+}
+
+const openFillForm = createFillForm(els.fill, {
+  onCopy: (command, text, values) => {
+    rememberValues(values);
+    copy(command, text);
+  },
+  onClose: () => els.input.focus(),
+});
+
+// Enter / click: commands with placeholders open the fill-in form, the rest are copied directly.
+function activate(index) {
+  const command = state.results[index];
+  if (!command) return;
+  setState({ selected: index });
+  if (command.placeholders.length) openFillForm(command, loadRememberedValues());
+  else copy(command, command.command);
+}
+
+function copyTemplate(index) {
+  const command = state.results[index];
+  if (!command) return;
+  setState({ selected: index });
+  copy(command, command.command);
 }
 
 function toggleFavoriteAt(index) {
@@ -161,13 +187,14 @@ els.list.addEventListener('click', (e) => {
   if (!item) return;
   const index = Number(item.dataset.index);
   if (e.target.closest('.star')) toggleFavoriteAt(index);
-  else copyCommand(index);
+  else activate(index);
 });
 
 initKeyboard({
   input: els.input,
   moveSelection,
-  copySelected: () => copyCommand(state.selected),
+  activateSelected: () => activate(state.selected),
+  copySelectedTemplate: () => copyTemplate(state.selected),
   toggleFavorite: () => toggleFavoriteAt(state.selected),
   clear,
   selectFilter,

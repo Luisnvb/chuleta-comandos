@@ -1,8 +1,7 @@
+import { PLACEHOLDER } from './placeholders.js';
 import { COLLECTIONS, FILTERS, TOOLS, isCollection, toolLabel } from './tools.js';
 
-const PLACEHOLDER = /\{([a-z][a-z0-9_]*)\}/g;
-
-function escapeHtml(text) {
+export function escapeHtml(text) {
   return text
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')

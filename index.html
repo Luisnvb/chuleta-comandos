@@ -34,7 +34,7 @@
       <div class="status-row">
         <p id="status" class="status" aria-live="polite"></p>
         <p class="hints" aria-hidden="true">
-          <kbd>↑</kbd><kbd>↓</kbd> select · <kbd>Enter</kbd> copy · <kbd>Ctrl</kbd>+<kbd>D</kbd> favorite ·
+          <kbd>↑</kbd><kbd>↓</kbd> select · <kbd>Enter</kbd> copy / fill · <kbd>Ctrl</kbd>+<kbd>D</kbd> favorite ·
           <kbd>Esc</kbd> clear · <kbd>Alt</kbd>+<kbd>0–9</kbd> filter
         </p>
       </div>
@@ -43,6 +43,28 @@
     <main>
       <ul id="results" class="results" role="listbox" aria-label="Commands"></ul>
     </main>
+
+    <dialog id="fill" class="fill" aria-labelledby="fill-title">
+      <form method="dialog">
+        <h2 id="fill-title" class="fill-title">Fill in placeholders</h2>
+        <p class="fill-description"></p>
+        <code class="fill-preview" aria-live="polite"></code>
+        <div class="fill-fields"></div>
+        <p class="fill-example"></p>
+        <div class="fill-actions">
+          <button type="button" class="button" data-action="template" title="Shift+Enter">
+            Copy template
+          </button>
+          <span class="fill-spacer"></span>
+          <button type="button" class="button" data-action="cancel" title="Esc">Cancel</button>
+          <button type="submit" class="button button-primary">Copy</button>
+        </div>
+        <p class="fill-hints" aria-hidden="true">
+          <kbd>Enter</kbd> next field / copy · <kbd>Shift</kbd>+<kbd>Enter</kbd> copy template ·
+          <kbd>Esc</kbd> cancel
+        </p>
+      </form>
+    </dialog>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 

@@ -15,6 +15,7 @@ The command descriptions are in Spanish; the UI and code are in English.
 - **Fuzzy search** over command, description, tags and category, with typo tolerance and accents ignored. Multi-word queries match every word in any order (`crear rama` = `rama crear`).
 - **Tool filter** with live match counts per tool.
 - **Copy** with a click, or with <kbd>Enter</kbd> on the selected result.
+- **Fill in placeholders**: commands with `{placeholders}` open a small form with a live preview before copying. Values are remembered per placeholder name, so `{rama}` typed once is suggested in every command that uses it. <kbd>Shift</kbd>+<kbd>Enter</kbd> copies the template as is.
 - **Favorites and recents**: star commands with ☆ or <kbd>Ctrl</kbd>+<kbd>D</kbd>; the last 20 copied commands are kept automatically. Both are filters you can search within, and are stored in the browser (per device).
 - **Keyboard first**: the whole app works without a mouse (see [shortcuts](#keyboard-shortcuts)).
 - **Light / dark** theme following the system.
@@ -63,11 +64,14 @@ npm run build && npm run preview   # http://localhost:4173
 |---|---|
 | <kbd>Ctrl</kbd>+<kbd>K</kbd> or <kbd>/</kbd> | Focus the search box |
 | <kbd>↑</kbd> <kbd>↓</kbd> | Move the selection (<kbd>PgUp</kbd> / <kbd>PgDn</kbd> jump 10) |
-| <kbd>Enter</kbd> | Copy the selected command |
+| <kbd>Enter</kbd> | Copy the selected command (opens the fill-in form if it has placeholders) |
+| <kbd>Shift</kbd>+<kbd>Enter</kbd> | Copy the selected command as is, placeholders included |
 | <kbd>Ctrl</kbd>+<kbd>D</kbd> | Add / remove the selected command from favorites |
 | <kbd>Esc</kbd> | Clear the search, then the filter |
 | <kbd>Alt</kbd>+<kbd>0</kbd>…<kbd>9</kbd> | Filter: 0 = all, 1–7 = tools, 8 = favorites, 9 = recent |
 | Any character | Typing anywhere goes into the search box |
+
+In the fill-in form: <kbd>Enter</kbd> jumps to the next empty field and copies once all are filled, <kbd>Shift</kbd>+<kbd>Enter</kbd> copies the template, <kbd>Esc</kbd> cancels.
 
 ## Adding or editing commands
 
@@ -116,7 +120,10 @@ src/
   render.js        DOM rendering
   keyboard.js      Keyboard shortcuts
   clipboard.js     Copy with fallback
-  collections.js   Favorites and recents (localStorage)
+  fill-form.js     Placeholder fill-in dialog
+  placeholders.js  Placeholder parsing, filling and remembered values
+  collections.js   Favorites and recents
+  storage.js       Safe localStorage helpers
   tools.js         Tool labels, filter order
   styles.css
 public/            Icon source (favicon.svg) and generated icons
@@ -128,9 +135,8 @@ public/            Icon source (favicon.svg) and generated icons
 
 ## Roadmap
 
-Not implemented yet. Each command already has a parsed list of `placeholders` to support these:
+Not implemented yet:
 
-- A form to fill in placeholders before copying
 - Editing commands from the app
 
 ## License
