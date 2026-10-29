@@ -5,6 +5,7 @@ import {
   addRecent,
   loadCollections,
   onCollectionsChangedElsewhere,
+  replaceId,
   saveCollection,
   toggleFavorite,
 } from './collections.js';
@@ -25,11 +26,21 @@ import { setState, state, subscribe } from './state.js';
 import { FILTERS, TOOLS, isCollection, toolLabel } from './tools.js';
 
 const toolOrder = new Map(TOOLS.map((t, i) => [t.id, i]));
-const commands = data.commands
-  .map((c) => ({ ...c, toolLabel: toolLabel(c.tool) }))
-  .sort((a, b) => (toolOrder.get(a.tool) ?? 99) - (toolOrder.get(b.tool) ?? 99));
-const commandIds = new Set(commands.map((c) => c.id));
-const search = createSearch(commands);
+
+// Replaced when the dev editor changes the data (see the HMR handler at the bottom).
+let commands;
+let commandIds;
+let search;
+
+function setData(json) {
+  commands = json.commands
+    .map((c) => ({ ...c, toolLabel: toolLabel(c.tool) }))
+    .sort((a, b) => (toolOrder.get(a.tool) ?? 99) - (toolOrder.get(b.tool) ?? 99));
+  commandIds = new Set(commands.map((c) => c.id));
+  search = createSearch(commands);
+}
+
+setData(data);
 
 const els = {
   header: document.querySelector('.top'),
@@ -84,13 +95,13 @@ subscribe((s, prev) => {
   const viewChanged = s.query !== prev.query || s.filter !== prev.filter;
   const favoritesChanged = s.favorites !== prev.favorites;
 
-  if (resultsChanged || favoritesChanged) renderResults(els.list, s.results, s);
+  if (resultsChanged || favoritesChanged || s.editable !== prev.editable) renderResults(els.list, s.results, s);
   if (resultsChanged || favoritesChanged || s.recent !== prev.recent) {
     renderFilters(els.filters, countByFilter(matches, s), s.filter);
   }
   if (resultsChanged) renderStatus(els.status, s.results, s.query);
   if (viewChanged) window.scrollTo(0, 0);
-  if (resultsChanged || favoritesChanged || s.selected !== prev.selected) {
+  if (resultsChanged || favoritesChanged || s.editable !== prev.editable || s.selected !== prev.selected) {
     // A new query or filter already reset the scroll to the top; otherwise keep the selection visible.
     renderSelection(els.list, els.input, s.results, s.selected, !viewChanged);
   }
@@ -187,8 +198,82 @@ els.list.addEventListener('click', (e) => {
   if (!item) return;
   const index = Number(item.dataset.index);
   if (e.target.closest('.star')) toggleFavoriteAt(index);
+  else if (e.target.closest('.edit')) editAt(index);
   else activate(index);
 });
+
+// --- dev-only command editor (src/editor.js writes data/*.yaml through the Vite dev server) ---
+
+let openEditor = null;
+// Id to select once the edited command shows up in the reloaded data.
+let pendingSelectId = null;
+
+function editAt(index) {
+  const command = state.results[index];
+  if (!openEditor || !command) return;
+  setState({ selected: index });
+  openEditor(command);
+}
+
+// New commands default to the active tool filter, else the selected command's tool and category.
+function createCommand() {
+  if (!openEditor) return;
+  const selected = state.results[state.selected];
+  if (TOOLS.some((t) => t.id === state.filter)) {
+    openEditor(null, { tool: state.filter, category: selected?.tool === state.filter ? selected.category : '' });
+  } else {
+    openEditor(null, { tool: selected?.tool, category: selected?.category });
+  }
+}
+
+// Recomputes the results from the current data, keeping the selection where possible.
+// dataChanged: called from HMR with new data (vs. after the save response).
+function refresh(dataChanged = false) {
+  matches = search(state.query);
+  update({}, { keepSelection: true });
+  if (!pendingSelectId) return;
+  const index = state.results.findIndex((c) => c.id === pendingSelectId);
+  if (index !== -1) setState({ selected: index });
+  if (index !== -1 || dataChanged) pendingSelectId = null;
+}
+
+// The save response and the HMR data update can arrive in either order; both call refresh().
+function onSaved({ id, previousId, file, action }) {
+  if (previousId && previousId !== id) {
+    const favorites = replaceId(state.favorites, previousId, id);
+    const recent = replaceId(state.recent, previousId, id);
+    saveCollection('favorites', favorites);
+    saveCollection('recent', recent);
+    setState({ favorites, recent });
+  }
+  pendingSelectId = id;
+  showToast(els.toast, action === 'delete' ? `Deleted from ${file}` : `Saved to ${file}`);
+  refresh();
+}
+
+if (import.meta.env.DEV) {
+  import('./editor.js').then(({ createEditor }) => {
+    openEditor = createEditor({
+      getCommands: () => commands,
+      onSaved,
+      onClose: () => els.input.focus(),
+    });
+    els.status.insertAdjacentHTML(
+      'afterend',
+      `<button type="button" class="button button-small new-command" title="Alt+N">+ New command</button>`,
+    );
+    document.querySelector('.new-command').addEventListener('click', createCommand);
+    setState({ editable: true });
+  });
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept('./generated/commands.json', (mod) => {
+    if (!mod) return;
+    setData(mod.default);
+    refresh(true);
+  });
+}
 
 initKeyboard({
   input: els.input,
@@ -198,6 +283,8 @@ initKeyboard({
   toggleFavorite: () => toggleFavoriteAt(state.selected),
   clear,
   selectFilter,
+  // Only bound in dev, so production keeps the browser's own Ctrl+E / Alt+N.
+  ...(import.meta.env.DEV && { editSelected: () => editAt(state.selected), createCommand }),
 });
 
 onCollectionsChangedElsewhere(() => update(loadCollections(commandIds), { keepSelection: true }));

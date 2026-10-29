@@ -34,6 +34,12 @@ export function addRecent(ids, id) {
   return [id, ...ids.filter((x) => x !== id)].slice(0, MAX_RECENT);
 }
 
+// Editing a command's text changes its id: keep it in the lists under the new id
+// (newId null = the command was deleted).
+export function replaceId(ids, oldId, newId) {
+  return ids.flatMap((id) => (id === oldId ? (newId ? [newId] : []) : [id]));
+}
+
 // Keeps several open windows (browser tab + installed app) in sync.
 export function onCollectionsChangedElsewhere(callback) {
   const keys = new Set(Object.values(KEYS));

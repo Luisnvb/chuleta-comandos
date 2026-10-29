@@ -6,6 +6,7 @@ export const state = {
   selected: 0, // index into results
   favorites: [], // command ids, newest first
   recent: [], // command ids, most recently copied first
+  editable: false, // dev only: the command editor is available
 };
 
 const listeners = new Set();

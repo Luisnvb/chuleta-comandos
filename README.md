@@ -75,6 +75,14 @@ In the fill-in form: <kbd>Enter</kbd> jumps to the next empty field and copies o
 
 ## Adding or editing commands
 
+### From the app (dev mode)
+
+Run `npm run dev` and the app gains an editor: **+ New command** (<kbd>Alt</kbd>+<kbd>N</kbd>) and a ✎ button on each result (<kbd>Ctrl</kbd>+<kbd>E</kbd> on the selected one). You can change any field, move a command to another tool, or delete it (click Delete twice).
+
+Changes are written straight into `data/*.yaml` through the Vite dev server, keeping comments, order and quoting style, and the app updates without reloading. Review them with `git diff`, then commit and push to publish. The deployed app is read-only: the editor is not part of the production build.
+
+### By hand
+
 The YAML files in [`data/`](data/) are the single source of truth, one file per tool:
 
 ```yaml
@@ -112,7 +120,10 @@ See [`CLAUDE.md`](CLAUDE.md) for the full data conventions.
 
 ```
 data/              Command data, one YAML per tool (source of truth)
-scripts/           build-data.js
+scripts/
+  build-data.js                  YAML -> JSON (npm run build-data)
+  commands-lib.js                Validation, ids and build shared by both scripts
+  vite-plugin-command-editor.js  Dev-only API that edits data/*.yaml
 src/
   main.js          Wiring: data, state, events
   state.js         Single app state
@@ -122,6 +133,7 @@ src/
   clipboard.js     Copy with fallback
   fill-form.js     Placeholder fill-in dialog
   placeholders.js  Placeholder parsing, filling and remembered values
+  editor.js        Command editor dialog (dev only)
   collections.js   Favorites and recents
   storage.js       Safe localStorage helpers
   tools.js         Tool labels, filter order
@@ -131,13 +143,7 @@ public/            Icon source (favicon.svg) and generated icons
 
 ## Tech stack
 
-[Vite](https://vite.dev) · vanilla JavaScript · [Fuse.js](https://www.fusejs.io) · [js-yaml](https://github.com/nodeca/js-yaml) · [vite-plugin-pwa](https://vite-pwa-org.netlify.app) (Workbox)
-
-## Roadmap
-
-Not implemented yet:
-
-- Editing commands from the app
+[Vite](https://vite.dev) · vanilla JavaScript · [Fuse.js](https://www.fusejs.io) · [yaml](https://eemeli.org/yaml/) · [vite-plugin-pwa](https://vite-pwa-org.netlify.app) (Workbox)
 
 ## License
 

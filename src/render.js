@@ -68,6 +68,7 @@ export function renderResults(list, results, s) {
         <div class="result-meta">
           ${showTool ? `<span class="chip chip-tool" data-tool="${c.tool}">${escapeHtml(c.toolLabel)}</span>` : ''}
           <span class="chip">${escapeHtml(c.category)}</span>
+          ${s.editable ? '<button type="button" class="icon-button edit" tabindex="-1" aria-label="Edit command" title="Edit (Ctrl+E)">✎</button>' : ''}
           ${starButton(favorites.has(c.id))}
         </div>
       </li>`,

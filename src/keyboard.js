@@ -4,6 +4,7 @@
 //   Enter           copy the selected command, or open the fill-in form if it has placeholders
 //   Shift+Enter     copy the selected command as is, placeholders included
 //   Ctrl+D          add/remove the selected command from favorites
+//   Ctrl+E / Alt+N  edit the selected command / new command (dev only, when handlers are given)
 //   Esc             clear the query, then reset the filter
 //   Alt+0…9         select a filter (0 = all, then tools, favorites, recent)
 //   any character   typed outside the search box goes into it
@@ -18,6 +19,8 @@ export function initKeyboard({
   toggleFavorite,
   clear,
   selectFilter,
+  editSelected,
+  createCommand,
 }) {
   document.addEventListener('keydown', (e) => {
     // An open dialog (the fill-in form) handles its own keys.
@@ -38,6 +41,18 @@ export function initKeyboard({
     if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'd') {
       e.preventDefault();
       toggleFavorite();
+      return;
+    }
+
+    if (editSelected && (e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'e') {
+      e.preventDefault();
+      editSelected();
+      return;
+    }
+
+    if (createCommand && e.altKey && !e.ctrlKey && !e.metaKey && e.code === 'KeyN') {
+      e.preventDefault();
+      createCommand();
       return;
     }
 
