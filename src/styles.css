@@ -13,6 +13,24 @@
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: ui-monospace, 'Cascadia Code', 'Cascadia Mono', Consolas, 'SF Mono', monospace;
   --max-width: 860px;
+  --header-h: 140px; /* updated from JS to the real sticky header height */
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14171c;
+    --surface: #1c2027;
+    --border: #2d333c;
+    --text: #e6e9ee;
+    --text-muted: #9aa3b0;
+    --accent: #6ea2ff;
+    --accent-soft: #1e2b44;
+    --placeholder: #d08cf5;
+    --success: #23804a;
+    --danger: #c44848;
+    color-scheme: dark;
+  }
 }
 
 *,
@@ -119,10 +137,46 @@ code {
   opacity: 0.75;
 }
 
-.status {
-  margin-block: 8px 0;
+.filter:focus-visible,
+.result:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
   font-size: 12px;
   color: var(--text-muted);
+}
+
+.status,
+.hints {
+  margin: 0;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 0 4px;
+  font: 11px/1.5 var(--font-mono);
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+}
+
+kbd + kbd {
+  margin-left: 2px;
+}
+
+@media (max-width: 560px), (hover: none) {
+  .hints {
+    display: none;
+  }
 }
 
 /* --- results --- */
@@ -151,6 +205,8 @@ main {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   cursor: pointer;
+  scroll-margin-top: calc(var(--header-h) + 8px);
+  scroll-margin-bottom: 16px;
 }
 
 .result:hover {
@@ -263,6 +319,15 @@ main {
 
 .toast-error {
   background: var(--danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result.copied {
+    animation: none;
+  }
+  .toast {
+    transition: none;
+  }
 }
 
 @media (max-width: 560px) {

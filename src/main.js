@@ -1,6 +1,7 @@
 import './styles.css';
 import data from './generated/commands.json';
 import { copyText } from './clipboard.js';
+import { initKeyboard } from './keyboard.js';
 import {
   flashCopied,
   optionId,
@@ -21,6 +22,7 @@ const commands = data.commands
 const search = createSearch(commands);
 
 const els = {
+  header: document.querySelector('.top'),
   input: document.getElementById('search'),
   filters: document.getElementById('filters'),
   status: document.getElementById('status'),
@@ -52,9 +54,31 @@ subscribe((s, prev) => {
     window.scrollTo(0, 0);
   }
   if (s.results !== prev.results || s.selected !== prev.selected) {
-    renderSelection(els.list, els.input, s.results, s.selected);
+    // Only scroll for selection moves; new results already reset the scroll to the top.
+    renderSelection(els.list, els.input, s.results, s.selected, s.results === prev.results);
   }
 });
+
+function moveSelection(delta) {
+  const last = state.results.length - 1;
+  if (last < 0) return;
+  setState({ selected: Math.min(last, Math.max(0, state.selected + delta)) });
+}
+
+// index 0 = all, 1… = TOOLS order
+function selectTool(index) {
+  const tool = index === 0 ? 'all' : TOOLS[index - 1]?.id;
+  if (tool && tool !== state.tool) update({ tool });
+}
+
+function clear() {
+  if (state.query) {
+    els.input.value = '';
+    update({ query: '' });
+  } else if (state.tool !== 'all') {
+    update({ tool: 'all' });
+  }
+}
 
 async function copyCommand(index) {
   const command = state.results[index];
@@ -73,12 +97,27 @@ els.input.addEventListener('input', () => update({ query: els.input.value }));
 
 els.filters.addEventListener('click', (e) => {
   const button = e.target.closest('button[data-tool]');
-  if (button) update({ tool: button.dataset.tool });
+  if (!button) return;
+  update({ tool: button.dataset.tool });
+  els.input.focus(); // keep arrows/Enter working on the results
 });
 
 els.list.addEventListener('click', (e) => {
   const item = e.target.closest('.result');
   if (item) copyCommand(Number(item.dataset.index));
 });
+
+initKeyboard({
+  input: els.input,
+  moveSelection,
+  copySelected: () => copyCommand(state.selected),
+  clear,
+  selectTool,
+});
+
+// Lets selected results scroll into view below the sticky header (see .result scroll-margin-top).
+new ResizeObserver(([entry]) => {
+  document.documentElement.style.setProperty('--header-h', `${entry.borderBoxSize[0].blockSize}px`);
+}).observe(els.header);
 
 update({ query: '' });

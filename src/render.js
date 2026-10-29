@@ -26,8 +26,9 @@ export function renderFilters(container, counts, activeTool) {
   );
   container.innerHTML = buttons
     .map(
-      (b) => `
+      (b, i) => `
       <button type="button" class="filter" data-tool="${b.id}" aria-pressed="${b.id === activeTool}"
+        title="Alt+${i}" aria-keyshortcuts="Alt+${i}"
         ${b.count === 0 && b.id !== activeTool ? 'disabled' : ''}>
         ${escapeHtml(b.label)} <span class="filter-count">${b.count}</span>
       </button>`,
@@ -61,7 +62,7 @@ export function renderResults(list, results, { query, tool }) {
     .join('');
 }
 
-export function renderSelection(list, input, results, selected) {
+export function renderSelection(list, input, results, selected, scroll = false) {
   list.querySelector('[aria-selected="true"]')?.setAttribute('aria-selected', 'false');
   const command = results[selected];
   if (!command) {
@@ -71,6 +72,7 @@ export function renderSelection(list, input, results, selected) {
   const el = document.getElementById(optionId(command));
   el.setAttribute('aria-selected', 'true');
   input.setAttribute('aria-activedescendant', el.id);
+  if (scroll) el.scrollIntoView({ block: 'nearest' });
 }
 
 export function renderStatus(el, results, query) {

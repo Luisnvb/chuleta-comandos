@@ -62,6 +62,16 @@ The build step adds derived fields to each entry: a stable `id` (from tool + com
 - Keyboard first: every action must be reachable without the mouse (Ctrl+K focus search, ↑/↓ move, Enter copy, Esc clear).
 - Accessible markup: results as a listbox with `aria-activedescendant`, visible focus, sufficient contrast in both themes.
 
+## Search behaviour (`src/search.js`)
+
+- Fuse.js (threshold 0.2, diacritics ignored) finds candidates; multi-word queries require every word to match some field, in any order.
+- Candidates are re-ranked by literal word-start matches (command > tags / category / tool > description). If any candidate matches literally, purely fuzzy hits are dropped; otherwise fuzzy hits are kept (typo tolerance).
+- When changing search, check sample queries in Node (`stash`, `rama`, `kill`, `puerto`, `comit`, `crear rama`) — top results must be the obvious commands.
+
+## Keyboard shortcuts (`src/keyboard.js`)
+
+Ctrl+K or `/` focus search · ↑/↓ move (PageUp/PageDown ±10) · Enter copy · Esc clears the query, then the tool filter · Alt+0…7 tool filter (0 = all, then `TOOLS` order) · typing anywhere goes into the search box. If tools are added, update the `Alt+0–7` hint in `index.html`.
+
 ## Out of scope for now (keep the structure ready)
 
 Favorites, recents, placeholder fill-in form before copying, editing commands in the app. They will rely on the stable `id` and `placeholders` fields and on a storage module (localStorage) — do not implement until asked.
