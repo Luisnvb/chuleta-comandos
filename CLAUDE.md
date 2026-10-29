@@ -79,8 +79,18 @@ The build step adds derived fields to each entry: a stable `id` (from tool + com
 
 ## Keyboard shortcuts (`src/keyboard.js`)
 
-Ctrl+K or `/` focus search · ↑/↓ move (PageUp/PageDown ±10) · Enter copy · Esc clears the query, then the tool filter · Alt+0…7 tool filter (0 = all, then `TOOLS` order) · typing anywhere goes into the search box. If tools are added, update the `Alt+0–7` hint in `index.html`.
+Ctrl+K or `/` focus search · ↑/↓ move (PageUp/PageDown ±10) · Enter copy · Ctrl+D toggle favorite · Esc clears the query, then the filter · Alt+0…9 filter in `FILTERS` order (0 = all, 1–7 tools, 8 favorites, 9 recent) · typing anywhere goes into the search box.
+
+`FILTERS` (`src/tools.js`) = All + `TOOLS` + `COLLECTIONS`. With 7 tools the Alt digits are exactly used up: adding a tool pushes Favorites/Recent past Alt+9 — revisit the shortcut scheme then (and the hint in `index.html`).
+
+## Favorites and recents (`src/collections.js`)
+
+- Stored per device in localStorage (`cheatsheet:favorites`, `cheatsheet:recent`) as lists of command `id`s, newest first. Recents keep the last 20 copies, no duplicates.
+- Ids derive from tool + command text (`scripts/build-data.js`), so **editing a command's text resets its favorite/recent status**; ids not present in the data are dropped on load. Editing description, tags, etc. is safe.
+- All storage access is wrapped in try/catch: without storage the lists live in memory for the session. Corrupt values are ignored.
+- They are filters like the tools: search works inside them; with an empty query they are sorted newest first. Copying in the Recent view updates the count but doesn't reorder the visible list.
+- A `storage` event listener keeps several open windows (tab + installed app) in sync.
 
 ## Out of scope for now (keep the structure ready)
 
-Favorites, recents, placeholder fill-in form before copying, editing commands in the app. They will rely on the stable `id` and `placeholders` fields and on a storage module (localStorage) — do not implement until asked.
+Placeholder fill-in form before copying (will use the `placeholders` field) and editing commands in the app — do not implement until asked.

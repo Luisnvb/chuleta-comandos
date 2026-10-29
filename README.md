@@ -15,6 +15,7 @@ The command descriptions are in Spanish; the UI and code are in English.
 - **Fuzzy search** over command, description, tags and category, with typo tolerance and accents ignored. Multi-word queries match every word in any order (`crear rama` = `rama crear`).
 - **Tool filter** with live match counts per tool.
 - **Copy** with a click, or with <kbd>Enter</kbd> on the selected result.
+- **Favorites and recents**: star commands with ☆ or <kbd>Ctrl</kbd>+<kbd>D</kbd>; the last 20 copied commands are kept automatically. Both are filters you can search within, and are stored in the browser (per device).
 - **Keyboard first**: the whole app works without a mouse (see [shortcuts](#keyboard-shortcuts)).
 - **Light / dark** theme following the system.
 - **Installable PWA** that works fully offline, with no server running.
@@ -63,8 +64,9 @@ npm run build && npm run preview   # http://localhost:4173
 | <kbd>Ctrl</kbd>+<kbd>K</kbd> or <kbd>/</kbd> | Focus the search box |
 | <kbd>↑</kbd> <kbd>↓</kbd> | Move the selection (<kbd>PgUp</kbd> / <kbd>PgDn</kbd> jump 10) |
 | <kbd>Enter</kbd> | Copy the selected command |
-| <kbd>Esc</kbd> | Clear the search, then the tool filter |
-| <kbd>Alt</kbd>+<kbd>0</kbd>…<kbd>7</kbd> | Filter by tool (0 = all) |
+| <kbd>Ctrl</kbd>+<kbd>D</kbd> | Add / remove the selected command from favorites |
+| <kbd>Esc</kbd> | Clear the search, then the filter |
+| <kbd>Alt</kbd>+<kbd>0</kbd>…<kbd>9</kbd> | Filter: 0 = all, 1–7 = tools, 8 = favorites, 9 = recent |
 | Any character | Typing anywhere goes into the search box |
 
 ## Adding or editing commands
@@ -114,7 +116,8 @@ src/
   render.js        DOM rendering
   keyboard.js      Keyboard shortcuts
   clipboard.js     Copy with fallback
-  tools.js         Tool labels and order
+  collections.js   Favorites and recents (localStorage)
+  tools.js         Tool labels, filter order
   styles.css
 public/            Icon source (favicon.svg) and generated icons
 ```
@@ -125,9 +128,8 @@ public/            Icon source (favicon.svg) and generated icons
 
 ## Roadmap
 
-Not implemented yet. Each command already has a stable `id` and a parsed list of `placeholders` to support these:
+Not implemented yet. Each command already has a parsed list of `placeholders` to support these:
 
-- Favorites and recently copied commands
 - A form to fill in placeholders before copying
 - Editing commands from the app
 

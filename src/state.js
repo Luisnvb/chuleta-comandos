@@ -1,9 +1,11 @@
 // Single source of app state. Modules read `state` and change it only through setState().
 export const state = {
   query: '',
-  tool: 'all', // 'all' or a tool id
+  filter: 'all', // 'all', a tool id or a collection id ('favorites', 'recent')
   results: [],
   selected: 0, // index into results
+  favorites: [], // command ids, newest first
+  recent: [], // command ids, most recently copied first
 };
 
 const listeners = new Set();

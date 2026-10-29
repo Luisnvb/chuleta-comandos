@@ -2,13 +2,14 @@
 //   Ctrl+K or /     focus the search box
 //   ↑ ↓             move the selection (PageUp/PageDown jump 10)
 //   Enter           copy the selected command
-//   Esc             clear the query, then reset the tool filter
-//   Alt+0…9         filter by tool (0 = all)
+//   Ctrl+D          add/remove the selected command from favorites
+//   Esc             clear the query, then reset the filter
+//   Alt+0…9         select a filter (0 = all, then tools, favorites, recent)
 //   any character   typed outside the search box goes into it
 
 const PAGE = 10;
 
-export function initKeyboard({ input, moveSelection, copySelected, clear, selectTool }) {
+export function initKeyboard({ input, moveSelection, copySelected, toggleFavorite, clear, selectFilter }) {
   document.addEventListener('keydown', (e) => {
     const target = e.target instanceof Element ? e.target : document.body;
     const inSearch = target === input;
@@ -22,9 +23,16 @@ export function initKeyboard({ input, moveSelection, copySelected, clear, select
       return;
     }
 
+    // Overrides the browser's "bookmark this page", which is meaningless here.
+    if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'd') {
+      e.preventDefault();
+      toggleFavorite();
+      return;
+    }
+
     if (e.altKey && !e.ctrlKey && !e.metaKey && /^Digit\d$/.test(e.code)) {
       e.preventDefault();
-      selectTool(Number(e.code.slice(5)));
+      selectFilter(Number(e.code.slice(5)));
       return;
     }
 
