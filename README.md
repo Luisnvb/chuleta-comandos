@@ -2,6 +2,8 @@
 
 A personal, offline-first PWA to find and copy developer commands in a couple of keystrokes. No backend: the commands live in YAML files in this repo and are bundled into the app.
 
+**Live: https://chuleta-comandos.vercel.app** — open it and install it from the address bar.
+
 The command descriptions are in Spanish; the UI and code are in English.
 
 | Light | Dark |
@@ -42,13 +44,17 @@ npm run dev        # http://localhost:5173
 
 ### Install as an app
 
+Open https://chuleta-comandos.vercel.app in Chrome or Edge (desktop or mobile) and click the install icon in the address bar. The installed app works offline and updates itself the next time it opens after a new deploy.
+
+### Deployment
+
+The repo is connected to Vercel: every push to `main` deploys to production (build command `npm run build`, output `dist/`), and other branches get preview URLs.
+
+To test the production build locally, including the service worker and offline mode:
+
 ```bash
 npm run build && npm run preview   # http://localhost:4173
 ```
-
-Open `http://localhost:4173` in Chrome or Edge and click the install icon in the address bar. After that you can stop the server: the installed app runs offline.
-
-To update the installed app after changing commands or code, run `npm run build && npm run preview` again, open the app once (it updates on load) and stop the server. Keep port 4173: the installed app is bound to that address.
 
 ## Keyboard shortcuts
 

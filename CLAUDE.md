@@ -18,8 +18,9 @@ The service worker is only active in `build` + `preview`, not in `dev`.
 ## PWA
 
 - vite-plugin-pwa (`generateSW`, `registerType: 'autoUpdate'`) precaches everything (JS with the bundled command data, CSS, HTML, icons): the app works with no server at all.
-- The installed app lives on `http://localhost:4173` (port pinned in `vite.config.js` — do not change it or the installed app stops receiving updates).
-- Updating the installed app after editing data or code: `npm run build && npm run preview`, open the app once (it updates on load), then stop the server.
+- Production: https://chuleta-comandos.vercel.app (Vercel project `luisnvb/chuleta-comandos`, connected to GitHub). **Every push to `main` deploys to production** — run `npm run build` locally before pushing. Other branches get preview URLs.
+- Installed apps update themselves on the next open after a deploy (`sw.js` is served with `must-revalidate`).
+- `npm run preview` (port 4173, pinned in `vite.config.js`) is for testing the service worker and offline mode locally. An app installed from localhost is bound to that port.
 - Icons are generated from `public/favicon.svg` by `pwa-assets.config.js` (maskable/apple with the accent background). Generated PNGs are committed.
 
 ## Stack
