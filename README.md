@@ -8,7 +8,7 @@ Everything — UI, command data and code — is in English.
 
 | Light | Dark |
 |---|---|
-| ![Cheatsheet in light mode, searching "rama"](docs/screenshot-light.png) | ![Cheatsheet in dark mode, searching "rama"](docs/screenshot-dark.png) |
+| ![Cheatsheet in light mode, searching "commit"](docs/screenshot-light.png) | ![Cheatsheet in dark mode, searching "commit"](docs/screenshot-dark.png) |
 
 ## Features
 
