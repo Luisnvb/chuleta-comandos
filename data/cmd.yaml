@@ -1,405 +1,405 @@
 # Windows CMD (cmd.exe). Not from a PDF: written for this project.
 
-# --- navegación y archivos ---
+# --- navigation and files ---
 - tool: cmd
-  category: navegación y archivos
+  category: navigation and files
   command: 'cd'
-  description: Muestra el directorio actual.
-  tags: [directorio, pwd, ruta]
+  description: Shows the current directory.
+  tags: [directory, pwd, path]
 - tool: cmd
-  category: navegación y archivos
-  command: 'cd {ruta}'
-  description: Cambia a un directorio de la misma unidad.
-  tags: [directorio, change]
+  category: navigation and files
+  command: 'cd {path}'
+  description: Changes to a directory on the same drive.
+  tags: [directory, change]
 - tool: cmd
-  category: navegación y archivos
+  category: navigation and files
   command: 'cd ..'
-  description: Sube al directorio padre.
-  tags: [directorio, padre]
+  description: Goes up to the parent directory.
+  tags: [directory, parent]
 - tool: cmd
-  category: navegación y archivos
-  command: 'cd /d {ruta}'
-  description: Cambia de directorio y también de unidad.
-  tags: [directorio, unidad, drive]
-  example: 'cd /d D:\proyectos'
+  category: navigation and files
+  command: 'cd /d {path}'
+  description: Changes directory and drive at the same time.
+  tags: [directory, drive]
+  example: 'cd /d D:\projects'
 - tool: cmd
-  category: navegación y archivos
+  category: navigation and files
   command: 'dir'
-  description: Lista archivos y carpetas del directorio actual.
-  tags: [listar, ls]
+  description: Lists files and folders in the current directory.
+  tags: [list, ls]
 - tool: cmd
-  category: navegación y archivos
+  category: navigation and files
   command: 'dir /a'
-  description: Lista incluyendo archivos ocultos y de sistema.
-  tags: [listar, ocultos, ls]
+  description: Lists including hidden and system files.
+  tags: [list, hidden, ls]
 - tool: cmd
-  category: navegación y archivos
-  command: 'dir /s /b {patron}'
-  description: Busca archivos por nombre en subcarpetas, mostrando solo rutas.
-  tags: [buscar, find, recursivo]
+  category: navigation and files
+  command: 'dir /s /b {pattern}'
+  description: Finds files by name in subfolders, showing only paths.
+  tags: [search, find, recursive]
   example: 'dir /s /b *.log'
 - tool: cmd
-  category: navegación y archivos
+  category: navigation and files
   command: 'tree /f'
-  description: Muestra la estructura de carpetas en árbol, con archivos.
-  tags: [árbol, estructura]
+  description: Shows the folder structure as a tree, with files.
+  tags: [tree, structure]
 - tool: cmd
-  category: navegación y archivos
-  command: 'mkdir {ruta}'
-  description: Crea un directorio, incluidos los intermedios.
-  tags: [crear, carpeta, md]
+  category: navigation and files
+  command: 'mkdir {path}'
+  description: Creates a directory, including intermediate ones.
+  tags: [create, folder, md]
   example: 'mkdir dir\subdir'
 - tool: cmd
-  category: navegación y archivos
-  command: 'type nul > {archivo}'
-  description: Crea un archivo vacío (equivalente a touch).
-  tags: [crear, archivo, touch]
+  category: navigation and files
+  command: 'type nul > {file}'
+  description: Creates an empty file (like touch).
+  tags: [create, file, touch]
 - tool: cmd
-  category: navegación y archivos
-  command: 'copy {origen} {destino}'
-  description: Copia uno o varios archivos.
-  tags: [copiar, copy]
+  category: navigation and files
+  command: 'copy {source} {destination}'
+  description: Copies one or more files.
+  tags: [copy]
 - tool: cmd
-  category: navegación y archivos
-  command: 'xcopy {origen} {destino} /e /i'
-  description: Copia una carpeta con subcarpetas (incluidas vacías).
-  tags: [copiar, carpeta, recursivo]
+  category: navigation and files
+  command: 'xcopy {source} {destination} /e /i'
+  description: Copies a folder with its subfolders (including empty ones).
+  tags: [copy, folder, recursive]
 - tool: cmd
-  category: navegación y archivos
-  command: 'robocopy {origen} {destino} /e'
-  description: Copia robusta de carpetas; /mir refleja (borra lo que sobra en destino).
-  tags: [copiar, sincronizar, backup]
+  category: navigation and files
+  command: 'robocopy {source} {destination} /e'
+  description: Robust folder copy; /mir mirrors (deletes extra files in the destination).
+  tags: [copy, sync, backup]
 - tool: cmd
-  category: navegación y archivos
-  command: 'move {origen} {destino}'
-  description: Mueve archivos o carpetas.
-  tags: [mover, move]
+  category: navigation and files
+  command: 'move {source} {destination}'
+  description: Moves files or folders.
+  tags: [move]
 - tool: cmd
-  category: navegación y archivos
-  command: 'ren {archivo} {nuevo_nombre}'
-  description: Renombra un archivo o carpeta.
-  tags: [renombrar, rename]
+  category: navigation and files
+  command: 'ren {file} {new_name}'
+  description: Renames a file or folder.
+  tags: [rename]
 - tool: cmd
-  category: navegación y archivos
-  command: 'del {archivo}'
-  description: Borra archivos. No usa la papelera.
-  tags: [borrar, eliminar, rm]
+  category: navigation and files
+  command: 'del {file}'
+  description: Deletes files. Doesn't use the recycle bin.
+  tags: [delete, remove, rm]
 - tool: cmd
-  category: navegación y archivos
-  command: 'del /s /q {patron}'
-  description: Borra archivos que coincidan en todas las subcarpetas, sin preguntar.
-  tags: [borrar, recursivo]
+  category: navigation and files
+  command: 'del /s /q {pattern}'
+  description: Deletes matching files in all subfolders, without asking.
+  tags: [delete, recursive]
   example: 'del /s /q *.tmp'
 - tool: cmd
-  category: navegación y archivos
-  command: 'rmdir /s /q {directorio}'
-  description: Borra una carpeta y todo su contenido sin preguntar.
-  tags: [borrar, carpeta, rd]
+  category: navigation and files
+  command: 'rmdir /s /q {directory}'
+  description: Deletes a folder and all its contents without asking.
+  tags: [delete, folder, rd]
   example: 'rmdir /s /q node_modules'
 - tool: cmd
-  category: navegación y archivos
-  command: 'mklink /d {enlace} {destino}'
-  description: Crea un enlace simbólico a una carpeta (requiere admin o modo desarrollador).
-  tags: [symlink, enlace]
+  category: navigation and files
+  command: 'mklink /d {link} {target}'
+  description: Creates a symbolic link to a folder (needs admin or developer mode).
+  tags: [symlink, link]
 - tool: cmd
-  category: navegación y archivos
-  command: 'attrib +h {archivo}'
-  description: Oculta un archivo (-h para mostrarlo, +r solo lectura).
-  tags: [atributos, ocultar]
+  category: navigation and files
+  command: 'attrib +h {file}'
+  description: Hides a file (-h to show it, +r read-only).
+  tags: [attributes, hide]
 - tool: cmd
-  category: navegación y archivos
+  category: navigation and files
   command: 'start .'
-  description: Abre la carpeta actual en el Explorador.
-  tags: [explorador, abrir, explorer]
+  description: Opens the current folder in File Explorer.
+  tags: [explorer, open]
 
-# --- ver y editar contenido ---
+# --- view and edit content ---
 - tool: cmd
-  category: ver y editar
-  command: 'type {archivo}'
-  description: Imprime el contenido de un archivo.
-  tags: [leer, cat, mostrar]
+  category: view and edit
+  command: 'type {file}'
+  description: Prints the contents of a file.
+  tags: [read, cat, show]
 - tool: cmd
-  category: ver y editar
-  command: 'more {archivo}'
-  description: Muestra un archivo paginado (espacio avanza, q sale).
-  tags: [leer, paginar, less]
+  category: view and edit
+  command: 'more {file}'
+  description: Shows a file page by page (space advances, q quits).
+  tags: [read, pager, less]
 - tool: cmd
-  category: ver y editar
-  command: 'fc {archivo_a} {archivo_b}'
-  description: Compara dos archivos.
-  tags: [comparar, diff]
+  category: view and edit
+  command: 'fc {file_a} {file_b}'
+  description: Compares two files.
+  tags: [compare, diff]
 - tool: cmd
-  category: ver y editar
-  command: 'notepad {archivo}'
-  description: Abre un archivo en el Bloc de notas.
-  tags: [editor, editar]
+  category: view and edit
+  command: 'notepad {file}'
+  description: Opens a file in Notepad.
+  tags: [editor, edit]
 - tool: cmd
-  category: ver y editar
-  command: 'find /c /v "" {archivo}'
-  description: Cuenta las líneas de un archivo.
-  tags: [contar, líneas, wc]
+  category: view and edit
+  command: 'find /c /v "" {file}'
+  description: Counts the lines of a file.
+  tags: [count, lines, wc]
 
-# --- búsqueda y filtrado ---
+# --- search and filter ---
 - tool: cmd
-  category: búsqueda y filtrado
-  command: 'findstr /s /i /n "{texto}" {patron}'
-  description: Busca texto en archivos de forma recursiva, sin distinguir mayúsculas y con número de línea.
-  tags: [buscar, grep, texto]
+  category: search and filter
+  command: 'findstr /s /i /n "{text}" {pattern}'
+  description: Searches for text in files recursively, case-insensitive and with line numbers.
+  tags: [search, grep, text]
   example: 'findstr /s /i /n "TODO" *.js'
 - tool: cmd
-  category: búsqueda y filtrado
-  command: '{comando} | findstr "{texto}"'
-  description: Filtra la salida de un comando.
-  tags: [filtrar, grep, pipe]
+  category: search and filter
+  command: '{command} | findstr "{text}"'
+  description: Filters a command's output.
+  tags: [filter, grep, pipe]
   example: 'tasklist | findstr "node"'
 - tool: cmd
-  category: búsqueda y filtrado
-  command: 'where {comando}'
-  description: Indica la ruta del ejecutable de un comando.
-  tags: [ruta, ejecutable, which]
+  category: search and filter
+  command: 'where {command}'
+  description: Shows the path of a command's executable.
+  tags: [path, executable, which]
 - tool: cmd
-  category: búsqueda y filtrado
-  command: '{comando} | sort'
-  description: Ordena las líneas de la salida.
-  tags: [ordenar, sort]
+  category: search and filter
+  command: '{command} | sort'
+  description: Sorts the output lines.
+  tags: [sort]
 
-# --- procesos y sistema ---
+# --- processes and system ---
 - tool: cmd
-  category: procesos y sistema
+  category: processes and system
   command: 'tasklist'
-  description: Lista los procesos en ejecución.
-  tags: [procesos, ps]
+  description: Lists the running processes.
+  tags: [processes, ps]
 - tool: cmd
-  category: procesos y sistema
+  category: processes and system
   command: 'taskkill /pid {pid} /f'
-  description: Fuerza el cierre de un proceso por su PID.
-  tags: [matar, terminar, kill]
+  description: Force-closes a process by its PID.
+  tags: [kill, terminate]
 - tool: cmd
-  category: procesos y sistema
-  command: 'taskkill /im {proceso} /f'
-  description: Fuerza el cierre de todos los procesos con ese nombre.
-  tags: [matar, terminar, kill]
+  category: processes and system
+  command: 'taskkill /im {process} /f'
+  description: Force-closes all processes with that name.
+  tags: [kill, terminate]
   example: 'taskkill /im node.exe /f'
 - tool: cmd
-  category: procesos y sistema
+  category: processes and system
   command: 'systeminfo'
-  description: Información detallada del sistema (versión, RAM, arranque…).
-  tags: [sistema, info]
+  description: Detailed system information (version, RAM, boot time…).
+  tags: [system, info]
 - tool: cmd
-  category: procesos y sistema
+  category: processes and system
   command: 'ver'
-  description: Versión de Windows.
-  tags: [versión, sistema]
+  description: Windows version.
+  tags: [version, system]
 - tool: cmd
-  category: procesos y sistema
+  category: processes and system
   command: 'hostname'
-  description: Nombre del equipo.
-  tags: [equipo, nombre]
+  description: Computer name.
+  tags: [computer, name]
 - tool: cmd
-  category: procesos y sistema
+  category: processes and system
   command: 'whoami'
-  description: Usuario actual (whoami /groups para ver grupos).
-  tags: [usuario, user]
+  description: Current user (whoami /groups to see groups).
+  tags: [user]
 - tool: cmd
-  category: procesos y sistema
-  command: 'start "" {programa}'
-  description: Abre un programa, archivo o URL en una ventana nueva.
-  tags: [abrir, ejecutar, open]
+  category: processes and system
+  command: 'start "" {program}'
+  description: Opens a program, file or URL in a new window.
+  tags: [open, run]
   example: 'start "" https://example.com'
 - tool: cmd
-  category: procesos y sistema
+  category: processes and system
   command: 'shutdown /r /t 0'
-  description: Reinicia el equipo inmediatamente.
-  tags: [reiniciar, restart]
+  description: Restarts the computer immediately.
+  tags: [restart, reboot]
 - tool: cmd
-  category: procesos y sistema
+  category: processes and system
   command: 'shutdown /s /t 0'
-  description: Apaga el equipo inmediatamente.
-  tags: [apagar, shutdown]
+  description: Shuts down the computer immediately.
+  tags: [shutdown, power off]
 - tool: cmd
-  category: procesos y sistema
+  category: processes and system
   command: 'sfc /scannow'
-  description: Comprueba y repara archivos del sistema (como administrador).
-  tags: [reparar, sistema, admin]
+  description: Checks and repairs system files (as administrator).
+  tags: [repair, system, admin]
 - tool: cmd
-  category: procesos y sistema
-  command: 'chkdsk {unidad}: /f'
-  description: Comprueba y repara errores del disco (como administrador).
-  tags: [disco, reparar, admin]
+  category: processes and system
+  command: 'chkdsk {drive}: /f'
+  description: Checks and repairs disk errors (as administrator).
+  tags: [disk, repair, admin]
   example: 'chkdsk C: /f'
 
-# --- variables de entorno ---
+# --- environment variables ---
 - tool: cmd
-  category: variables de entorno
+  category: environment variables
   command: 'set'
-  description: Lista todas las variables de entorno.
-  tags: [env, variables, listar]
+  description: Lists all environment variables.
+  tags: [env, variables, list]
 - tool: cmd
-  category: variables de entorno
+  category: environment variables
   command: 'echo %{variable}%'
-  description: Muestra el valor de una variable.
-  tags: [env, variables, mostrar]
+  description: Shows the value of a variable.
+  tags: [env, variables, show]
   example: 'echo %PATH%'
 - tool: cmd
-  category: variables de entorno
-  command: 'set {variable}={valor}'
-  description: Define una variable solo para la sesión actual.
-  tags: [env, variables, definir]
+  category: environment variables
+  command: 'set {variable}={value}'
+  description: Sets a variable for the current session only.
+  tags: [env, variables, set]
   example: 'set NODE_ENV=production'
 - tool: cmd
-  category: variables de entorno
-  command: 'setx {variable} "{valor}"'
-  description: Define una variable de usuario de forma permanente (afecta a ventanas nuevas).
-  tags: [env, variables, permanente]
+  category: environment variables
+  command: 'setx {variable} "{value}"'
+  description: Sets a user variable permanently (affects new windows).
+  tags: [env, variables, permanent]
 - tool: cmd
-  category: variables de entorno
+  category: environment variables
   command: 'echo %errorlevel%'
-  description: Código de salida del último comando (0 = éxito).
+  description: Exit code of the last command (0 = success).
   tags: [exit code, error]
 
-# --- red ---
+# --- network ---
 - tool: cmd
-  category: red
+  category: network
   command: 'ipconfig'
-  description: Muestra las direcciones IP de cada adaptador.
-  tags: [ip, red, network]
+  description: Shows the IP addresses of each adapter.
+  tags: [ip, network]
 - tool: cmd
-  category: red
+  category: network
   command: 'ipconfig /all'
-  description: Configuración de red completa (MAC, DNS, DHCP…).
+  description: Full network configuration (MAC, DNS, DHCP…).
   tags: [ip, dns, mac]
 - tool: cmd
-  category: red
+  category: network
   command: 'ipconfig /flushdns'
-  description: Vacía la caché DNS.
-  tags: [dns, cache, limpiar]
+  description: Flushes the DNS cache.
+  tags: [dns, cache, clear]
 - tool: cmd
-  category: red
+  category: network
   command: 'ping {host}'
-  description: Comprueba la conectividad con un host (-t continuo).
-  tags: [conectividad, network]
+  description: Checks connectivity with a host (-t continuous).
+  tags: [connectivity, network]
 - tool: cmd
-  category: red
+  category: network
   command: 'tracert {host}'
-  description: Muestra los saltos de red hasta un host.
-  tags: [traceroute, ruta]
+  description: Shows the network hops to a host.
+  tags: [traceroute, route]
 - tool: cmd
-  category: red
-  command: 'nslookup {dominio}'
-  description: Consulta los registros DNS de un dominio.
-  tags: [dns, dominio]
+  category: network
+  command: 'nslookup {domain}'
+  description: Looks up a domain's DNS records.
+  tags: [dns, domain]
 - tool: cmd
-  category: red
+  category: network
   command: 'netstat -ano'
-  description: Conexiones y puertos abiertos con el PID del proceso.
-  tags: [puertos, ports, conexiones]
+  description: Connections and open ports with the process PID.
+  tags: [ports, connections]
 - tool: cmd
-  category: red
-  command: 'netstat -ano | findstr :{puerto}'
-  description: Averigua qué proceso usa un puerto.
-  tags: [puertos, ports, pid]
+  category: network
+  command: 'netstat -ano | findstr :{port}'
+  description: Finds out which process is using a port.
+  tags: [ports, pid]
   example: 'netstat -ano | findstr :8000'
 - tool: cmd
-  category: red
+  category: network
   command: 'curl -I {url}'
-  description: Petición HTTP mostrando solo cabeceras (curl viene con Windows 10+).
-  tags: [http, cabeceras, headers]
+  description: HTTP request showing only the headers (curl ships with Windows 10+).
+  tags: [http, headers]
 
-# --- paquetes (winget) ---
+# --- packages (winget) ---
 - tool: cmd
-  category: paquetes
-  command: 'winget search {nombre}'
-  description: Busca un programa en el repositorio de winget.
-  tags: [winget, buscar, instalar]
+  category: packages
+  command: 'winget search {name}'
+  description: Searches for a program in the winget repository.
+  tags: [winget, search, install]
 - tool: cmd
-  category: paquetes
+  category: packages
   command: 'winget install --id {id}'
-  description: Instala un programa por su ID.
-  tags: [winget, instalar]
+  description: Installs a program by its ID.
+  tags: [winget, install]
   example: 'winget install --id Git.Git'
 - tool: cmd
-  category: paquetes
+  category: packages
   command: 'winget upgrade --all'
-  description: Actualiza todos los programas instalados con winget.
-  tags: [winget, actualizar]
+  description: Updates all programs installed with winget.
+  tags: [winget, update, upgrade]
 - tool: cmd
-  category: paquetes
+  category: packages
   command: 'winget list'
-  description: Lista los programas instalados.
-  tags: [winget, listar]
+  description: Lists the installed programs.
+  tags: [winget, list]
 
-# --- redirecciones y shell ---
+# --- redirection and shell ---
 - tool: cmd
-  category: redirecciones y shell
-  command: '{comando} > {archivo}'
-  description: Envía la salida a un archivo (sobrescribe).
-  tags: [redirigir, salida, output]
+  category: redirection and shell
+  command: '{command} > {file}'
+  description: Sends the output to a file (overwrites).
+  tags: [redirect, output]
 - tool: cmd
-  category: redirecciones y shell
-  command: '{comando} >> {archivo}'
-  description: Añade la salida al final de un archivo.
-  tags: [redirigir, añadir, append]
+  category: redirection and shell
+  command: '{command} >> {file}'
+  description: Appends the output to the end of a file.
+  tags: [redirect, append]
 - tool: cmd
-  category: redirecciones y shell
-  command: '{comando} > {archivo} 2>&1'
-  description: Envía la salida y los errores al mismo archivo.
-  tags: [redirigir, errores, stderr]
+  category: redirection and shell
+  command: '{command} > {file} 2>&1'
+  description: Sends the output and the errors to the same file.
+  tags: [redirect, errors, stderr]
 - tool: cmd
-  category: redirecciones y shell
-  command: '{comando} > nul'
-  description: Descarta la salida de un comando.
-  tags: [silenciar, nul, 'null']
+  category: redirection and shell
+  command: '{command} > nul'
+  description: Discards a command's output.
+  tags: [silence, nul, 'null']
 - tool: cmd
-  category: redirecciones y shell
-  command: '{comando} | clip'
-  description: Copia la salida de un comando al portapapeles.
-  tags: [portapapeles, clipboard, copiar]
+  category: redirection and shell
+  command: '{command} | clip'
+  description: Copies a command's output to the clipboard.
+  tags: [clipboard, copy]
   example: 'ipconfig | clip'
 - tool: cmd
-  category: redirecciones y shell
-  command: '{comando1} && {comando2}'
-  description: Ejecuta el segundo comando solo si el primero tuvo éxito.
-  tags: [encadenar, and]
+  category: redirection and shell
+  command: '{command1} && {command2}'
+  description: Runs the second command only if the first one succeeded.
+  tags: [chain, and]
 - tool: cmd
-  category: redirecciones y shell
-  command: '{comando1} || {comando2}'
-  description: Ejecuta el segundo comando solo si el primero falló.
-  tags: [encadenar, or]
+  category: redirection and shell
+  command: '{command1} || {command2}'
+  description: Runs the second command only if the first one failed.
+  tags: [chain, or]
 - tool: cmd
-  category: redirecciones y shell
+  category: redirection and shell
   command: 'doskey /history'
-  description: Muestra el historial de comandos de la sesión.
-  tags: [historial]
+  description: Shows the session's command history.
+  tags: [history]
 - tool: cmd
-  category: redirecciones y shell
+  category: redirection and shell
   command: 'cls'
-  description: Limpia la pantalla.
-  tags: [limpiar, clear]
+  description: Clears the screen.
+  tags: [clear]
 - tool: cmd
-  category: redirecciones y shell
-  command: '{comando} /?'
-  description: Muestra la ayuda de un comando.
-  tags: [ayuda, help]
+  category: redirection and shell
+  command: '{command} /?'
+  description: Shows a command's help.
+  tags: [help]
   example: 'robocopy /?'
 
-# --- atajos de teclado ---
+# --- keyboard shortcuts ---
 - tool: cmd
-  category: atajos
+  category: shortcuts
   command: 'F7'
-  description: Abre el historial de comandos en una lista.
-  tags: [teclado, historial, shortcut]
+  description: Opens the command history as a list.
+  tags: [keyboard, history, shortcut]
 - tool: cmd
-  category: atajos
+  category: shortcuts
   command: 'F3'
-  description: Repite el último comando.
-  tags: [teclado, repetir, shortcut]
+  description: Repeats the last command.
+  tags: [keyboard, repeat, shortcut]
 - tool: cmd
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+C'
-  description: Interrumpe el comando en curso.
-  tags: [teclado, interrumpir, shortcut]
+  description: Interrupts the running command.
+  tags: [keyboard, interrupt, shortcut]
 - tool: cmd
-  category: atajos
+  category: shortcuts
   command: 'Tab'
-  description: Autocompleta rutas y nombres de archivo.
-  tags: [teclado, autocompletar, shortcut]
+  description: Autocompletes paths and file names.
+  tags: [keyboard, autocomplete, shortcut]

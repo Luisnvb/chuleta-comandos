@@ -23,7 +23,7 @@ import {
 } from './render.js';
 import { createSearch } from './search.js';
 import { setState, state, subscribe } from './state.js';
-import { FILTERS, TOOLS, isCollection, toolLabel } from './tools.js';
+import { FILTERS, SHOW_COLLECTIONS, TOOLS, isCollection, toolLabel } from './tools.js';
 
 const toolOrder = new Map(TOOLS.map((t, i) => [t.id, i]));
 
@@ -32,10 +32,20 @@ let commands;
 let commandIds;
 let search;
 
+// One hue per category name, in order of first appearance: golden-angle steps keep the
+// categories of a tool (neighbours in the data) far apart on the color wheel.
+function categoryHues(sorted) {
+  const hues = new Map();
+  for (const c of sorted) {
+    if (!hues.has(c.category)) hues.set(c.category, Math.round((hues.size * 137.508) % 360));
+  }
+  return hues;
+}
+
 function setData(json) {
-  commands = json.commands
-    .map((c) => ({ ...c, toolLabel: toolLabel(c.tool) }))
-    .sort((a, b) => (toolOrder.get(a.tool) ?? 99) - (toolOrder.get(b.tool) ?? 99));
+  const sorted = json.commands.toSorted((a, b) => (toolOrder.get(a.tool) ?? 99) - (toolOrder.get(b.tool) ?? 99));
+  const hues = categoryHues(sorted);
+  commands = sorted.map((c) => ({ ...c, toolLabel: toolLabel(c.tool), categoryHue: hues.get(c.category) }));
   commandIds = new Set(commands.map((c) => c.id));
   search = createSearch(commands);
 }
@@ -280,7 +290,8 @@ initKeyboard({
   moveSelection,
   activateSelected: () => activate(state.selected),
   copySelectedTemplate: () => copyTemplate(state.selected),
-  toggleFavorite: () => toggleFavoriteAt(state.selected),
+  // Only bound while collections are shown, so the browser keeps its own Ctrl+D otherwise.
+  ...(SHOW_COLLECTIONS && { toggleFavorite: () => toggleFavoriteAt(state.selected) }),
   clear,
   selectFilter,
   // Only bound in dev, so production keeps the browser's own Ctrl+E / Alt+N.

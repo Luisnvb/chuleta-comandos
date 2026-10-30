@@ -32,7 +32,7 @@ function literalScore(fields, words) {
 }
 
 // Returns search(query) -> matching commands, best first. An empty query returns everything.
-// Multi-word queries require every word to match some field, in any order ("rama crear").
+// Multi-word queries require every word to match some field, in any order ("branch create").
 export function createSearch(commands) {
   const fuse = new Fuse(commands, {
     keys: KEYS,

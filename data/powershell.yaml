@@ -1,370 +1,370 @@
 # PowerShell (Windows PowerShell 5.1 and PowerShell 7). Not from a PDF: written for this project.
 
-# --- navegación y archivos ---
+# --- navigation and files ---
 - tool: powershell
-  category: navegación y archivos
+  category: navigation and files
   command: 'Get-Location'
-  description: Muestra el directorio actual (alias pwd).
-  tags: [directorio, pwd, ruta]
+  description: Shows the current directory (alias pwd).
+  tags: [directory, pwd, path]
 - tool: powershell
-  category: navegación y archivos
-  command: 'Set-Location {ruta}'
-  description: Cambia de directorio, también de unidad (alias cd).
-  tags: [directorio, cd]
-  example: 'Set-Location D:\proyectos'
+  category: navigation and files
+  command: 'Set-Location {path}'
+  description: Changes directory, drive included (alias cd).
+  tags: [directory, cd]
+  example: 'Set-Location D:\projects'
 - tool: powershell
-  category: navegación y archivos
+  category: navigation and files
   command: 'Get-ChildItem -Force'
-  description: Lista archivos incluidos los ocultos (alias ls, dir, gci).
-  tags: [listar, ls, ocultos]
+  description: Lists files including hidden ones (alias ls, dir, gci).
+  tags: [list, ls, hidden]
 - tool: powershell
-  category: navegación y archivos
-  command: 'Get-ChildItem -Recurse -Filter {patron}'
-  description: Busca archivos por nombre en subcarpetas.
-  tags: [buscar, find, recursivo]
+  category: navigation and files
+  command: 'Get-ChildItem -Recurse -Filter {pattern}'
+  description: Finds files by name in subfolders.
+  tags: [search, find, recursive]
   example: 'Get-ChildItem -Recurse -Filter *.log'
 - tool: powershell
-  category: navegación y archivos
-  command: 'New-Item -ItemType Directory -Force {ruta}'
-  description: Crea un directorio con sus intermedios (como mkdir -p).
-  tags: [crear, carpeta, mkdir]
+  category: navigation and files
+  command: 'New-Item -ItemType Directory -Force {path}'
+  description: Creates a directory with its intermediate ones (like mkdir -p).
+  tags: [create, folder, mkdir]
 - tool: powershell
-  category: navegación y archivos
-  command: 'New-Item -ItemType File {archivo}'
-  description: Crea un archivo vacío.
-  tags: [crear, archivo, touch]
+  category: navigation and files
+  command: 'New-Item -ItemType File {file}'
+  description: Creates an empty file.
+  tags: [create, file, touch]
 - tool: powershell
-  category: navegación y archivos
-  command: 'Copy-Item {origen} {destino} -Recurse'
-  description: Copia archivos o carpetas (alias cp).
-  tags: [copiar, copy]
+  category: navigation and files
+  command: 'Copy-Item {source} {destination} -Recurse'
+  description: Copies files or folders (alias cp).
+  tags: [copy]
 - tool: powershell
-  category: navegación y archivos
-  command: 'Move-Item {origen} {destino}'
-  description: Mueve archivos o carpetas (alias mv).
-  tags: [mover, move]
+  category: navigation and files
+  command: 'Move-Item {source} {destination}'
+  description: Moves files or folders (alias mv).
+  tags: [move]
 - tool: powershell
-  category: navegación y archivos
-  command: 'Rename-Item {archivo} {nuevo_nombre}'
-  description: Renombra un archivo o carpeta.
-  tags: [renombrar, rename]
+  category: navigation and files
+  command: 'Rename-Item {file} {new_name}'
+  description: Renames a file or folder.
+  tags: [rename]
 - tool: powershell
-  category: navegación y archivos
-  command: 'Remove-Item {ruta} -Recurse -Force'
-  description: Borra archivos o carpetas sin papelera ni confirmación (alias rm).
-  tags: [borrar, eliminar, rm]
+  category: navigation and files
+  command: 'Remove-Item {path} -Recurse -Force'
+  description: Deletes files or folders without recycle bin or confirmation (alias rm).
+  tags: [delete, remove, rm]
   example: 'Remove-Item node_modules -Recurse -Force'
 - tool: powershell
-  category: navegación y archivos
-  command: 'Test-Path {ruta}'
-  description: Indica si existe un archivo o carpeta (True/False).
-  tags: [existe, comprobar]
+  category: navigation and files
+  command: 'Test-Path {path}'
+  description: Tells whether a file or folder exists (True/False).
+  tags: [exists, check]
 - tool: powershell
-  category: navegación y archivos
-  command: 'New-Item -ItemType SymbolicLink -Path {enlace} -Target {destino}'
-  description: Crea un enlace simbólico (requiere admin o modo desarrollador).
-  tags: [symlink, enlace]
+  category: navigation and files
+  command: 'New-Item -ItemType SymbolicLink -Path {link} -Target {target}'
+  description: Creates a symbolic link (needs admin or developer mode).
+  tags: [symlink, link]
 - tool: powershell
-  category: navegación y archivos
+  category: navigation and files
   command: 'Invoke-Item .'
-  description: Abre la carpeta actual en el Explorador (alias ii).
-  tags: [explorador, abrir, explorer]
+  description: Opens the current folder in File Explorer (alias ii).
+  tags: [explorer, open]
 
-# --- ver y editar contenido ---
+# --- view and edit content ---
 - tool: powershell
-  category: ver y editar
-  command: 'Get-Content {archivo}'
-  description: Imprime el contenido de un archivo (alias cat, gc).
-  tags: [leer, cat, mostrar]
+  category: view and edit
+  command: 'Get-Content {file}'
+  description: Prints the contents of a file (alias cat, gc).
+  tags: [read, cat, show]
 - tool: powershell
-  category: ver y editar
-  command: 'Get-Content {archivo} -TotalCount 20'
-  description: Primeras líneas de un archivo (como head).
-  tags: [primeras, head]
+  category: view and edit
+  command: 'Get-Content {file} -TotalCount 20'
+  description: First lines of a file (like head).
+  tags: [first, head]
 - tool: powershell
-  category: ver y editar
-  command: 'Get-Content {archivo} -Tail 20'
-  description: Últimas líneas de un archivo (como tail).
-  tags: [últimas, tail]
+  category: view and edit
+  command: 'Get-Content {file} -Tail 20'
+  description: Last lines of a file (like tail).
+  tags: [last, tail]
 - tool: powershell
-  category: ver y editar
-  command: 'Get-Content {archivo} -Wait -Tail 20'
-  description: Sigue un archivo en tiempo real (como tail -f).
-  tags: [logs, seguir, follow, tail]
+  category: view and edit
+  command: 'Get-Content {file} -Wait -Tail 20'
+  description: Follows a file in real time (like tail -f).
+  tags: [logs, follow, tail]
 - tool: powershell
-  category: ver y editar
-  command: 'Set-Content {archivo} "{texto}" -Encoding utf8'
-  description: Escribe texto en un archivo, sobrescribiéndolo.
-  tags: [escribir, sobrescribir, write]
+  category: view and edit
+  command: 'Set-Content {file} "{text}" -Encoding utf8'
+  description: Writes text to a file, overwriting it.
+  tags: [write, overwrite]
 - tool: powershell
-  category: ver y editar
-  command: 'Add-Content {archivo} "{texto}"'
-  description: Añade texto al final de un archivo.
-  tags: [añadir, append]
+  category: view and edit
+  command: 'Add-Content {file} "{text}"'
+  description: Appends text to the end of a file.
+  tags: [add, append]
 - tool: powershell
-  category: ver y editar
-  command: 'Compare-Object (Get-Content {archivo_a}) (Get-Content {archivo_b})'
-  description: Compara dos archivos línea a línea.
-  tags: [comparar, diff]
+  category: view and edit
+  command: 'Compare-Object (Get-Content {file_a}) (Get-Content {file_b})'
+  description: Compares two files line by line.
+  tags: [compare, diff]
 - tool: powershell
-  category: ver y editar
-  command: '(Get-Content {archivo}).Count'
-  description: Cuenta las líneas de un archivo.
-  tags: [contar, líneas, wc]
+  category: view and edit
+  command: '(Get-Content {file}).Count'
+  description: Counts the lines of a file.
+  tags: [count, lines, wc]
 
-# --- búsqueda y filtrado ---
+# --- search and filter ---
 - tool: powershell
-  category: búsqueda y filtrado
-  command: 'Select-String -Path {patron} -Pattern "{texto}"'
-  description: Busca texto en archivos, con número de línea (como grep).
-  tags: [buscar, grep, texto]
+  category: search and filter
+  command: 'Select-String -Path {pattern} -Pattern "{text}"'
+  description: Searches for text in files, with line numbers (like grep).
+  tags: [search, grep, text]
   example: 'Select-String -Path *.js -Pattern "TODO"'
 - tool: powershell
-  category: búsqueda y filtrado
-  command: 'Get-ChildItem -Recurse -File | Select-String "{texto}"'
-  description: Busca texto en todos los archivos de las subcarpetas.
-  tags: [buscar, grep, recursivo]
+  category: search and filter
+  command: 'Get-ChildItem -Recurse -File | Select-String "{text}"'
+  description: Searches for text in all files in subfolders.
+  tags: [search, grep, recursive]
 - tool: powershell
-  category: búsqueda y filtrado
-  command: '{comando} | Where-Object { $_.{propiedad} -like "*{texto}*" }'
-  description: Filtra objetos por el valor de una propiedad (alias where, ?).
-  tags: [filtrar, where]
+  category: search and filter
+  command: '{command} | Where-Object { $_.{property} -like "*{text}*" }'
+  description: Filters objects by the value of a property (alias where, ?).
+  tags: [filter, where]
   example: 'Get-Process | Where-Object { $_.Name -like "*node*" }'
 - tool: powershell
-  category: búsqueda y filtrado
-  command: '{comando} | Select-Object -First 10'
-  description: Se queda con los primeros elementos (o elige propiedades con -Property).
-  tags: [seleccionar, head, select]
+  category: search and filter
+  command: '{command} | Select-Object -First 10'
+  description: Keeps the first items (or picks properties with -Property).
+  tags: [select, head]
 - tool: powershell
-  category: búsqueda y filtrado
-  command: '{comando} | Sort-Object {propiedad} -Descending'
-  description: Ordena objetos por una propiedad.
-  tags: [ordenar, sort]
+  category: search and filter
+  command: '{command} | Sort-Object {property} -Descending'
+  description: Sorts objects by a property.
+  tags: [sort]
   example: 'Get-ChildItem | Sort-Object Length -Descending'
 - tool: powershell
-  category: búsqueda y filtrado
-  command: '{comando} | Group-Object {propiedad}'
-  description: Agrupa y cuenta objetos por una propiedad.
-  tags: [agrupar, contar]
+  category: search and filter
+  command: '{command} | Group-Object {property}'
+  description: Groups and counts objects by a property.
+  tags: [group, count]
 - tool: powershell
-  category: búsqueda y filtrado
-  command: '(Get-Command {comando}).Source'
-  description: Ruta del ejecutable de un comando (como which).
-  tags: [ruta, ejecutable, which]
+  category: search and filter
+  command: '(Get-Command {command}).Source'
+  description: Path of a command's executable (like which).
+  tags: [path, executable, which]
 - tool: powershell
-  category: búsqueda y filtrado
-  command: 'Get-Command *{texto}*'
-  description: Busca cmdlets y comandos por nombre.
-  tags: [buscar, cmdlets]
+  category: search and filter
+  command: 'Get-Command *{text}*'
+  description: Finds cmdlets and commands by name.
+  tags: [search, cmdlets]
 - tool: powershell
-  category: búsqueda y filtrado
-  command: '{comando} | Get-Member'
-  description: Muestra las propiedades y métodos de los objetos de salida.
-  tags: [propiedades, métodos, objetos]
+  category: search and filter
+  command: '{command} | Get-Member'
+  description: Shows the properties and methods of the output objects.
+  tags: [properties, methods, objects]
 
-# --- procesos y sistema ---
+# --- processes and system ---
 - tool: powershell
-  category: procesos y sistema
+  category: processes and system
   command: 'Get-Process'
-  description: Lista los procesos en ejecución (alias ps).
-  tags: [procesos, ps]
+  description: Lists the running processes (alias ps).
+  tags: [processes, ps]
 - tool: powershell
-  category: procesos y sistema
+  category: processes and system
   command: 'Stop-Process -Id {pid} -Force'
-  description: Fuerza el cierre de un proceso por su PID.
-  tags: [matar, terminar, kill]
+  description: Force-closes a process by its PID.
+  tags: [kill, terminate]
 - tool: powershell
-  category: procesos y sistema
-  command: 'Stop-Process -Name {nombre} -Force'
-  description: Fuerza el cierre de todos los procesos con ese nombre.
-  tags: [matar, terminar, kill]
+  category: processes and system
+  command: 'Stop-Process -Name {name} -Force'
+  description: Force-closes all processes with that name.
+  tags: [kill, terminate]
   example: 'Stop-Process -Name node -Force'
 - tool: powershell
-  category: procesos y sistema
-  command: 'Start-Process {programa} -Verb RunAs'
-  description: Abre un programa como administrador.
-  tags: [admin, ejecutar, sudo]
+  category: processes and system
+  command: 'Start-Process {program} -Verb RunAs'
+  description: Opens a program as administrator.
+  tags: [admin, run, sudo]
   example: 'Start-Process powershell -Verb RunAs'
 - tool: powershell
-  category: procesos y sistema
-  command: 'Get-Service {nombre}'
-  description: Estado de un servicio de Windows.
-  tags: [servicio, estado]
+  category: processes and system
+  command: 'Get-Service {name}'
+  description: Status of a Windows service.
+  tags: [service, status]
 - tool: powershell
-  category: procesos y sistema
-  command: 'Restart-Service {nombre}'
-  description: Reinicia un servicio (también Start-Service, Stop-Service).
-  tags: [servicio, reiniciar]
+  category: processes and system
+  command: 'Restart-Service {name}'
+  description: Restarts a service (also Start-Service, Stop-Service).
+  tags: [service, restart]
 - tool: powershell
-  category: procesos y sistema
+  category: processes and system
   command: '$PSVersionTable'
-  description: Versión de PowerShell.
-  tags: [versión]
+  description: PowerShell version.
+  tags: [version]
 - tool: powershell
-  category: procesos y sistema
+  category: processes and system
   command: 'Get-ComputerInfo'
-  description: Información detallada del sistema.
-  tags: [sistema, info]
+  description: Detailed system information.
+  tags: [system, info]
 - tool: powershell
-  category: procesos y sistema
+  category: processes and system
   command: 'Get-PSDrive -PSProvider FileSystem'
-  description: Unidades con espacio usado y libre.
-  tags: [disco, espacio, df]
+  description: Drives with used and free space.
+  tags: [disk, space, df]
 
-# --- variables de entorno y perfil ---
+# --- environment variables and profile ---
 - tool: powershell
-  category: variables de entorno
+  category: environment variables
   command: 'Get-ChildItem env:'
-  description: Lista todas las variables de entorno.
-  tags: [env, variables, listar]
+  description: Lists all environment variables.
+  tags: [env, variables, list]
 - tool: powershell
-  category: variables de entorno
+  category: environment variables
   command: '$env:{variable}'
-  description: Muestra el valor de una variable de entorno.
-  tags: [env, variables, mostrar]
+  description: Shows the value of an environment variable.
+  tags: [env, variables, show]
   example: '$env:PATH'
 - tool: powershell
-  category: variables de entorno
-  command: '$env:{variable} = "{valor}"'
-  description: Define una variable solo para la sesión actual.
-  tags: [env, variables, definir]
+  category: environment variables
+  command: '$env:{variable} = "{value}"'
+  description: Sets a variable for the current session only.
+  tags: [env, variables, set]
   example: '$env:NODE_ENV = "production"'
 - tool: powershell
-  category: variables de entorno
-  command: '[Environment]::SetEnvironmentVariable("{variable}", "{valor}", "User")'
-  description: Define una variable de usuario de forma permanente.
-  tags: [env, variables, permanente]
+  category: environment variables
+  command: '[Environment]::SetEnvironmentVariable("{variable}", "{value}", "User")'
+  description: Sets a user variable permanently.
+  tags: [env, variables, permanent]
 - tool: powershell
-  category: variables de entorno
+  category: environment variables
   command: "$env:Path -split ';'"
-  description: Muestra cada ruta del PATH en una línea.
+  description: Shows each PATH entry on its own line.
   tags: [path, env]
 - tool: powershell
-  category: variables de entorno
+  category: environment variables
   command: 'notepad $PROFILE'
-  description: Edita tu perfil (se ejecuta al abrir PowerShell; ideal para alias y funciones).
-  tags: [perfil, profile, configuración]
+  description: Edits your profile (runs when PowerShell opens; ideal for aliases and functions).
+  tags: [profile, configuration]
 - tool: powershell
-  category: variables de entorno
-  command: 'Set-Alias {alias} {comando}'
-  description: Crea un alias para un comando (guárdalo en $PROFILE).
-  tags: [alias, atajo]
+  category: environment variables
+  command: 'Set-Alias {alias} {command}'
+  description: Creates an alias for a command (save it in $PROFILE).
+  tags: [alias, shortcut]
   example: 'Set-Alias g git'
 - tool: powershell
-  category: variables de entorno
+  category: environment variables
   command: 'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser'
-  description: Permite ejecutar scripts locales (.ps1) para tu usuario.
-  tags: [scripts, permisos, política]
+  description: Allows running local scripts (.ps1) for your user.
+  tags: [scripts, permissions, policy]
 - tool: powershell
-  category: variables de entorno
+  category: environment variables
   command: '$LASTEXITCODE'
-  description: Código de salida del último programa externo (0 = éxito).
+  description: Exit code of the last external program (0 = success).
   tags: [exit code, error]
 
-# --- red ---
+# --- network ---
 - tool: powershell
-  category: red
-  command: 'Test-NetConnection {host} -Port {puerto}'
-  description: Comprueba si un host responde en un puerto concreto.
-  tags: [conectividad, puerto, ping]
+  category: network
+  command: 'Test-NetConnection {host} -Port {port}'
+  description: Checks whether a host responds on a specific port.
+  tags: [connectivity, port, ping]
   example: 'Test-NetConnection github.com -Port 443'
 - tool: powershell
-  category: red
+  category: network
   command: 'Get-NetIPAddress -AddressFamily IPv4'
-  description: Direcciones IPv4 de cada interfaz.
-  tags: [ip, red, network]
+  description: IPv4 addresses of each interface.
+  tags: [ip, network]
 - tool: powershell
-  category: red
-  command: 'Resolve-DnsName {dominio}'
-  description: Consulta los registros DNS de un dominio.
-  tags: [dns, dominio, nslookup]
+  category: network
+  command: 'Resolve-DnsName {domain}'
+  description: Looks up a domain's DNS records.
+  tags: [dns, domain, nslookup]
 - tool: powershell
-  category: red
-  command: 'Get-NetTCPConnection -LocalPort {puerto}'
-  description: Averigua qué proceso (OwningProcess) usa un puerto.
-  tags: [puertos, ports, pid]
+  category: network
+  command: 'Get-NetTCPConnection -LocalPort {port}'
+  description: Finds out which process (OwningProcess) is using a port.
+  tags: [ports, pid]
   example: 'Get-NetTCPConnection -LocalPort 8000'
 - tool: powershell
-  category: red
-  command: 'Invoke-WebRequest {url} -OutFile {archivo}'
-  description: Descarga un archivo (alias iwr).
-  tags: [descargar, download, wget]
+  category: network
+  command: 'Invoke-WebRequest {url} -OutFile {file}'
+  description: Downloads a file (alias iwr).
+  tags: [download, wget]
 - tool: powershell
-  category: red
+  category: network
   command: 'Invoke-RestMethod {url}'
-  description: Llama a una API y convierte la respuesta JSON en objetos (alias irm).
+  description: Calls an API and turns the JSON response into objects (alias irm).
   tags: [api, http, json, rest]
   example: 'Invoke-RestMethod https://api.github.com/users/octocat'
 
-# --- compresión ---
+# --- compression ---
 - tool: powershell
-  category: compresión
-  command: 'Compress-Archive -Path {origen} -DestinationPath {archivo}.zip'
-  description: Comprime archivos o carpetas en un zip.
-  tags: [comprimir, zip]
+  category: compression
+  command: 'Compress-Archive -Path {source} -DestinationPath {archive}.zip'
+  description: Compresses files or folders into a zip.
+  tags: [compress, zip]
   example: 'Compress-Archive -Path dist -DestinationPath dist.zip'
 - tool: powershell
-  category: compresión
-  command: 'Expand-Archive {archivo}.zip -DestinationPath {destino}'
-  description: Descomprime un zip.
-  tags: [descomprimir, zip, extraer]
+  category: compression
+  command: 'Expand-Archive {archive}.zip -DestinationPath {destination}'
+  description: Extracts a zip.
+  tags: [decompress, zip, extract]
 
-# --- shell y portapapeles ---
+# --- shell and clipboard ---
 - tool: powershell
   category: shell
-  command: '{comando} | Set-Clipboard'
-  description: Copia la salida de un comando al portapapeles.
-  tags: [portapapeles, clipboard, copiar]
+  command: '{command} | Set-Clipboard'
+  description: Copies a command's output to the clipboard.
+  tags: [clipboard, copy]
 - tool: powershell
   category: shell
   command: 'Get-Clipboard'
-  description: Muestra el contenido del portapapeles.
-  tags: [portapapeles, clipboard, pegar]
+  description: Shows the clipboard contents.
+  tags: [clipboard, paste]
 - tool: powershell
   category: shell
-  command: '{comando} | Out-File {archivo} -Encoding utf8'
-  description: Envía la salida a un archivo (> también funciona; -Append para añadir).
-  tags: [redirigir, salida, output]
+  command: '{command} | Out-File {file} -Encoding utf8'
+  description: Sends the output to a file (> also works; -Append to append).
+  tags: [redirect, output]
 - tool: powershell
   category: shell
-  command: '{comando1}; if ($?) { {comando2} }'
-  description: Ejecuta el segundo comando solo si el primero tuvo éxito (en PowerShell 7 basta con &&).
-  tags: [encadenar, and]
+  command: '{command1}; if ($?) { {command2} }'
+  description: Runs the second command only if the first one succeeded (in PowerShell 7, && is enough).
+  tags: [chain, and]
 - tool: powershell
   category: shell
   command: 'Get-History'
-  description: Historial de comandos de la sesión (alias h).
-  tags: [historial]
+  description: The session's command history (alias h).
+  tags: [history]
 - tool: powershell
   category: shell
   command: 'Clear-Host'
-  description: Limpia la pantalla (alias cls, clear).
-  tags: [limpiar, clear]
+  description: Clears the screen (alias cls, clear).
+  tags: [clear]
 - tool: powershell
   category: shell
-  command: 'Get-Help {comando} -Examples'
-  description: Ayuda de un cmdlet con ejemplos de uso.
-  tags: [ayuda, help, ejemplos]
+  command: 'Get-Help {command} -Examples'
+  description: A cmdlet's help with usage examples.
+  tags: [help, examples]
   example: 'Get-Help Get-ChildItem -Examples'
 
-# --- atajos de teclado ---
+# --- keyboard shortcuts ---
 - tool: powershell
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+R'
-  description: Busca en el historial de comandos.
-  tags: [teclado, historial, shortcut]
+  description: Searches the command history.
+  tags: [keyboard, history, shortcut]
 - tool: powershell
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+Space'
-  description: Muestra todas las opciones de autocompletado.
-  tags: [teclado, autocompletar, shortcut]
+  description: Shows all autocomplete options.
+  tags: [keyboard, autocomplete, shortcut]
 - tool: powershell
-  category: atajos
+  category: shortcuts
   command: 'Tab'
-  description: Autocompleta cmdlets, parámetros y rutas.
-  tags: [teclado, autocompletar, shortcut]
+  description: Autocompletes cmdlets, parameters and paths.
+  tags: [keyboard, autocomplete, shortcut]
 - tool: powershell
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+C'
-  description: Interrumpe el comando en curso.
-  tags: [teclado, interrumpir, shortcut]
+  description: Interrupts the running command.
+  tags: [keyboard, interrupt, shortcut]

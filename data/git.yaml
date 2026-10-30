@@ -1,542 +1,542 @@
-# Source: pdfs/git.pdf (the "conceptos clave" section is intentionally omitted)
+# Source: pdfs/git.pdf (the "key concepts" section is intentionally omitted)
 
-# --- configuración ---
+# --- configuration ---
 - tool: git
-  category: configuración
-  command: 'git config --global user.name "{nombre}"'
-  description: Nombre que aparecerá en tus commits.
-  tags: [config, usuario, setup]
-  example: 'git config --global user.name "Tu Nombre"'
+  category: configuration
+  command: 'git config --global user.name "{name}"'
+  description: Name that will appear on your commits.
+  tags: [config, user, setup]
+  example: 'git config --global user.name "Your Name"'
 - tool: git
-  category: configuración
+  category: configuration
   command: 'git config --global user.email "{email}"'
-  description: Email asociado a tus commits.
+  description: Email associated with your commits.
   tags: [config, email, setup]
 - tool: git
-  category: configuración
+  category: configuration
   command: 'git config --global init.defaultBranch main'
-  description: Usa main como rama inicial en repos nuevos.
-  tags: [config, rama, setup]
+  description: Uses main as the initial branch in new repos.
+  tags: [config, branch, setup]
 - tool: git
-  category: configuración
+  category: configuration
   command: 'git config --global core.editor "code --wait"'
-  description: Editor para mensajes de commit (aquí VS Code; también nano, vim).
+  description: Editor for commit messages (VS Code here; also nano, vim).
   tags: [config, editor, vscode]
 - tool: git
-  category: configuración
+  category: configuration
   command: 'git config --global pull.rebase false'
-  description: 'Comportamiento de pull: merge (false) o rebase (true).'
+  description: 'Pull behaviour: merge (false) or rebase (true).'
   tags: [config, pull, rebase]
 - tool: git
-  category: configuración
+  category: configuration
   command: 'git config --list --show-origin'
-  description: Muestra toda la configuración y de qué archivo sale.
-  tags: [config, listar]
+  description: Shows all configuration and which file each value comes from.
+  tags: [config, list]
 
-# --- crear u obtener un repositorio ---
+# --- create or get a repository ---
 - tool: git
-  category: repositorio
+  category: repository
   command: 'git init'
-  description: Convierte la carpeta actual en un repositorio Git.
-  tags: [crear, nuevo, repo]
+  description: Turns the current folder into a Git repository.
+  tags: [create, new, repo]
 - tool: git
-  category: repositorio
+  category: repository
   command: 'git clone {url}'
-  description: Descarga un repositorio remoto completo.
-  tags: [clonar, descargar, repo]
-  example: 'git clone https://github.com/usuario/repo.git'
+  description: Downloads a complete remote repository.
+  tags: [clone, download, repo]
+  example: 'git clone https://github.com/user/repo.git'
 - tool: git
-  category: repositorio
-  command: 'git clone {url} {carpeta}'
-  description: Clona en una carpeta con otro nombre.
-  tags: [clonar, repo]
+  category: repository
+  command: 'git clone {url} {folder}'
+  description: Clones into a folder with a different name.
+  tags: [clone, repo]
 - tool: git
-  category: repositorio
+  category: repository
   command: 'git clone --depth 1 {url}'
-  description: 'Clon superficial: solo el último commit (más rápido).'
-  tags: [clonar, shallow]
+  description: 'Shallow clone: only the latest commit (faster).'
+  tags: [clone, shallow]
 
-# --- ciclo básico ---
+# --- basic workflow ---
 - tool: git
-  category: ciclo básico
+  category: basics
   command: 'git status'
-  description: 'Estado: qué ha cambiado, qué está preparado y qué no.'
-  tags: [estado, cambios]
+  description: 'Status: what has changed, what is staged and what is not.'
+  tags: [status, changes]
 - tool: git
-  category: ciclo básico
+  category: basics
   command: 'git status -s'
-  description: Estado resumido (M = modificado, A = añadido, ?? = sin seguimiento).
-  tags: [estado, short]
+  description: Short status (M = modified, A = added, ?? = untracked).
+  tags: [status, short]
 - tool: git
-  category: ciclo básico
-  command: 'git add {archivo}'
-  description: Prepara un archivo para el próximo commit.
-  tags: [staging, preparar]
+  category: basics
+  command: 'git add {file}'
+  description: Stages a file for the next commit.
+  tags: [staging, stage]
 - tool: git
-  category: ciclo básico
+  category: basics
   command: 'git add .'
-  description: Prepara todos los cambios de la carpeta actual.
-  tags: [staging, preparar, todo]
+  description: Stages all changes in the current folder.
+  tags: [staging, stage, all]
 - tool: git
-  category: ciclo básico
+  category: basics
   command: 'git add -p'
-  description: Prepara cambios por fragmentos, eligiendo uno a uno.
-  tags: [staging, patch, interactivo]
+  description: Stages changes hunk by hunk, choosing each one.
+  tags: [staging, patch, interactive]
 - tool: git
-  category: ciclo básico
-  command: 'git commit -m "{mensaje}"'
-  description: Crea un commit con lo preparado.
-  tags: [commit, confirmar]
-  example: 'git commit -m "Corrige validación del email"'
+  category: basics
+  command: 'git commit -m "{message}"'
+  description: Creates a commit with the staged changes.
+  tags: [commit, save]
+  example: 'git commit -m "Fix email validation"'
 - tool: git
-  category: ciclo básico
-  command: 'git commit -am "{mensaje}"'
-  description: Prepara y confirma archivos ya rastreados (no incluye nuevos).
-  tags: [commit, confirmar]
+  category: basics
+  command: 'git commit -am "{message}"'
+  description: Stages and commits already tracked files (new files are not included).
+  tags: [commit, save]
 - tool: git
-  category: ciclo básico
+  category: basics
   command: 'git commit --amend'
-  description: Modifica el último commit (mensaje o contenido). Solo si no lo has subido.
-  tags: [commit, corregir, amend]
+  description: Modifies the last commit (message or content). Only if you haven't pushed it.
+  tags: [commit, fix, amend]
 - tool: git
-  category: ciclo básico
-  command: 'git rm {archivo}'
-  description: Borra el archivo y registra el borrado.
-  tags: [borrar, eliminar]
+  category: basics
+  command: 'git rm {file}'
+  description: Deletes the file and records the deletion.
+  tags: [delete, remove]
 - tool: git
-  category: ciclo básico
-  command: 'git rm --cached {archivo}'
-  description: Deja de rastrear un archivo sin borrarlo del disco.
+  category: basics
+  command: 'git rm --cached {file}'
+  description: Stops tracking a file without deleting it from disk.
   tags: [untrack, gitignore]
 - tool: git
-  category: ciclo básico
-  command: 'git mv {origen} {destino}'
-  description: Renombra o mueve un archivo.
-  tags: [mover, renombrar]
+  category: basics
+  command: 'git mv {source} {destination}'
+  description: Renames or moves a file.
+  tags: [move, rename]
 
-# --- historial y diferencias ---
+# --- history and diffs ---
 - tool: git
-  category: historial
+  category: history
   command: 'git log'
-  description: Historial completo de commits.
-  tags: [historial, log]
+  description: Full commit history.
+  tags: [history, log]
 - tool: git
-  category: historial
+  category: history
   command: 'git log --oneline --graph --all'
-  description: Historial compacto con gráfico de todas las ramas.
-  tags: [historial, gráfico, log]
+  description: Compact history with a graph of all branches.
+  tags: [history, graph, log]
 - tool: git
-  category: historial
+  category: history
   command: 'git log -n 5'
-  description: Solo los últimos 5 commits.
-  tags: [historial, log]
+  description: Only the last 5 commits.
+  tags: [history, log]
 - tool: git
-  category: historial
-  command: 'git log -p {archivo}'
-  description: Historial de un archivo con los cambios de cada commit.
-  tags: [historial, archivo, log]
+  category: history
+  command: 'git log -p {file}'
+  description: History of a file with the changes of each commit.
+  tags: [history, file, log]
 - tool: git
-  category: historial
-  command: 'git log --author="{autor}" --since="{fecha}"'
-  description: Filtra el historial por autor y fecha.
-  tags: [historial, filtrar, log]
+  category: history
+  command: 'git log --author="{author}" --since="{date}"'
+  description: Filters the history by author and date.
+  tags: [history, filter, log]
   example: 'git log --author="Ana" --since="2 weeks ago"'
 - tool: git
-  category: historial
-  command: 'git log -S "{texto}"'
-  description: Commits que añadieron o quitaron ese texto.
-  tags: [historial, buscar, pickaxe]
+  category: history
+  command: 'git log -S "{text}"'
+  description: Commits that added or removed that text.
+  tags: [history, search, pickaxe]
 - tool: git
-  category: historial
+  category: history
   command: 'git diff'
-  description: Cambios no preparados (trabajo frente a staging).
-  tags: [diferencias, cambios]
+  description: Unstaged changes (working tree vs. staging).
+  tags: [diff, changes]
 - tool: git
-  category: historial
+  category: history
   command: 'git diff --staged'
-  description: Cambios preparados (staging frente al último commit).
-  tags: [diferencias, staging]
+  description: Staged changes (staging vs. last commit).
+  tags: [diff, staging]
 - tool: git
-  category: historial
-  command: 'git diff {rama_a}..{rama_b}'
-  description: Diferencias entre dos ramas.
-  tags: [diferencias, ramas, comparar]
-  example: 'git diff main..otra-rama'
+  category: history
+  command: 'git diff {branch_a}..{branch_b}'
+  description: Differences between two branches.
+  tags: [diff, branches, compare]
+  example: 'git diff main..other-branch'
 - tool: git
-  category: historial
+  category: history
   command: 'git show {hash}'
-  description: Detalle de un commit concreto.
-  tags: [commit, detalle]
+  description: Details of a specific commit.
+  tags: [commit, details]
 - tool: git
-  category: historial
-  command: 'git blame {archivo}'
-  description: Quién cambió cada línea y en qué commit.
-  tags: [autor, líneas]
+  category: history
+  command: 'git blame {file}'
+  description: Who changed each line and in which commit.
+  tags: [author, lines]
 
-# --- ramas ---
+# --- branches ---
 - tool: git
-  category: ramas
+  category: branches
   command: 'git branch'
-  description: Lista las ramas locales (* marca la actual).
-  tags: [branch, listar]
+  description: Lists local branches (* marks the current one).
+  tags: [branch, list]
 - tool: git
-  category: ramas
+  category: branches
   command: 'git branch -a'
-  description: Lista también las ramas remotas.
-  tags: [branch, listar, remoto]
+  description: Also lists remote branches.
+  tags: [branch, list, remote]
 - tool: git
-  category: ramas
+  category: branches
   command: 'git branch -vv'
-  description: Ramas con su rama remota asociada y estado.
+  description: Branches with their upstream branch and status.
   tags: [branch, upstream]
 - tool: git
-  category: ramas
-  command: 'git switch {rama}'
-  description: Cambia a otra rama (equivale a git checkout).
-  tags: [branch, cambiar, checkout]
+  category: branches
+  command: 'git switch {branch}'
+  description: Switches to another branch (like git checkout).
+  tags: [branch, switch, checkout]
 - tool: git
-  category: ramas
-  command: 'git switch -c {rama}'
-  description: Crea una rama nueva y cambia a ella.
-  tags: [branch, crear]
+  category: branches
+  command: 'git switch -c {branch}'
+  description: Creates a new branch and switches to it.
+  tags: [branch, create]
   example: 'git switch -c feature/login'
 - tool: git
-  category: ramas
+  category: branches
   command: 'git switch -'
-  description: Vuelve a la rama anterior.
-  tags: [branch, anterior]
+  description: Goes back to the previous branch.
+  tags: [branch, previous]
 - tool: git
-  category: ramas
-  command: 'git branch -m {nuevo_nombre}'
-  description: Renombra la rama actual.
-  tags: [branch, renombrar]
+  category: branches
+  command: 'git branch -m {new_name}'
+  description: Renames the current branch.
+  tags: [branch, rename]
 - tool: git
-  category: ramas
-  command: 'git branch -d {rama}'
-  description: Borra una rama ya fusionada.
-  tags: [branch, borrar]
+  category: branches
+  command: 'git branch -d {branch}'
+  description: Deletes an already merged branch.
+  tags: [branch, delete]
 - tool: git
-  category: ramas
-  command: 'git branch -D {rama}'
-  description: Fuerza el borrado de una rama aunque no esté fusionada.
-  tags: [branch, borrar, forzar]
+  category: branches
+  command: 'git branch -D {branch}'
+  description: Force-deletes a branch even if it isn't merged.
+  tags: [branch, delete, force]
 - tool: git
-  category: ramas
-  command: 'git push origin --delete {rama}'
-  description: Borra la rama en el remoto.
-  tags: [branch, borrar, remoto]
+  category: branches
+  command: 'git push origin --delete {branch}'
+  description: Deletes the branch on the remote.
+  tags: [branch, delete, remote]
 
-# --- fusionar e integrar ---
+# --- merge and integrate ---
 - tool: git
-  category: fusionar
-  command: 'git merge {rama}'
-  description: Integra una rama en la rama actual.
-  tags: [merge, fusionar]
+  category: merging
+  command: 'git merge {branch}'
+  description: Merges a branch into the current branch.
+  tags: [merge]
 - tool: git
-  category: fusionar
-  command: 'git merge --no-ff {rama}'
-  description: Fuerza un commit de merge aunque pudiera avanzar en línea.
+  category: merging
+  command: 'git merge --no-ff {branch}'
+  description: Forces a merge commit even if a fast-forward were possible.
   tags: [merge, no-fast-forward]
 - tool: git
-  category: fusionar
+  category: merging
   command: 'git merge --abort'
-  description: Cancela un merge con conflictos y vuelve al estado previo.
-  tags: [merge, cancelar, conflictos]
+  description: Cancels a merge with conflicts and returns to the previous state.
+  tags: [merge, cancel, conflicts]
 - tool: git
-  category: fusionar
-  command: 'git rebase {rama}'
-  description: Reaplica tus commits encima de otra rama (historial lineal).
+  category: merging
+  command: 'git rebase {branch}'
+  description: Replays your commits on top of another branch (linear history).
   tags: [rebase]
   example: 'git rebase main'
 - tool: git
-  category: fusionar
+  category: merging
   command: 'git rebase -i HEAD~3'
-  description: 'Rebase interactivo: reordenar, unir (squash) o editar los últimos 3 commits.'
-  tags: [rebase, interactivo, squash]
+  description: 'Interactive rebase: reorder, squash or edit the last 3 commits.'
+  tags: [rebase, interactive, squash]
 - tool: git
-  category: fusionar
+  category: merging
   command: 'git rebase --continue'
-  description: Sigue con el rebase tras resolver un conflicto.
-  tags: [rebase, conflictos]
+  description: Continues the rebase after resolving a conflict.
+  tags: [rebase, conflicts]
 - tool: git
-  category: fusionar
+  category: merging
   command: 'git rebase --abort'
-  description: Cancela el rebase.
-  tags: [rebase, cancelar]
+  description: Cancels the rebase.
+  tags: [rebase, cancel]
 - tool: git
-  category: fusionar
+  category: merging
   command: 'git cherry-pick {hash}'
-  description: Copia un commit concreto a la rama actual.
-  tags: [cherry-pick, copiar, commit]
+  description: Copies a specific commit onto the current branch.
+  tags: [cherry-pick, copy, commit]
 
-# --- remotos ---
+# --- remotes ---
 - tool: git
-  category: remotos
+  category: remotes
   command: 'git remote -v'
-  description: Lista los remotos configurados y sus URL.
-  tags: [remote, listar]
+  description: Lists the configured remotes and their URLs.
+  tags: [remote, list]
 - tool: git
-  category: remotos
+  category: remotes
   command: 'git remote add origin {url}'
-  description: Asocia un remoto a un repo creado con git init.
-  tags: [remote, añadir, github]
+  description: Adds a remote to a repo created with git init.
+  tags: [remote, add, github]
 - tool: git
-  category: remotos
+  category: remotes
   command: 'git remote set-url origin {url}'
-  description: Cambia la URL del remoto.
+  description: Changes the remote URL.
   tags: [remote, url]
 - tool: git
-  category: remotos
+  category: remotes
   command: 'git fetch'
-  description: Descarga cambios del remoto sin tocar tus archivos.
-  tags: [fetch, descargar]
+  description: Downloads changes from the remote without touching your files.
+  tags: [fetch, download]
 - tool: git
-  category: remotos
+  category: remotes
   command: 'git fetch --prune'
-  description: Descarga cambios y limpia referencias a ramas remotas borradas.
-  tags: [fetch, limpiar, prune]
+  description: Downloads changes and cleans up references to deleted remote branches.
+  tags: [fetch, clean, prune]
 - tool: git
-  category: remotos
+  category: remotes
   command: 'git pull'
-  description: Descarga e integra los cambios del remoto en tu rama actual.
-  tags: [pull, actualizar]
+  description: Downloads and integrates remote changes into your current branch.
+  tags: [pull, update]
 - tool: git
-  category: remotos
+  category: remotes
   command: 'git pull --rebase'
-  description: Descarga y hace rebase en lugar de merge.
+  description: Downloads and rebases instead of merging.
   tags: [pull, rebase]
 - tool: git
-  category: remotos
+  category: remotes
   command: 'git push'
-  description: Sube tus commits a la rama remota asociada.
-  tags: [push, subir]
+  description: Uploads your commits to the upstream branch.
+  tags: [push, upload]
 - tool: git
-  category: remotos
-  command: 'git push -u origin {rama}'
-  description: 'Primera subida de una rama: la crea en el remoto y la asocia (upstream).'
-  tags: [push, subir, upstream]
+  category: remotes
+  command: 'git push -u origin {branch}'
+  description: 'First push of a branch: creates it on the remote and sets it as upstream.'
+  tags: [push, upload, upstream]
   example: 'git push -u origin feature/login'
 - tool: git
-  category: remotos
+  category: remotes
   command: 'git push --force-with-lease'
-  description: Sobrescribe el remoto tras un rebase, pero falla si otro subió cambios. Alternativa segura a --force.
-  tags: [push, forzar, rebase]
+  description: Overwrites the remote after a rebase, but fails if someone else pushed changes. Safe alternative to --force.
+  tags: [push, force, rebase]
 - tool: git
-  category: remotos
+  category: remotes
   command: 'git push --tags'
-  description: Sube las etiquetas locales.
-  tags: [push, tags, etiquetas]
+  description: Pushes local tags.
+  tags: [push, tags]
 
-# --- deshacer cambios ---
+# --- undo changes ---
 - tool: git
-  category: deshacer
-  command: 'git restore {archivo}'
-  description: Descarta cambios no preparados del archivo. Irreversible.
-  tags: [descartar, undo]
+  category: undo
+  command: 'git restore {file}'
+  description: Discards unstaged changes to the file. Irreversible.
+  tags: [discard, undo]
 - tool: git
-  category: deshacer
-  command: 'git restore --staged {archivo}'
-  description: Saca el archivo del staging; conserva los cambios.
+  category: undo
+  command: 'git restore --staged {file}'
+  description: Unstages the file; keeps the changes.
   tags: [unstage, undo]
 - tool: git
-  category: deshacer
-  command: 'git restore --source={hash} {archivo}'
-  description: Recupera el archivo tal como estaba en ese commit.
-  tags: [recuperar, undo]
+  category: undo
+  command: 'git restore --source={hash} {file}'
+  description: Restores the file as it was in that commit.
+  tags: [restore, recover, undo]
 - tool: git
-  category: deshacer
+  category: undo
   command: 'git reset --soft HEAD~1'
-  description: Deshace el último commit; los cambios quedan preparados.
+  description: Undoes the last commit; the changes stay staged.
   tags: [reset, undo, commit]
 - tool: git
-  category: deshacer
+  category: undo
   command: 'git reset HEAD~1'
-  description: Deshace el último commit; los cambios quedan sin preparar.
+  description: Undoes the last commit; the changes stay unstaged.
   tags: [reset, undo, commit]
 - tool: git
-  category: deshacer
+  category: undo
   command: 'git reset --hard HEAD~1'
-  description: Deshace el último commit y borra sus cambios.
-  tags: [reset, undo, destructivo]
+  description: Undoes the last commit and deletes its changes.
+  tags: [reset, undo, destructive]
 - tool: git
-  category: deshacer
+  category: undo
   command: 'git reset --hard origin/main'
-  description: Deja tu rama idéntica al remoto, descartando todo lo local.
-  tags: [reset, remoto, destructivo]
+  description: Makes your branch identical to the remote, discarding everything local.
+  tags: [reset, remote, destructive]
 - tool: git
-  category: deshacer
+  category: undo
   command: 'git revert {hash}'
-  description: Crea un commit nuevo que invierte otro. Seguro para commits ya subidos.
+  description: Creates a new commit that reverses another one. Safe for already pushed commits.
   tags: [revert, undo]
 - tool: git
-  category: deshacer
+  category: undo
   command: 'git clean -n'
-  description: Muestra qué archivos sin seguimiento se borrarían (simulación).
-  tags: [limpiar, untracked, dry-run]
+  description: Shows which untracked files would be deleted (dry run).
+  tags: [clean, untracked, dry-run]
 - tool: git
-  category: deshacer
+  category: undo
   command: 'git clean -fd'
-  description: Borra archivos y carpetas sin seguimiento.
-  tags: [limpiar, untracked, destructivo]
+  description: Deletes untracked files and folders.
+  tags: [clean, untracked, destructive]
 
 # --- stash ---
 - tool: git
   category: stash
   command: 'git stash'
-  description: Aparta los cambios sin confirmar y deja el directorio limpio.
-  tags: [stash, guardar, apartar]
+  description: Sets aside uncommitted changes and leaves the working directory clean.
+  tags: [stash, save, shelve]
 - tool: git
   category: stash
-  command: 'git stash push -m "{descripcion}"'
-  description: Aparta los cambios con un nombre para identificarlos.
-  tags: [stash, guardar]
+  command: 'git stash push -m "{description}"'
+  description: Sets aside the changes with a name to identify them.
+  tags: [stash, save]
 - tool: git
   category: stash
   command: 'git stash -u'
-  description: Aparta los cambios incluyendo archivos sin seguimiento.
+  description: Sets aside the changes including untracked files.
   tags: [stash, untracked]
 - tool: git
   category: stash
   command: 'git stash list'
-  description: Lista los stashes guardados.
-  tags: [stash, listar]
+  description: Lists the saved stashes.
+  tags: [stash, list]
 - tool: git
   category: stash
   command: 'git stash pop'
-  description: Recupera el último stash y lo elimina de la lista.
-  tags: [stash, recuperar]
+  description: Restores the latest stash and removes it from the list.
+  tags: [stash, restore]
 - tool: git
   category: stash
   command: 'git stash apply stash@{1}'
-  description: Aplica un stash concreto sin borrarlo.
-  tags: [stash, aplicar]
+  description: Applies a specific stash without deleting it.
+  tags: [stash, apply]
 - tool: git
   category: stash
   command: 'git stash drop stash@{1}'
-  description: Elimina un stash.
-  tags: [stash, borrar]
+  description: Deletes a stash.
+  tags: [stash, delete]
 
-# --- etiquetas ---
+# --- tags ---
 - tool: git
-  category: etiquetas
+  category: tags
   command: 'git tag'
-  description: Lista las etiquetas.
-  tags: [tag, versión, listar]
+  description: Lists the tags.
+  tags: [tag, version, list]
 - tool: git
-  category: etiquetas
-  command: 'git tag -a {version} -m "{mensaje}"'
-  description: Crea una etiqueta anotada en el commit actual.
-  tags: [tag, versión, crear]
-  example: 'git tag -a v1.0 -m "Versión 1.0"'
+  category: tags
+  command: 'git tag -a {version} -m "{message}"'
+  description: Creates an annotated tag on the current commit.
+  tags: [tag, version, create]
+  example: 'git tag -a v1.0 -m "Version 1.0"'
 - tool: git
-  category: etiquetas
+  category: tags
   command: 'git tag -a {version} {hash}'
-  description: Etiqueta un commit anterior.
-  tags: [tag, versión]
+  description: Tags an earlier commit.
+  tags: [tag, version]
 - tool: git
-  category: etiquetas
+  category: tags
   command: 'git push origin {version}'
-  description: Sube una etiqueta concreta.
+  description: Pushes a specific tag.
   tags: [tag, push]
 - tool: git
-  category: etiquetas
+  category: tags
   command: 'git tag -d {version}'
-  description: Borra una etiqueta local.
-  tags: [tag, borrar]
+  description: Deletes a local tag.
+  tags: [tag, delete]
 - tool: git
-  category: etiquetas
+  category: tags
   command: 'git push origin --delete {version}'
-  description: Borra la etiqueta en el remoto.
-  tags: [tag, borrar, remoto]
+  description: Deletes the tag on the remote.
+  tags: [tag, delete, remote]
 
-# --- herramientas avanzadas ---
+# --- advanced tools ---
 - tool: git
-  category: avanzado
+  category: advanced
   command: 'git reflog'
-  description: Registro de todos los movimientos de HEAD. Sirve para recuperar commits "perdidos".
-  tags: [reflog, recuperar]
+  description: Log of every HEAD movement. Useful to recover "lost" commits.
+  tags: [reflog, recover]
 - tool: git
-  category: avanzado
+  category: advanced
   command: 'git reset --hard {hash}'
-  description: Vuelve a un estado anterior (por ejemplo, uno encontrado en el reflog).
-  tags: [reflog, recuperar, reset]
+  description: Goes back to an earlier state (for example, one found in the reflog).
+  tags: [reflog, recover, reset]
 - tool: git
-  category: avanzado
+  category: advanced
   command: 'git bisect start'
-  description: Inicia una búsqueda binaria del commit que introdujo un error.
-  tags: [bisect, bug, depurar]
+  description: Starts a binary search for the commit that introduced a bug.
+  tags: [bisect, bug, debug]
 - tool: git
-  category: avanzado
+  category: advanced
   command: 'git bisect bad'
-  description: Marca el commit actual como malo durante un bisect.
+  description: Marks the current commit as bad during a bisect.
   tags: [bisect, bug]
 - tool: git
-  category: avanzado
+  category: advanced
   command: 'git bisect good {hash}'
-  description: Marca un commit como bueno; Git va acotando.
+  description: Marks a commit as good; Git keeps narrowing it down.
   tags: [bisect, bug]
 - tool: git
-  category: avanzado
+  category: advanced
   command: 'git bisect reset'
-  description: Termina el bisect y vuelve a donde estabas.
+  description: Ends the bisect and returns to where you were.
   tags: [bisect]
 - tool: git
-  category: avanzado
-  command: 'git worktree add {ruta} {rama}'
-  description: Abre otra rama en una carpeta aparte, en paralelo.
-  tags: [worktree, paralelo]
-  example: 'git worktree add ../carpeta feature/login'
+  category: advanced
+  command: 'git worktree add {path} {branch}'
+  description: Checks out another branch in a separate folder, side by side.
+  tags: [worktree, parallel]
+  example: 'git worktree add ../folder feature/login'
 - tool: git
-  category: avanzado
-  command: 'git grep "{texto}"'
-  description: Busca texto en los archivos rastreados.
-  tags: [buscar, grep]
+  category: advanced
+  command: 'git grep "{text}"'
+  description: Searches for text in tracked files.
+  tags: [search, grep]
 - tool: git
-  category: avanzado
+  category: advanced
   command: 'git shortlog -sn'
-  description: Número de commits por autor.
-  tags: [autores, estadísticas]
+  description: Number of commits per author.
+  tags: [authors, stats]
 - tool: git
-  category: avanzado
-  command: 'git check-ignore -v {archivo}'
-  description: Explica qué regla de .gitignore ignora un archivo.
-  tags: [gitignore, ignorar]
+  category: advanced
+  command: 'git check-ignore -v {file}'
+  description: Explains which .gitignore rule ignores a file.
+  tags: [gitignore, ignore]
 
-# --- alias ---
+# --- aliases ---
 - tool: git
-  category: alias
+  category: aliases
   command: 'git config --global alias.st status'
-  description: Crea el alias git st para git status.
-  tags: [alias, atajo]
+  description: Creates the alias git st for git status.
+  tags: [alias, shortcut]
 - tool: git
-  category: alias
+  category: aliases
   command: 'git config --global alias.co checkout'
-  description: Crea el alias git co para git checkout.
-  tags: [alias, atajo]
+  description: Creates the alias git co for git checkout.
+  tags: [alias, shortcut]
 - tool: git
-  category: alias
+  category: aliases
   command: 'git config --global alias.sw switch'
-  description: Crea el alias git sw para git switch.
-  tags: [alias, atajo]
+  description: Creates the alias git sw for git switch.
+  tags: [alias, shortcut]
 - tool: git
-  category: alias
+  category: aliases
   command: 'git config --global alias.lg "log --oneline --graph --all --decorate"'
-  description: Crea el alias git lg para un historial compacto con gráfico.
-  tags: [alias, atajo, log]
+  description: Creates the alias git lg for a compact history with a graph.
+  tags: [alias, shortcut, log]
 - tool: git
-  category: alias
+  category: aliases
   command: 'git config --global alias.last "log -1 HEAD --stat"'
-  description: Crea el alias git last para ver el último commit con estadísticas.
-  tags: [alias, atajo, log]
+  description: Creates the alias git last to see the last commit with stats.
+  tags: [alias, shortcut, log]
 - tool: git
-  category: alias
+  category: aliases
   command: 'git config --global alias.unstage "restore --staged"'
-  description: Crea el alias git unstage para sacar archivos del staging.
-  tags: [alias, atajo, unstage]
+  description: Creates the alias git unstage to unstage files.
+  tags: [alias, shortcut, unstage]
 
-# --- ayuda ---
+# --- help ---
 - tool: git
-  category: ayuda
-  command: 'git {comando} --help'
-  description: Abre la documentación oficial de un comando.
-  tags: [ayuda, help]
+  category: help
+  command: 'git {command} --help'
+  description: Opens the official documentation of a command.
+  tags: [help, docs]

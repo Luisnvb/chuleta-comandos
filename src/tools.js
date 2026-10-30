@@ -15,8 +15,12 @@ export const COLLECTIONS = [
   { id: 'recent', label: 'Recent' },
 ];
 
+// Favorites and Recent are hidden for now: no filter tabs, star buttons or Ctrl+D.
+// The lists are still kept in localStorage, so turning this back on restores them.
+export const SHOW_COLLECTIONS = false;
+
 // Filter bar order; Alt+<index> selects each one.
-export const FILTERS = [{ id: 'all', label: 'All' }, ...TOOLS, ...COLLECTIONS];
+export const FILTERS = [{ id: 'all', label: 'All' }, ...TOOLS, ...(SHOW_COLLECTIONS ? COLLECTIONS : [])];
 
 const labels = new Map([...TOOLS, ...COLLECTIONS].map((t) => [t.id, t.label]));
 const collectionIds = new Set(COLLECTIONS.map((c) => c.id));

@@ -102,7 +102,7 @@ function insertNode(doc, node, category) {
   items.splice(index, 0, node);
 }
 
-// A section comment ("# --- ramas ---") is attached to the first entry below it:
+// A section comment ("# --- branches ---") is attached to the first entry below it:
 // hand it to the next entry instead of deleting it with this one.
 function removeNode(doc, index) {
   const items = doc.contents.items;

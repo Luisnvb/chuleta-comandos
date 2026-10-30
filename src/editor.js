@@ -26,7 +26,7 @@ const TEMPLATE = `
           <input name="command" class="mono" autocomplete="off" spellcheck="false" />
         </label>
         <label class="editor-field editor-wide">
-          <span>Description <small>in Spanish</small></span>
+          <span>Description <small>one sentence</small></span>
           <input name="description" autocomplete="off" />
         </label>
         <label class="editor-field editor-wide">

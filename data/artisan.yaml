@@ -1,566 +1,566 @@
 # Source: pdfs/comandos-artisan-laravel.pdf
 # The PDF omits the "php artisan" prefix in most rows; here every command is complete.
 
-# --- básicos ---
+# --- basics ---
 - tool: artisan
-  category: básicos
+  category: basics
   command: 'php artisan list'
-  description: Lista todos los comandos disponibles.
-  tags: [listar, comandos]
+  description: Lists all available commands.
+  tags: [list, commands]
 - tool: artisan
-  category: básicos
-  command: 'php artisan help {comando}'
-  description: Muestra argumentos y opciones de un comando.
-  tags: [ayuda, help]
+  category: basics
+  command: 'php artisan help {command}'
+  description: Shows a command's arguments and options.
+  tags: [help]
   example: 'php artisan help make:model'
 - tool: artisan
-  category: básicos
+  category: basics
   command: 'php artisan about'
-  description: 'Resumen del proyecto: versión, entorno, drivers, caché.'
-  tags: [info, proyecto]
+  description: 'Project overview: version, environment, drivers, cache.'
+  tags: [info, project]
 - tool: artisan
-  category: básicos
+  category: basics
   command: 'php artisan --version'
-  description: Versión de Laravel instalada.
-  tags: [versión]
+  description: Installed Laravel version.
+  tags: [version]
 - tool: artisan
-  category: básicos
+  category: basics
   command: 'php artisan serve'
-  description: Arranca el servidor de desarrollo (por defecto :8000; cambia con --port=8080).
-  tags: [servidor, server, dev]
+  description: Starts the development server (default :8000; change it with --port=8080).
+  tags: [server, dev]
   example: 'php artisan serve --port=8080'
 - tool: artisan
-  category: básicos
+  category: basics
   command: 'php artisan tinker'
-  description: Consola interactiva (REPL) con la aplicación cargada.
-  tags: [repl, consola, shell]
+  description: Interactive console (REPL) with the application loaded.
+  tags: [repl, console, shell]
 - tool: artisan
-  category: básicos
+  category: basics
   command: 'php artisan env'
-  description: Muestra el entorno actual (local, production...).
-  tags: [entorno, environment]
+  description: Shows the current environment (local, production...).
+  tags: [environment]
 - tool: artisan
-  category: básicos
+  category: basics
   command: 'php artisan key:generate'
-  description: Genera APP_KEY en el archivo .env.
-  tags: [clave, key, env]
+  description: Generates APP_KEY in the .env file.
+  tags: [key, env]
 - tool: artisan
-  category: básicos
+  category: basics
   command: 'php artisan storage:link'
-  description: Crea el enlace simbólico public/storage → storage/app/public.
+  description: Creates the symbolic link public/storage → storage/app/public.
   tags: [storage, symlink]
 - tool: artisan
-  category: básicos
-  command: 'php artisan docs {tema}'
-  description: Abre la documentación oficial sobre un tema.
-  tags: [documentación, ayuda]
+  category: basics
+  command: 'php artisan docs {topic}'
+  description: Opens the official documentation on a topic.
+  tags: [documentation, help]
   example: 'php artisan docs validation'
 
-# --- generadores ---
+# --- generators ---
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:model {modelo} -mfsc'
-  description: Modelo + migración, factory, seeder y controlador.
-  tags: [make, modelo, eloquent]
+  category: generators
+  command: 'php artisan make:model {model} -mfsc'
+  description: Model + migration, factory, seeder and controller.
+  tags: [make, model, eloquent]
   example: 'php artisan make:model Post -mfsc'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:model {modelo} -a'
-  description: 'Modelo con todo: migración, factory, seeder, policy, requests y controlador.'
-  tags: [make, modelo, eloquent]
+  category: generators
+  command: 'php artisan make:model {model} -a'
+  description: 'Model with everything: migration, factory, seeder, policy, requests and controller.'
+  tags: [make, model, eloquent]
   example: 'php artisan make:model Post -a'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:controller {controlador} --resource'
-  description: Controlador con los 7 métodos CRUD.
-  tags: [make, controlador, crud]
+  category: generators
+  command: 'php artisan make:controller {controller} --resource'
+  description: Controller with the 7 CRUD methods.
+  tags: [make, controller, crud]
   example: 'php artisan make:controller PostController --resource'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:controller {controlador} --api'
-  description: Controlador REST sin create/edit.
-  tags: [make, controlador, api, rest]
+  category: generators
+  command: 'php artisan make:controller {controller} --api'
+  description: REST controller without create/edit.
+  tags: [make, controller, api, rest]
   example: 'php artisan make:controller Api/PostController --api'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:controller {controlador} --invokable'
-  description: Controlador de una sola acción (__invoke).
-  tags: [make, controlador, invokable]
+  category: generators
+  command: 'php artisan make:controller {controller} --invokable'
+  description: Single-action controller (__invoke).
+  tags: [make, controller, invokable]
   example: 'php artisan make:controller ShowPost --invokable'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:migration create_{tabla}_table'
-  description: Nueva migración para crear una tabla (detecta la tabla por el nombre).
-  tags: [make, migración, tabla]
+  category: generators
+  command: 'php artisan make:migration create_{table}_table'
+  description: New migration to create a table (detects the table from the name).
+  tags: [make, migration, table]
   example: 'php artisan make:migration create_posts_table'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:migration add_{columna}_to_{tabla}_table'
-  description: Migración para modificar una tabla existente.
-  tags: [make, migración, columna]
+  category: generators
+  command: 'php artisan make:migration add_{column}_to_{table}_table'
+  description: Migration to modify an existing table.
+  tags: [make, migration, column]
   example: 'php artisan make:migration add_slug_to_posts_table'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:seeder {nombre}'
-  description: Seeder para poblar la base de datos con datos de prueba.
-  tags: [make, seeder, datos]
+  category: generators
+  command: 'php artisan make:seeder {name}'
+  description: Seeder to populate the database with test data.
+  tags: [make, seeder, data]
   example: 'php artisan make:seeder UserSeeder'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:factory {nombre}'
-  description: Factory para generar modelos de prueba.
-  tags: [make, factory, datos]
+  category: generators
+  command: 'php artisan make:factory {name}'
+  description: Factory to generate test models.
+  tags: [make, factory, data]
   example: 'php artisan make:factory PostFactory'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:request {nombre}'
-  description: Form Request para validación y autorización.
-  tags: [make, request, validación]
+  category: generators
+  command: 'php artisan make:request {name}'
+  description: Form Request for validation and authorization.
+  tags: [make, request, validation]
   example: 'php artisan make:request StorePostRequest'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:middleware {nombre}'
-  description: Nuevo middleware HTTP.
+  category: generators
+  command: 'php artisan make:middleware {name}'
+  description: New HTTP middleware.
   tags: [make, middleware]
   example: 'php artisan make:middleware EnsureIsAdmin'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:policy {nombre} --model={modelo}'
-  description: Policy de autorización ligada a un modelo.
-  tags: [make, policy, autorización]
+  category: generators
+  command: 'php artisan make:policy {name} --model={model}'
+  description: Authorization policy tied to a model.
+  tags: [make, policy, authorization]
   example: 'php artisan make:policy PostPolicy --model=Post'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:resource {nombre}'
-  description: API Resource para transformar respuestas JSON (--collection para colecciones).
+  category: generators
+  command: 'php artisan make:resource {name}'
+  description: API Resource to transform JSON responses (--collection for collections).
   tags: [make, resource, api, json]
   example: 'php artisan make:resource PostResource'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:event {nombre}'
-  description: Nuevo evento.
-  tags: [make, evento, event]
+  category: generators
+  command: 'php artisan make:event {name}'
+  description: New event.
+  tags: [make, event]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:listener {nombre}'
-  description: Nuevo listener de eventos.
-  tags: [make, listener, evento]
+  category: generators
+  command: 'php artisan make:listener {name}'
+  description: New event listener.
+  tags: [make, listener, event]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:observer {nombre}'
-  description: Observer de un modelo.
-  tags: [make, observer, modelo]
+  category: generators
+  command: 'php artisan make:observer {name}'
+  description: Model observer.
+  tags: [make, observer, model]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:job {nombre}'
-  description: Job para colas.
-  tags: [make, job, cola, queue]
+  category: generators
+  command: 'php artisan make:job {name}'
+  description: Job for queues.
+  tags: [make, job, queue]
   example: 'php artisan make:job ProcessPodcast'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:mail {nombre}'
-  description: Nuevo Mailable.
+  category: generators
+  command: 'php artisan make:mail {name}'
+  description: New Mailable.
   tags: [make, mail, email]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:notification {nombre}'
-  description: Nueva notificación.
-  tags: [make, notificación]
+  category: generators
+  command: 'php artisan make:notification {name}'
+  description: New notification.
+  tags: [make, notification]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:command {nombre}'
-  description: Comando Artisan personalizado.
-  tags: [make, comando, consola]
+  category: generators
+  command: 'php artisan make:command {name}'
+  description: Custom Artisan command.
+  tags: [make, command, console]
   example: 'php artisan make:command SendReport'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:rule {nombre}'
-  description: Regla de validación personalizada.
-  tags: [make, regla, validación]
+  category: generators
+  command: 'php artisan make:rule {name}'
+  description: Custom validation rule.
+  tags: [make, rule, validation]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:cast {nombre}'
-  description: Cast personalizado para atributos de modelo.
-  tags: [make, cast, modelo]
+  category: generators
+  command: 'php artisan make:cast {name}'
+  description: Custom cast for model attributes.
+  tags: [make, cast, model]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:enum {nombre}'
-  description: Nuevo enum PHP.
+  category: generators
+  command: 'php artisan make:enum {name}'
+  description: New PHP enum.
   tags: [make, enum]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:component {nombre}'
-  description: Componente Blade.
-  tags: [make, blade, componente]
+  category: generators
+  command: 'php artisan make:component {name}'
+  description: Blade component.
+  tags: [make, blade, component]
   example: 'php artisan make:component Alert'
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:view {nombre}'
-  description: Nueva vista Blade.
-  tags: [make, blade, vista]
+  category: generators
+  command: 'php artisan make:view {name}'
+  description: New Blade view.
+  tags: [make, blade, view]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:class {nombre}'
-  description: Clase PHP genérica (Laravel 11+).
-  tags: [make, clase]
+  category: generators
+  command: 'php artisan make:class {name}'
+  description: Generic PHP class (Laravel 11+).
+  tags: [make, class]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:interface {nombre}'
-  description: Interfaz PHP (Laravel 11+).
-  tags: [make, interfaz]
+  category: generators
+  command: 'php artisan make:interface {name}'
+  description: PHP interface (Laravel 11+).
+  tags: [make, interface]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:trait {nombre}'
-  description: Trait PHP (Laravel 11+).
+  category: generators
+  command: 'php artisan make:trait {name}'
+  description: PHP trait (Laravel 11+).
   tags: [make, trait]
 - tool: artisan
-  category: generadores
-  command: 'php artisan make:test {nombre}'
-  description: Test de feature (--unit para unitario, --pest para Pest).
+  category: generators
+  command: 'php artisan make:test {name}'
+  description: Feature test (--unit for a unit test, --pest for Pest).
   tags: [make, test, phpunit, pest]
   example: 'php artisan make:test PostTest --unit'
 
-# --- base de datos ---
+# --- database ---
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan migrate'
-  description: Ejecuta las migraciones pendientes.
-  tags: [migración, db]
+  description: Runs the pending migrations.
+  tags: [migration, db]
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan migrate --pretend'
-  description: Muestra el SQL de las migraciones sin ejecutarlo.
-  tags: [migración, sql, dry-run]
+  description: Shows the migrations' SQL without running it.
+  tags: [migration, sql, dry-run]
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan migrate:status'
-  description: Estado de cada migración (ejecutada o no).
-  tags: [migración, estado]
+  description: Status of each migration (run or not).
+  tags: [migration, status]
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan migrate:rollback'
-  description: Revierte el último lote de migraciones (--step=N para N pasos).
-  tags: [migración, deshacer, rollback]
+  description: Rolls back the last batch of migrations (--step=N for N steps).
+  tags: [migration, undo, rollback]
   example: 'php artisan migrate:rollback --step=1'
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan migrate:reset'
-  description: Revierte todas las migraciones.
-  tags: [migración, deshacer]
+  description: Rolls back all migrations.
+  tags: [migration, undo]
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan migrate:refresh'
-  description: Rollback total y migrate de nuevo (--seed para sembrar).
-  tags: [migración, refrescar]
+  description: Full rollback and migrate again (--seed to seed).
+  tags: [migration, refresh]
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan migrate:fresh --seed'
-  description: Borra todas las tablas, migra y siembra. ¡Destructivo!
-  tags: [migración, seed, destructivo]
+  description: Drops all tables, migrates and seeds. Destructive!
+  tags: [migration, seed, destructive]
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan migrate --force'
-  description: Ejecuta las migraciones en producción sin pedir confirmación.
-  tags: [migración, producción, deploy]
+  description: Runs the migrations in production without asking for confirmation.
+  tags: [migration, production, deploy]
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan db:seed'
-  description: Ejecuta todos los seeders.
-  tags: [seed, datos]
+  description: Runs all seeders.
+  tags: [seed, data]
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan db:seed --class={seeder}'
-  description: Ejecuta un seeder concreto.
-  tags: [seed, datos]
+  description: Runs a specific seeder.
+  tags: [seed, data]
   example: 'php artisan db:seed --class=UserSeeder'
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan db:wipe'
-  description: Elimina todas las tablas, vistas y tipos. ¡Destructivo!
-  tags: [borrar, destructivo]
+  description: Drops all tables, views and types. Destructive!
+  tags: [delete, destructive]
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan db:show'
-  description: Información de la base de datos.
+  description: Database information.
   tags: [info, db]
 - tool: artisan
-  category: base de datos
-  command: 'php artisan db:table {tabla}'
-  description: Información de una tabla.
-  tags: [info, tabla]
+  category: database
+  command: 'php artisan db:table {table}'
+  description: Information about a table.
+  tags: [info, table]
   example: 'php artisan db:table users'
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan db'
-  description: Abre el cliente CLI de la base de datos.
-  tags: [cliente, sql, consola]
+  description: Opens the database CLI client.
+  tags: [client, sql, console]
 - tool: artisan
-  category: base de datos
-  command: 'php artisan model:show {modelo}'
-  description: Atributos, relaciones y observers de un modelo.
-  tags: [modelo, info, eloquent]
+  category: database
+  command: 'php artisan model:show {model}'
+  description: A model's attributes, relations and observers.
+  tags: [model, info, eloquent]
   example: 'php artisan model:show Post'
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan model:prune'
-  description: Elimina registros de modelos Prunable.
-  tags: [modelo, limpiar]
+  description: Deletes records of Prunable models.
+  tags: [model, clean, prune]
 - tool: artisan
-  category: base de datos
+  category: database
   command: 'php artisan schema:dump'
-  description: Vuelca el esquema a SQL (--prune para compactar migraciones).
-  tags: [esquema, sql]
+  description: Dumps the schema to SQL (--prune to squash migrations).
+  tags: [schema, sql]
 
-# --- caché y optimización ---
+# --- cache and optimization ---
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan optimize'
-  description: Cachea config, rutas, eventos y vistas (producción).
-  tags: [optimizar, producción, deploy]
+  description: Caches config, routes, events and views (production).
+  tags: [optimize, production, deploy]
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan optimize:clear'
-  description: Limpia todas las cachés de golpe.
-  tags: [limpiar, clear]
+  description: Clears all caches at once.
+  tags: [clear]
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan config:cache'
-  description: Cachea la configuración.
+  description: Caches the configuration.
   tags: [config, cache]
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan config:clear'
-  description: Limpia la caché de configuración (útil si un cambio en .env no se aplica).
-  tags: [config, limpiar, env]
+  description: Clears the configuration cache (useful when a .env change doesn't apply).
+  tags: [config, clear, env]
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan route:cache'
-  description: Cachea las rutas.
-  tags: [rutas, cache]
+  description: Caches the routes.
+  tags: [routes, cache]
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan route:clear'
-  description: Limpia la caché de rutas.
-  tags: [rutas, limpiar]
+  description: Clears the route cache.
+  tags: [routes, clear]
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan view:cache'
-  description: Precompila las vistas Blade.
-  tags: [vistas, blade, cache]
+  description: Precompiles the Blade views.
+  tags: [views, blade, cache]
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan view:clear'
-  description: Limpia las vistas Blade compiladas.
-  tags: [vistas, blade, limpiar]
+  description: Clears the compiled Blade views.
+  tags: [views, blade, clear]
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan event:cache'
-  description: Cachea el mapa de eventos.
-  tags: [eventos, cache]
+  description: Caches the event map.
+  tags: [events, cache]
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan event:clear'
-  description: Limpia el mapa de eventos cacheado.
-  tags: [eventos, limpiar]
+  description: Clears the cached event map.
+  tags: [events, clear]
 - tool: artisan
-  category: caché
+  category: cache
   command: 'php artisan cache:clear'
-  description: Vacía la caché de la aplicación (opcionalmente de un store concreto).
-  tags: [cache, limpiar]
+  description: Empties the application cache (optionally of a specific store).
+  tags: [cache, clear]
 - tool: artisan
-  category: caché
-  command: 'php artisan cache:forget {clave}'
-  description: Elimina una clave concreta de la caché.
-  tags: [cache, borrar, clave]
+  category: cache
+  command: 'php artisan cache:forget {key}'
+  description: Removes a specific key from the cache.
+  tags: [cache, delete, key]
 - tool: artisan
-  category: caché
-  command: 'php artisan config:show {archivo}'
-  description: Muestra los valores de un archivo de configuración.
-  tags: [config, mostrar]
+  category: cache
+  command: 'php artisan config:show {file}'
+  description: Shows the values of a configuration file.
+  tags: [config, show]
   example: 'php artisan config:show app'
 
-# --- rutas ---
+# --- routes ---
 - tool: artisan
-  category: rutas
+  category: routes
   command: 'php artisan route:list'
-  description: Lista todas las rutas registradas.
-  tags: [rutas, routes, listar]
+  description: Lists all registered routes.
+  tags: [routes, list]
 - tool: artisan
-  category: rutas
+  category: routes
   command: 'php artisan route:list --path={uri}'
-  description: Filtra las rutas por URI.
-  tags: [rutas, filtrar]
+  description: Filters the routes by URI.
+  tags: [routes, filter]
   example: 'php artisan route:list --path=api'
 - tool: artisan
-  category: rutas
-  command: 'php artisan route:list --method={metodo} --name={nombre}'
-  description: Filtra las rutas por método o nombre.
-  tags: [rutas, filtrar]
+  category: routes
+  command: 'php artisan route:list --method={method} --name={name}'
+  description: Filters the routes by method or name.
+  tags: [routes, filter]
   example: 'php artisan route:list --method=POST --name=posts'
 - tool: artisan
-  category: rutas
+  category: routes
   command: 'php artisan route:list -v --except-vendor'
-  description: Muestra middleware y oculta rutas de paquetes.
-  tags: [rutas, middleware]
+  description: Shows middleware and hides package routes.
+  tags: [routes, middleware]
 
-# --- colas ---
+# --- queues ---
 - tool: artisan
-  category: colas
+  category: queues
   command: 'php artisan queue:work'
-  description: Procesa jobs (reiniciar tras cada deploy).
-  tags: [cola, queue, worker]
+  description: Processes jobs (restart after every deploy).
+  tags: [queue, worker]
 - tool: artisan
-  category: colas
-  command: 'php artisan queue:work --queue={colas}'
-  description: Procesa jobs de colas concretas, en orden de prioridad.
-  tags: [cola, queue, prioridad]
+  category: queues
+  command: 'php artisan queue:work --queue={queues}'
+  description: Processes jobs from specific queues, in priority order.
+  tags: [queue, priority]
   example: 'php artisan queue:work --queue=high,default'
 - tool: artisan
-  category: colas
+  category: queues
   command: 'php artisan queue:work --tries=3 --timeout=60'
-  description: Procesa jobs con reintentos y tiempo máximo por job.
-  tags: [cola, queue, reintentos]
+  description: Processes jobs with retries and a maximum time per job.
+  tags: [queue, retries]
 - tool: artisan
-  category: colas
+  category: queues
   command: 'php artisan queue:listen'
-  description: Como queue:work, pero recarga el código en cada job (desarrollo).
-  tags: [cola, queue, dev]
+  description: Like queue:work, but reloads the code on every job (development).
+  tags: [queue, dev]
 - tool: artisan
-  category: colas
+  category: queues
   command: 'php artisan queue:restart'
-  description: Reinicia los workers de forma ordenada.
-  tags: [cola, queue, reiniciar, deploy]
+  description: Gracefully restarts the workers.
+  tags: [queue, restart, deploy]
 - tool: artisan
-  category: colas
+  category: queues
   command: 'php artisan queue:failed'
-  description: Lista los jobs fallidos.
-  tags: [cola, fallidos]
+  description: Lists the failed jobs.
+  tags: [queue, failed]
 - tool: artisan
-  category: colas
+  category: queues
   command: 'php artisan queue:retry {id}'
-  description: Reintenta un job fallido (o todos con all).
-  tags: [cola, fallidos, reintentar]
+  description: Retries a failed job (or all of them with all).
+  tags: [queue, failed, retry]
   example: 'php artisan queue:retry all'
 - tool: artisan
-  category: colas
+  category: queues
   command: 'php artisan queue:forget {id}'
-  description: Borra un job fallido.
-  tags: [cola, fallidos, borrar]
+  description: Deletes a failed job.
+  tags: [queue, failed, delete]
 - tool: artisan
-  category: colas
+  category: queues
   command: 'php artisan queue:flush'
-  description: Borra todos los jobs fallidos.
-  tags: [cola, fallidos, borrar]
+  description: Deletes all failed jobs.
+  tags: [queue, failed, delete]
 - tool: artisan
-  category: colas
+  category: queues
   command: 'php artisan queue:clear'
-  description: Vacía una cola (opcionalmente de una conexión concreta).
-  tags: [cola, vaciar]
+  description: Empties a queue (optionally of a specific connection).
+  tags: [queue, empty]
 - tool: artisan
-  category: colas
-  command: 'php artisan queue:monitor {conexion}:{cola} --max={limite}'
-  description: Avisa si la cola supera un tamaño.
-  tags: [cola, monitor]
+  category: queues
+  command: 'php artisan queue:monitor {connection}:{queue} --max={limit}'
+  description: Warns when the queue exceeds a size.
+  tags: [queue, monitor]
   example: 'php artisan queue:monitor redis:default --max=100'
 
-# --- tareas programadas ---
+# --- scheduled tasks ---
 - tool: artisan
-  category: tareas programadas
+  category: scheduling
   command: 'php artisan schedule:list'
-  description: Lista las tareas programadas y su próxima ejecución.
+  description: Lists the scheduled tasks and their next run.
   tags: [scheduler, cron]
 - tool: artisan
-  category: tareas programadas
+  category: scheduling
   command: 'php artisan schedule:run'
-  description: Ejecuta las tareas pendientes (llamar desde cron cada minuto).
+  description: Runs the due tasks (call it from cron every minute).
   tags: [scheduler, cron]
 - tool: artisan
-  category: tareas programadas
+  category: scheduling
   command: 'php artisan schedule:work'
-  description: Ejecuta el scheduler en primer plano (desarrollo).
+  description: Runs the scheduler in the foreground (development).
   tags: [scheduler, dev]
 - tool: artisan
-  category: tareas programadas
+  category: scheduling
   command: 'php artisan schedule:test'
-  description: Lanza manualmente una tarea programada.
-  tags: [scheduler, probar]
+  description: Manually runs a scheduled task.
+  tags: [scheduler, test]
 
-# --- mantenimiento y paquetes ---
+# --- maintenance and packages ---
 - tool: artisan
-  category: mantenimiento
+  category: maintenance
   command: 'php artisan down --secret={token}'
-  description: Modo mantenimiento; visitar /token permite saltarlo.
-  tags: [mantenimiento, down]
+  description: Maintenance mode; visiting /token lets you bypass it.
+  tags: [maintenance, down]
 - tool: artisan
-  category: mantenimiento
+  category: maintenance
   command: 'php artisan down --render="errors::503" --retry=60'
-  description: Modo mantenimiento con vista personalizada y cabecera Retry-After.
-  tags: [mantenimiento, down]
+  description: Maintenance mode with a custom view and a Retry-After header.
+  tags: [maintenance, down]
 - tool: artisan
-  category: mantenimiento
+  category: maintenance
   command: 'php artisan up'
-  description: Sale del modo mantenimiento.
-  tags: [mantenimiento, up]
+  description: Leaves maintenance mode.
+  tags: [maintenance, up]
 - tool: artisan
-  category: mantenimiento
+  category: maintenance
   command: 'php artisan vendor:publish --tag={tag}'
-  description: Publica config, vistas o assets de paquetes (también --provider=...).
-  tags: [paquetes, publicar, vendor]
+  description: Publishes package config, views or assets (also --provider=...).
+  tags: [packages, publish, vendor]
 - tool: artisan
-  category: mantenimiento
+  category: maintenance
   command: 'php artisan install:api'
-  description: Instala Sanctum y routes/api.php (Laravel 11+).
-  tags: [api, sanctum, instalar]
+  description: Installs Sanctum and routes/api.php (Laravel 11+).
+  tags: [api, sanctum, install]
 - tool: artisan
-  category: mantenimiento
+  category: maintenance
   command: 'php artisan install:broadcasting'
-  description: Configura broadcasting / Reverb (Laravel 11+).
+  description: Sets up broadcasting / Reverb (Laravel 11+).
   tags: [broadcasting, reverb, websockets]
 - tool: artisan
-  category: mantenimiento
-  command: 'php artisan config:publish {nombre}'
-  description: Publica archivos de config ocultos (Laravel 11+).
-  tags: [config, publicar]
+  category: maintenance
+  command: 'php artisan config:publish {name}'
+  description: Publishes hidden config files (Laravel 11+).
+  tags: [config, publish]
 - tool: artisan
-  category: mantenimiento
+  category: maintenance
   command: 'php artisan lang:publish'
-  description: Publica los archivos de idioma.
-  tags: [idioma, traducciones]
+  description: Publishes the language files.
+  tags: [language, translations]
 - tool: artisan
-  category: mantenimiento
+  category: maintenance
   command: 'php artisan stub:publish'
-  description: Publica los stubs para personalizar los make:.
-  tags: [stubs, plantillas]
+  description: 'Publishes the stubs to customize the make: commands.'
+  tags: [stubs, templates]
 - tool: artisan
-  category: mantenimiento
+  category: maintenance
   command: 'php artisan package:discover'
-  description: Regenera el manifiesto de paquetes.
-  tags: [paquetes]
+  description: Rebuilds the package manifest.
+  tags: [packages]
 
-# --- testing y depuración ---
+# --- testing and debugging ---
 - tool: artisan
   category: testing
   command: 'php artisan test'
-  description: Ejecuta la suite de tests (PHPUnit o Pest).
+  description: Runs the test suite (PHPUnit or Pest).
   tags: [test, phpunit, pest]
 - tool: artisan
   category: testing
-  command: 'php artisan test --filter={nombre}'
-  description: Ejecuta solo los tests que coincidan.
-  tags: [test, filtrar]
+  command: 'php artisan test --filter={name}'
+  description: Runs only the matching tests.
+  tags: [test, filter]
   example: 'php artisan test --filter=PostTest'
 - tool: artisan
   category: testing
   command: 'php artisan test --parallel'
-  description: Ejecuta los tests en paralelo.
-  tags: [test, paralelo]
+  description: Runs the tests in parallel.
+  tags: [test, parallel]
 - tool: artisan
   category: testing
   command: 'php artisan test --coverage'
-  description: Ejecuta los tests con informe de cobertura.
-  tags: [test, cobertura, coverage]
+  description: Runs the tests with a coverage report.
+  tags: [test, coverage]
 - tool: artisan
   category: testing
   command: 'php artisan pail'
-  description: Sigue los logs en tiempo real (Laravel 11+; --filter=... para filtrar).
-  tags: [logs, depurar, tail]
+  description: Follows the logs in real time (Laravel 11+; --filter=... to filter).
+  tags: [logs, debug, tail]

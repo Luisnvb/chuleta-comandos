@@ -4,7 +4,7 @@ A personal, offline-first PWA to find and copy developer commands in a couple of
 
 **Live: https://chuleta-comandos.vercel.app** — open it and install it from the address bar.
 
-The command descriptions are in Spanish; the UI and code are in English.
+Everything — UI, command data and code — is in English.
 
 | Light | Dark |
 |---|---|
@@ -12,11 +12,11 @@ The command descriptions are in Spanish; the UI and code are in English.
 
 ## Features
 
-- **Fuzzy search** over command, description, tags and category, with typo tolerance and accents ignored. Multi-word queries match every word in any order (`crear rama` = `rama crear`).
+- **Fuzzy search** over command, description, tags and category, with typo tolerance and accents ignored. Multi-word queries match every word in any order (`create branch` = `branch create`).
 - **Tool filter** with live match counts per tool.
 - **Copy** with a click, or with <kbd>Enter</kbd> on the selected result.
-- **Fill in placeholders**: commands with `{placeholders}` open a small form with a live preview before copying. Values are remembered per placeholder name, so `{rama}` typed once is suggested in every command that uses it. <kbd>Shift</kbd>+<kbd>Enter</kbd> copies the template as is.
-- **Favorites and recents**: star commands with ☆ or <kbd>Ctrl</kbd>+<kbd>D</kbd>; the last 20 copied commands are kept automatically. Both are filters you can search within, and are stored in the browser (per device).
+- **Fill in placeholders**: commands with `{placeholders}` open a small form with a live preview before copying. Values are remembered per placeholder name, so `{branch}` typed once is suggested in every command that uses it. <kbd>Shift</kbd>+<kbd>Enter</kbd> copies the template as is.
+- **Favorites and recents** (currently hidden, see `SHOW_COLLECTIONS` in `src/tools.js`): star commands with ☆ or <kbd>Ctrl</kbd>+<kbd>D</kbd>; the last 20 copied commands are kept automatically. Both are filters you can search within, and are stored in the browser (per device).
 - **Keyboard first**: the whole app works without a mouse (see [shortcuts](#keyboard-shortcuts)).
 - **Light / dark** theme following the system.
 - **Installable PWA** that works fully offline, with no server running.
@@ -33,7 +33,7 @@ The command descriptions are in Spanish; the UI and code are in English.
 | Laravel Artisan | 103 |
 | Claude Code (CLI, flags, slash commands, shortcuts) | 72 |
 
-Variable parts are shown as `{placeholders}`, e.g. `git switch -c {rama}`.
+Variable parts are shown as `{placeholders}`, e.g. `git switch -c {branch}`.
 
 ## Getting started
 
@@ -66,9 +66,9 @@ npm run build && npm run preview   # http://localhost:4173
 | <kbd>↑</kbd> <kbd>↓</kbd> | Move the selection (<kbd>PgUp</kbd> / <kbd>PgDn</kbd> jump 10) |
 | <kbd>Enter</kbd> | Copy the selected command (opens the fill-in form if it has placeholders) |
 | <kbd>Shift</kbd>+<kbd>Enter</kbd> | Copy the selected command as is, placeholders included |
-| <kbd>Ctrl</kbd>+<kbd>D</kbd> | Add / remove the selected command from favorites |
+| <kbd>Ctrl</kbd>+<kbd>D</kbd> | Add / remove the selected command from favorites (only while favorites are shown) |
 | <kbd>Esc</kbd> | Clear the search, then the filter |
-| <kbd>Alt</kbd>+<kbd>0</kbd>…<kbd>9</kbd> | Filter: 0 = all, 1–7 = tools, 8 = favorites, 9 = recent |
+| <kbd>Alt</kbd>+<kbd>0</kbd>…<kbd>7</kbd> | Filter: 0 = all, 1–7 = tools (8 = favorites, 9 = recent when shown) |
 | Any character | Typing anywhere goes into the search box |
 
 In the fill-in form: <kbd>Enter</kbd> jumps to the next empty field and copies once all are filled, <kbd>Shift</kbd>+<kbd>Enter</kbd> copies the template, <kbd>Esc</kbd> cancels.
@@ -87,10 +87,10 @@ The YAML files in [`data/`](data/) are the single source of truth, one file per 
 
 ```yaml
 - tool: git                      # must match the file name (data/git.yaml)
-  category: ramas
-  command: 'git switch -c {rama}'
-  description: Crea una rama nueva y cambia a ella.
-  tags: [branch, crear]          # optional
+  category: branches
+  command: 'git switch -c {branch}'
+  description: Creates a new branch and switches to it.
+  tags: [branch, create]          # optional
   example: 'git switch -c feature/login'   # optional, concrete values
 ```
 

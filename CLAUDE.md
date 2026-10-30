@@ -45,28 +45,28 @@ public/            favicon.svg (icon source) + generated PNG/ICO icons
 
 ```yaml
 - tool: git                      # must match the file name
-  category: ramas                # Spanish, lowercase
-  command: git switch -c {rama}  # variable parts as {placeholder}
-  description: Crea una rama nueva y cambia a ella   # Spanish, one sentence
-  tags: [branch, crear]          # optional
+  category: branches             # English, lowercase
+  command: git switch -c {branch}  # variable parts as {placeholder}
+  description: Creates a new branch and switches to it.   # English, one sentence
+  tags: [branch, create]         # optional
   example: git switch -c feature/login               # optional, concrete values
 ```
 
 Rules:
 - One command per entry. Never combine alternatives (`cd .. / cd ~`) in one entry; split them.
 - Always the full command (e.g. `php artisan make:model`, not `make:model`).
-- Placeholders use `{lowercase_name}` (Spanish, snake_case) — never `<x>`, `[x]` or bare words like `ruta`. Braces with digits or spaces (`stash@{1}`, `awk '{print $1}'`) are not treated as placeholders.
+- Placeholders use `{lowercase_name}` (English, snake_case) — never `<x>`, `[x]` or bare words like `path`. Braces with digits or spaces (`stash@{1}`, `awk '{print $1}'`) are not treated as placeholders.
 - No `[--optional]` syntax in `command`: keep the base command, mention the flag in `description` and show it in `example` (or add a separate entry if it is used often).
-- Keyboard shortcuts (`Ctrl+R`) are valid entries under category `atajos`.
+- Keyboard shortcuts (`Ctrl+R`) are valid entries under category `shortcuts`.
 - Single-quote `command` and `example` values in YAML (Windows backslashes, `"`, `:`, `#`). Quote `description` if it contains `: ` or ` #`, and quote tags like `'null'`, `'yes'`, `'no'`.
-- Descriptions and categories in Spanish; tags may mix Spanish and English to help search.
+- Descriptions, categories, placeholders, tags and example values in English.
 - After editing YAML, run `npm run build-data`; it fails on missing fields, tool/file mismatch, duplicates or malformed placeholders.
 
 The build step adds derived fields to each entry: a stable `id` (from tool + command) and `placeholders` (array of names). Do not write these in YAML.
 
 ## Code conventions
 
-- Code, identifiers, comments, UI text and docs in English. Only command data (descriptions, categories) is in Spanish.
+- Everything in English: code, identifiers, comments, UI text, docs and command data.
 - Small ES modules with a single responsibility: data loading, search, rendering, keyboard handling, clipboard.
 - No global mutable state scattered across modules: keep app state in one place (`src/state.js`) and re-render from it.
 - Keyboard first: every action must be reachable without the mouse (Ctrl+K focus search, ↑/↓ move, Enter copy, Esc clear).
@@ -76,16 +76,17 @@ The build step adds derived fields to each entry: a stable `id` (from tool + com
 
 - Fuse.js (threshold 0.2, diacritics ignored) finds candidates; multi-word queries require every word to match some field, in any order.
 - Candidates are re-ranked by literal word-start matches (command > tags / category / tool > description). If any candidate matches literally, purely fuzzy hits are dropped; otherwise fuzzy hits are kept (typo tolerance).
-- When changing search, check sample queries in Node (`stash`, `rama`, `kill`, `puerto`, `comit`, `crear rama`) — top results must be the obvious commands.
+- When changing search, check sample queries in Node (`stash`, `branch`, `kill`, `port`, `comit`, `create branch`) — top results must be the obvious commands.
 
 ## Keyboard shortcuts (`src/keyboard.js`)
 
-Ctrl+K or `/` focus search · ↑/↓ move (PageUp/PageDown ±10) · Enter copy (or open the fill-in form) · Shift+Enter copy template as is · Ctrl+D toggle favorite · Esc clears the query, then the filter · Alt+0…9 filter in `FILTERS` order (0 = all, 1–7 tools, 8 favorites, 9 recent) · typing anywhere goes into the search box.
+Ctrl+K or `/` focus search · ↑/↓ move (PageUp/PageDown ±10) · Enter copy (or open the fill-in form) · Shift+Enter copy template as is · Ctrl+D toggle favorite (only with `SHOW_COLLECTIONS`) · Esc clears the query, then the filter · Alt+0…9 filter in `FILTERS` order (0 = all, 1–7 tools, 8 favorites, 9 recent — the last two only with `SHOW_COLLECTIONS`) · typing anywhere goes into the search box.
 
 `FILTERS` (`src/tools.js`) = All + `TOOLS` + `COLLECTIONS`. With 7 tools the Alt digits are exactly used up: adding a tool pushes Favorites/Recent past Alt+9 — revisit the shortcut scheme then (and the hint in `index.html`).
 
 ## Favorites and recents (`src/collections.js`)
 
+- **Hidden for now**: `SHOW_COLLECTIONS = false` in `src/tools.js` removes the filter tabs, the ☆ buttons and Ctrl+D. Stored lists are kept; set it to `true` to bring everything back.
 - Stored per device in localStorage (`cheatsheet:favorites`, `cheatsheet:recent`) as lists of command `id`s, newest first. Recents keep the last 20 copies, no duplicates.
 - Ids derive from tool + command text (`scripts/commands-lib.js`). Editing a command's text **by hand in the YAML** resets its favorite/recent status (the in-app editor migrates them); ids not present in the data are dropped on load. Editing description, tags, etc. is safe.
 - All storage access is wrapped in try/catch: without storage the lists live in memory for the session. Corrupt values are ignored.
@@ -97,7 +98,7 @@ Ctrl+K or `/` focus search · ↑/↓ move (PageUp/PageDown ±10) · Enter copy 
 - Enter / click on a command with `placeholders` opens a native `<dialog>`; commands without placeholders are copied directly. Shift+Enter (list or form) copies the template untouched.
 - In the form, Enter jumps to the next empty field and copies when none are left; an empty field shakes instead of copying. Esc and backdrop click cancel. Focus returns to the search box on close.
 - While a dialog is open, the global shortcuts in `keyboard.js` are disabled.
-- Values are remembered per placeholder **name** (`cheatsheet:placeholder-values`), shared across commands and pre-filled + selected next time. Consistent placeholder names in the YAML (`{rama}`, `{archivo}`, `{url}`…) make this useful — reuse existing names when adding commands.
+- Values are remembered per placeholder **name** (`cheatsheet:placeholder-values`), shared across commands and pre-filled + selected next time. Consistent placeholder names in the YAML (`{branch}`, `{file}`, `{url}`…) make this useful — reuse existing names when adding commands.
 - The `PLACEHOLDER` regex lives in `placeholders.js` (same rule as `scripts/commands-lib.js`); values are inserted verbatim, no shell quoting.
 - All localStorage access goes through `src/storage.js` (try/catch, fallback values).
 

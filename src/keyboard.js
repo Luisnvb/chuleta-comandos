@@ -3,7 +3,7 @@
 //   ↑ ↓             move the selection (PageUp/PageDown jump 10)
 //   Enter           copy the selected command, or open the fill-in form if it has placeholders
 //   Shift+Enter     copy the selected command as is, placeholders included
-//   Ctrl+D          add/remove the selected command from favorites
+//   Ctrl+D          add/remove the selected command from favorites (when a handler is given)
 //   Ctrl+E / Alt+N  edit the selected command / new command (dev only, when handlers are given)
 //   Esc             clear the query, then reset the filter
 //   Alt+0…9         select a filter (0 = all, then tools, favorites, recent)
@@ -38,7 +38,7 @@ export function initKeyboard({
     }
 
     // Overrides the browser's "bookmark this page", which is meaningless here.
-    if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'd') {
+    if (toggleFavorite && (e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'd') {
       e.preventDefault();
       toggleFavorite();
       return;

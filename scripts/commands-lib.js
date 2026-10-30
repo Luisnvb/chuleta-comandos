@@ -15,9 +15,9 @@ export const FIELD_ORDER = ['tool', 'category', 'command', 'description', 'tags'
 const REQUIRED = ['tool', 'category', 'command', 'description'];
 const ALLOWED = new Set(FIELD_ORDER);
 
-// {rama}, {nuevo_nombre}. Braces with digits or spaces (stash@{1}, awk '{print $1}') are not placeholders.
+// {branch}, {new_name}. Braces with digits or spaces (stash@{1}, awk '{print $1}') are not placeholders.
 const PLACEHOLDER = /\{([a-z][a-z0-9_]*)\}/g;
-// Likely mistakes: <url>, {Rama}, {nuevo-nombre}
+// Likely mistakes: <url>, {Branch}, {new-name}
 const MALFORMED = [/<[a-z][\w-]*>/i, /\{(?![a-z][a-z0-9_]*\})[A-Za-z][\w-]*\}/];
 
 function slugify(text) {

@@ -4,379 +4,379 @@
 - tool: claude-code
   category: terminal
   command: 'claude'
-  description: Abre una sesión interactiva en la carpeta actual.
-  tags: [iniciar, sesión, start]
+  description: Opens an interactive session in the current folder.
+  tags: [start, session]
 - tool: claude-code
   category: terminal
-  command: 'claude "{mensaje}"'
-  description: Abre la sesión con un primer mensaje ya escrito.
-  tags: [iniciar, prompt]
-  example: 'claude "explica este proyecto"'
+  command: 'claude "{message}"'
+  description: Opens the session with a first message already written.
+  tags: [start, prompt]
+  example: 'claude "explain this project"'
 - tool: claude-code
   category: terminal
-  command: 'claude -p "{consulta}"'
-  description: 'Modo no interactivo: responde y sale. Ideal para scripts y CI.'
+  command: 'claude -p "{query}"'
+  description: 'Non-interactive mode: answers and exits. Ideal for scripts and CI.'
   tags: [print, headless, scripts, ci]
 - tool: claude-code
   category: terminal
-  command: 'cat {archivo} | claude -p "{consulta}"'
-  description: Pasa contenido por tubería para que lo analice.
-  tags: [pipe, tubería, headless]
-  example: 'cat logs.txt | claude -p "explica"'
+  command: 'cat {file} | claude -p "{query}"'
+  description: Pipes content in for Claude to analyse.
+  tags: [pipe, headless]
+  example: 'cat logs.txt | claude -p "explain"'
 - tool: claude-code
   category: terminal
   command: 'claude -c'
-  description: Continúa la conversación más reciente de esta carpeta.
-  tags: [continuar, continue, sesión]
+  description: Continues the most recent conversation in this folder.
+  tags: [continue, session]
 - tool: claude-code
   category: terminal
-  command: 'claude -r "{nombre}"'
-  description: Reanuda una sesión concreta por ID o nombre (sin argumento, abre el selector).
-  tags: [reanudar, resume, sesión]
+  command: 'claude -r "{name}"'
+  description: Resumes a specific session by ID or name (without an argument, opens the picker).
+  tags: [resume, session]
 - tool: claude-code
   category: terminal
   command: 'claude update'
-  description: Actualiza a la última versión.
-  tags: [actualizar, update]
+  description: Updates to the latest version.
+  tags: [update, upgrade]
 - tool: claude-code
   category: terminal
   command: 'claude doctor'
-  description: Diagnóstico de instalación y ajustes, sin abrir sesión.
-  tags: [diagnóstico, doctor]
+  description: Checks the installation and settings, without opening a session.
+  tags: [diagnostics, doctor]
 - tool: claude-code
   category: terminal
   command: 'claude auth login'
-  description: Inicia sesión en tu cuenta.
-  tags: [login, autenticación]
+  description: Logs in to your account.
+  tags: [login, authentication]
 - tool: claude-code
   category: terminal
   command: 'claude auth status'
-  description: Muestra el estado de autenticación.
-  tags: [login, autenticación, estado]
+  description: Shows the authentication status.
+  tags: [login, authentication, status]
 - tool: claude-code
   category: terminal
   command: 'claude mcp'
-  description: Configura servidores MCP (herramientas externas).
-  tags: [mcp, servidores, herramientas]
+  description: Configures MCP servers (external tools).
+  tags: [mcp, servers, tools]
 - tool: claude-code
   category: terminal
   command: 'claude plugin install {plugin}'
-  description: Instala un plugin (también list, enable, disable…).
-  tags: [plugins, instalar]
+  description: Installs a plugin (also list, enable, disable…).
+  tags: [plugins, install]
 - tool: claude-code
   category: terminal
   command: 'claude agents'
-  description: 'Vista de agentes: monitoriza sesiones en segundo plano.'
-  tags: [agentes, segundo plano, background]
+  description: 'Agents view: monitors background sessions.'
+  tags: [agents, background]
 
-# --- opciones (flags) ---
+# --- options (flags) ---
 - tool: claude-code
   category: flags
-  command: 'claude --model {modelo}'
-  description: Elige el modelo para esta sesión (sonnet, opus, haiku).
-  tags: [modelo, model]
+  command: 'claude --model {model}'
+  description: Chooses the model for this session (sonnet, opus, haiku).
+  tags: [model]
   example: 'claude --model opus'
 - tool: claude-code
   category: flags
-  command: 'claude --effort {nivel}'
-  description: Nivel de razonamiento, de low a max (los disponibles dependen del modelo).
-  tags: [esfuerzo, razonamiento, effort]
+  command: 'claude --effort {level}'
+  description: Reasoning level, from low to max (the available ones depend on the model).
+  tags: [effort, reasoning]
   example: 'claude --effort high'
 - tool: claude-code
   category: flags
-  command: 'claude --permission-mode {modo}'
-  description: 'Arranca en un modo de permisos: default, acceptEdits, plan, auto…'
-  tags: [permisos, modo, plan]
+  command: 'claude --permission-mode {mode}'
+  description: 'Starts in a permission mode: default, acceptEdits, plan, auto…'
+  tags: [permissions, mode, plan]
   example: 'claude --permission-mode plan'
 - tool: claude-code
   category: flags
-  command: 'claude --add-dir {ruta}'
-  description: Da acceso a carpetas adicionales.
-  tags: [carpetas, directorios]
-  example: 'claude --add-dir ../otra-carpeta'
+  command: 'claude --add-dir {path}'
+  description: Gives access to additional folders.
+  tags: [folders, directories]
+  example: 'claude --add-dir ../other-folder'
 - tool: claude-code
   category: flags
-  command: 'claude -w {nombre}'
-  description: Trabaja en un git worktree aislado.
-  tags: [worktree, git, aislado]
+  command: 'claude -w {name}'
+  description: Works in an isolated git worktree.
+  tags: [worktree, git, isolated]
 - tool: claude-code
   category: flags
-  command: 'claude -n "{nombre}"'
-  description: Pone nombre a la sesión para reanudarla luego con -r.
-  tags: [nombre, sesión]
-  example: 'claude -n "mi-tarea"'
+  command: 'claude -n "{name}"'
+  description: Names the session so you can resume it later with -r.
+  tags: [name, session]
+  example: 'claude -n "my-task"'
 - tool: claude-code
   category: flags
-  command: 'claude --bg "{tarea}"'
-  description: Lanza la sesión como agente en segundo plano.
-  tags: [segundo plano, background, agente]
-  example: 'claude --bg "investiga el test"'
+  command: 'claude --bg "{task}"'
+  description: Launches the session as a background agent.
+  tags: [background, agent]
+  example: 'claude --bg "investigate the failing test"'
 - tool: claude-code
   category: flags
-  command: 'claude -p "{consulta}" --output-format json'
-  description: Salida en text, json o stream-json (con -p).
-  tags: [json, salida, headless]
+  command: 'claude -p "{query}" --output-format json'
+  description: Output as text, json or stream-json (with -p).
+  tags: [json, output, headless]
 - tool: claude-code
   category: flags
-  command: 'claude -p "{consulta}" --max-turns 3'
-  description: Limita los turnos del agente (con -p).
-  tags: [turnos, límite, headless]
+  command: 'claude -p "{query}" --max-turns 3'
+  description: Limits the agent's turns (with -p).
+  tags: [turns, limit, headless]
 - tool: claude-code
   category: flags
-  command: 'claude --allowedTools "{regla}"'
-  description: Herramientas que se ejecutan sin pedir permiso.
-  tags: [permisos, herramientas, tools]
+  command: 'claude --allowedTools "{rule}"'
+  description: Tools that run without asking for permission.
+  tags: [permissions, tools]
   example: 'claude --allowedTools "Bash(git *)"'
 - tool: claude-code
   category: flags
-  command: 'claude --append-system-prompt "{instrucciones}"'
-  description: Añade instrucciones al prompt de sistema.
-  tags: [system prompt, instrucciones]
+  command: 'claude --append-system-prompt "{instructions}"'
+  description: Appends instructions to the system prompt.
+  tags: [system prompt, instructions]
 - tool: claude-code
   category: flags
   command: 'claude --safe-mode'
-  description: Arranca sin personalizaciones, para depurar una configuración rota.
-  tags: [depurar, seguro]
+  description: Starts without customizations, to debug a broken configuration.
+  tags: [debug, safe]
 - tool: claude-code
   category: flags
   command: 'claude --dangerously-skip-permissions'
-  description: Omite todas las confirmaciones. Úsalo solo en entornos aislados.
-  tags: [permisos, peligroso, yolo]
+  description: Skips all confirmations. Use it only in isolated environments.
+  tags: [permissions, dangerous, yolo]
 
-# --- comandos dentro de la sesión ---
+# --- commands inside the session ---
 - tool: claude-code
   category: slash
   command: '/init'
-  description: Genera un CLAUDE.md inicial con el contexto del proyecto.
-  tags: [claude.md, inicializar]
+  description: Generates an initial CLAUDE.md with the project context.
+  tags: [claude.md, initialize]
 - tool: claude-code
   category: slash
   command: '/memory'
-  description: Edita los archivos CLAUDE.md y la memoria automática.
-  tags: [memoria, claude.md]
+  description: Edits the CLAUDE.md files and auto memory.
+  tags: [memory, claude.md]
 - tool: claude-code
   category: slash
-  command: '/plan {tarea}'
-  description: 'Entra en modo plan: analiza y propone antes de tocar código.'
-  tags: [plan, planificar]
+  command: '/plan {task}'
+  description: 'Enters plan mode: analyses and proposes before touching code.'
+  tags: [plan, planning]
 - tool: claude-code
   category: slash
   command: '/model'
-  description: Cambia de modelo.
-  tags: [modelo]
+  description: Switches model.
+  tags: [model]
 - tool: claude-code
   category: slash
   command: '/effort'
-  description: Ajusta el nivel de esfuerzo.
-  tags: [esfuerzo, razonamiento]
+  description: Adjusts the effort level.
+  tags: [effort, reasoning]
 - tool: claude-code
   category: slash
   command: '/clear'
-  description: Conversación nueva con contexto vacío (alias /new, /reset).
-  tags: [limpiar, nueva, contexto]
+  description: New conversation with an empty context (alias /new, /reset).
+  tags: [clear, new, context]
 - tool: claude-code
   category: slash
-  command: '/compact {instrucciones}'
-  description: Resume la conversación para liberar contexto.
-  tags: [compactar, contexto, resumir]
+  command: '/compact {instructions}'
+  description: Summarizes the conversation to free up context.
+  tags: [compact, context, summarize]
 - tool: claude-code
   category: slash
   command: '/context'
-  description: Muestra qué está ocupando la ventana de contexto.
-  tags: [contexto, tokens]
+  description: Shows what is taking up the context window.
+  tags: [context, tokens]
 - tool: claude-code
   category: slash
   command: '/resume'
-  description: Vuelve a una conversación anterior (alias /continue).
-  tags: [reanudar, sesión]
+  description: Goes back to an earlier conversation (alias /continue).
+  tags: [resume, session]
 - tool: claude-code
   category: slash
   command: '/rewind'
-  description: Restaura código y/o conversación a un punto anterior (alias /undo).
-  tags: [deshacer, rebobinar, undo]
+  description: Restores code and/or conversation to an earlier point (alias /undo).
+  tags: [undo, rewind]
 - tool: claude-code
   category: slash
   command: '/diff'
-  description: Revisa los cambios del árbol de trabajo, incluidos los de Claude.
-  tags: [cambios, diferencias]
+  description: Reviews the working tree changes, including Claude's.
+  tags: [changes, diff]
 - tool: claude-code
   category: slash
   command: '/code-review'
-  description: Revisa el diff en busca de bugs; --fix los corrige (alias /review).
-  tags: [revisión, review, bugs]
+  description: Reviews the diff for bugs; --fix fixes them (alias /review).
+  tags: [review, bugs]
 - tool: claude-code
   category: slash
   command: '/security-review'
-  description: Busca vulnerabilidades en los cambios de tu rama.
-  tags: [seguridad, vulnerabilidades]
+  description: Looks for vulnerabilities in your branch's changes.
+  tags: [security, vulnerabilities]
 - tool: claude-code
   category: slash
   command: '/permissions'
-  description: Reglas de permitir / preguntar / denegar herramientas.
-  tags: [permisos]
+  description: Allow / ask / deny rules for tools.
+  tags: [permissions]
 - tool: claude-code
   category: slash
   command: '/mcp'
-  description: Gestiona conexiones MCP y su autenticación.
-  tags: [mcp, servidores]
+  description: Manages MCP connections and their authentication.
+  tags: [mcp, servers]
 - tool: claude-code
   category: slash
-  command: '/btw {pregunta}'
-  description: Pregunta lateral que no se añade al historial.
-  tags: [pregunta, lateral]
+  command: '/btw {question}'
+  description: Side question that isn't added to the history.
+  tags: [question, side]
 - tool: claude-code
   category: slash
   command: '/tasks'
-  description: Ver y gestionar el trabajo en segundo plano.
-  tags: [tareas, segundo plano]
+  description: View and manage background work.
+  tags: [tasks, background]
 - tool: claude-code
   category: slash
   command: '/skills'
-  description: Lista las skills disponibles.
+  description: Lists the available skills.
   tags: [skills]
 - tool: claude-code
   category: slash
   command: '/hooks'
-  description: Muestra los hooks configurados.
+  description: Shows the configured hooks.
   tags: [hooks]
 - tool: claude-code
   category: slash
   command: '/agents'
-  description: Gestiona subagentes.
-  tags: [agentes, subagentes]
+  description: Manages subagents.
+  tags: [agents, subagents]
 - tool: claude-code
   category: slash
-  command: '/add-dir {ruta}'
-  description: Añade una carpeta a la sesión.
-  tags: [carpetas, directorios]
+  command: '/add-dir {path}'
+  description: Adds a folder to the session.
+  tags: [folders, directories]
 - tool: claude-code
   category: slash
-  command: '/cd {ruta}'
-  description: Mueve la sesión a otra carpeta.
-  tags: [carpetas, directorio]
+  command: '/cd {path}'
+  description: Moves the session to another folder.
+  tags: [folders, directory]
 - tool: claude-code
   category: slash
   command: '/usage'
-  description: Coste de la sesión, límites del plan y estadísticas (alias /cost).
-  tags: [coste, uso, límites]
+  description: Session cost, plan limits and stats (alias /cost).
+  tags: [cost, usage, limits]
 - tool: claude-code
   category: slash
   command: '/config'
-  description: Ajustes (tema, modelo, estilo…).
-  tags: [ajustes, configuración]
+  description: Settings (theme, model, style…).
+  tags: [settings, configuration]
 - tool: claude-code
   category: slash
   command: '/status'
-  description: Versión, cuenta y conexión.
-  tags: [estado, versión, cuenta]
+  description: Version, account and connection.
+  tags: [status, version, account]
 - tool: claude-code
   category: slash
-  command: '/export {archivo}'
-  description: Exporta la conversación como texto.
-  tags: [exportar, guardar]
+  command: '/export {file}'
+  description: Exports the conversation as text.
+  tags: [export, save]
 - tool: claude-code
   category: slash
   command: '/doctor'
-  description: Revisión del entorno con arreglos propuestos.
-  tags: [diagnóstico]
+  description: Environment check with suggested fixes.
+  tags: [diagnostics]
 - tool: claude-code
   category: slash
   command: '/help'
-  description: Ayuda general.
-  tags: [ayuda]
+  description: General help.
+  tags: [help]
 
-# --- atajos de teclado ---
+# --- keyboard shortcuts ---
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Esc'
-  description: Interrumpe a Claude (conserva el trabajo hecho) o cierra un diálogo.
-  tags: [teclado, interrumpir, shortcut]
+  description: Interrupts Claude (keeps the work done) or closes a dialog.
+  tags: [keyboard, interrupt, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Esc Esc'
-  description: 'Con texto: borra el borrador. Vacío: abre el menú de rebobinar.'
-  tags: [teclado, rebobinar, shortcut]
+  description: 'With text: clears the draft. Empty: opens the rewind menu.'
+  tags: [keyboard, rewind, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Shift+Tab'
-  description: 'Alterna modos de permisos: manual, aceptar ediciones, plan, auto…'
-  tags: [teclado, permisos, plan, shortcut]
+  description: 'Cycles permission modes: manual, accept edits, plan, auto…'
+  tags: [keyboard, permissions, plan, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+C'
-  description: Interrumpe; con el prompt vacío, una segunda pulsación sale.
-  tags: [teclado, salir, shortcut]
+  description: Interrupts; with an empty prompt, pressing it again exits.
+  tags: [keyboard, exit, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+R'
-  description: Búsqueda inversa en el historial de prompts.
-  tags: [teclado, historial, shortcut]
+  description: Reverse search through the prompt history.
+  tags: [keyboard, history, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+O'
-  description: Visor de transcripción con el detalle de las herramientas.
-  tags: [teclado, transcripción, shortcut]
+  description: Transcript viewer with tool details.
+  tags: [keyboard, transcript, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+B'
-  description: Manda a segundo plano el comando o agente en curso.
-  tags: [teclado, segundo plano, shortcut]
+  description: Sends the running command or agent to the background.
+  tags: [keyboard, background, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+T'
-  description: Muestra u oculta la lista de tareas de Claude.
-  tags: [teclado, tareas, shortcut]
+  description: Shows or hides Claude's task list.
+  tags: [keyboard, tasks, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Alt+V'
-  description: Pega una imagen del portapapeles (Ctrl+V fuera de Windows).
-  tags: [teclado, imagen, pegar, shortcut]
+  description: Pastes an image from the clipboard (Ctrl+V outside Windows).
+  tags: [keyboard, image, paste, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+G'
-  description: Edita el prompt en tu editor de texto.
-  tags: [teclado, editor, shortcut]
+  description: Edits the prompt in your text editor.
+  tags: [keyboard, editor, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Ctrl+S'
-  description: Guarda el prompt aparte y lo recupera después.
-  tags: [teclado, guardar, shortcut]
+  description: Stashes the prompt and brings it back later.
+  tags: [keyboard, save, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Alt+P'
-  description: Cambia de modelo (Option en Mac).
-  tags: [teclado, modelo, shortcut]
+  description: Switches model (Option on Mac).
+  tags: [keyboard, model, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Alt+T'
-  description: Activa o desactiva el razonamiento extendido (Option en Mac).
-  tags: [teclado, razonamiento, shortcut]
+  description: Toggles extended thinking (Option on Mac).
+  tags: [keyboard, reasoning, thinking, shortcut]
 - tool: claude-code
-  category: atajos
+  category: shortcuts
   command: 'Shift+Enter'
-  description: Salto de línea en el prompt (también \ + Enter o Ctrl+J).
-  tags: [teclado, nueva línea, shortcut]
+  description: New line in the prompt (also \ + Enter or Ctrl+J).
+  tags: [keyboard, new line, shortcut]
 
-# --- prefijos ---
+# --- prefixes ---
 - tool: claude-code
-  category: prefijos
+  category: prefixes
   command: '/'
-  description: Ejecuta un comando o skill.
-  tags: [slash, comando, skill]
+  description: Runs a command or skill.
+  tags: [slash, command, skill]
 - tool: claude-code
-  category: prefijos
-  command: '! {comando}'
-  description: 'Modo shell: ejecuta el comando y Claude responde a su salida.'
+  category: prefixes
+  command: '! {command}'
+  description: 'Shell mode: runs the command and Claude responds to its output.'
   tags: [shell, bash, terminal]
   example: '! npm test'
 - tool: claude-code
-  category: prefijos
-  command: '@{ruta}'
-  description: Menciona un archivo (autocompleta rutas).
-  tags: [archivo, mencionar]
+  category: prefixes
+  command: '@{path}'
+  description: Mentions a file (autocompletes paths).
+  tags: [file, mention]
   example: '@src/main.js'
 - tool: claude-code
-  category: prefijos
+  category: prefixes
   command: '?'
-  description: Con el prompt vacío, muestra el panel de atajos.
-  tags: [ayuda, atajos]
+  description: With an empty prompt, shows the shortcuts panel.
+  tags: [help, shortcuts]
